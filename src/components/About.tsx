@@ -6,7 +6,7 @@ export function About() {
     {
       icon: <Code className="w-8 h-8 text-[#D946EF]" />,
       title: "Frontend Development",
-      description: "Expert in React, Vue.js, and modern JavaScript frameworks. Creating responsive and intuitive user interfaces that bring ideas to life.",
+      description: "Expert in React , Vite and modern JavaScript frameworks. Creating responsive and intuitive user interfaces that bring ideas to life.",
     },
     {
       icon: <Database className="w-8 h-8 text-[#D946EF]" />,
