@@ -45,7 +45,8 @@ export function Hero() {
           </h2>
           
           <p className="text-xl md:text-2xl text-cyan-100/80 mb-8 max-w-2xl mx-auto font-mono">
-            Passionate about creating innovative and creative web solutions
+            Passionate about creating innovative and creative web solutions <br />
+            <a href="https://amzn.to/42GKXCp"> Visitez Amazon.fr pour des produits des produits inovants </a> 
           </p>
           
           <div className="flex justify-center gap-4 mb-8">
