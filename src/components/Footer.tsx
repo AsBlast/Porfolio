@@ -39,7 +39,7 @@ export function Footer() {
               transition={{ delay: 0.2 }}
               className="text-lg text-cyan-300/80 font-mono"
             >
-              Développement web & solutions digitales sur mesure
+             Web development & custom digital solutions
             </motion.p>
           </div>
 
