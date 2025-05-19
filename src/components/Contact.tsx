@@ -54,7 +54,7 @@ export function Contact() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
           >
-            <form onSubmit={handleSubmit} className="space-y-6">
+            {/* <form onSubmit={handleSubmit} className="space-y-6">
               <div>
                 <input
                   type="text"
@@ -87,7 +87,7 @@ export function Contact() {
               >
                 Send Message
               </motion.button>
-            </form>
+            </form> */}
           </motion.div>
         </div>
       </div>

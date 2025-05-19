@@ -6,26 +6,26 @@ export function Projects() {
     {
       title: "Project Alpha",
       description: "Modern web application built with React, leveraging Tailwind CSS for styling and Vite for blazing fast development",
-      image: "/api/placeholder/800/600",
+      image: "/images/alpha.png",
       github: "https://github.com",
-      live: "https://example.com",
+      live: "http://mg-remote-work.netlify.app/",
       tags: ["React", "Tailwind CSS", "Vite"],
     },
     {
       title: "Project Beta",
       description: "Advanced e-commerce solution using WordPress with WooCommerce integration and Elementor page builder",
-      image: "/api/placeholder/800/600",
+      image: "/images/samsung.png",
       github: "https://github.com",
-      live: "https://example.com",
+      live: "http://asblast-samsung.netlify.app/",
       tags: ["WordPress", "WooCommerce", "Elementor"],
     },
     {
       title: "Project Gamma",
       description: "Full-stack web application utilizing PHP frameworks (Work in Progress)",
-      image: "/api/placeholder/800/600",
+      image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&h=600",
       github: "https://github.com",
       live: "https://example.com",
-      tags: ["PHP", "MySQL", "Symfony"],
+      tags: ["Node JS / PHP", "MySQL", "Laravel"],
     },
   ];
 
