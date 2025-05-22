@@ -67,10 +67,9 @@ export function Projects() {
       title: "Projet Gamma",
       description:
         "Application Web complète utilisant Node JS (en cours de développement)",
-      image:
-        "https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&h=600",
+      image:"/images/AKATA.png",
       github: "https://github.com",
-      live: "https://example.com",
+      live: "http://akata.netlify.app/",
       tags: ["Node JS / PHP", "MySQL", "Laravel"],
       status: "En développement",
     },
