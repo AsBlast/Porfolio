@@ -13,9 +13,9 @@ export function Footer() {
   ];
 
   const socialLinks = [
-    { name: "Github", icon: <Github size={24} />, href: "https://github.com/bricedev" },
-    { name: "LinkedIn", icon: <Linkedin size={24} />, href: "https://linkedin.com/in/bricedev" },
-    { name: "Facebook", icon: <Facebook size={24} />, href: "https://facebook.com/bricedev" }
+    { name: "Github", icon: <Github size={24} />, href: "https://github.com/AsBlast" },
+    { name: "LinkedIn", icon: <Linkedin size={24} />, href: "https://linkedin.com/in/brice-yakim-andriamahefaromisa-6a8a2b200" },
+    { name: "Facebook", icon: <Facebook size={24} />, href: "https://facebook.com/" }
   ];
 
   return (

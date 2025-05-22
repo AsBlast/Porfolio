@@ -51,24 +51,41 @@ export function Hero() {
            
           </p>
           
-          <div className="flex justify-center gap-4 mb-8">
-            {["github", "linkedin"].map((platform) => (
-              <motion.a
-                key={platform}
-                href={`https://${platform}.com`}
-                target="_blank"
-                rel="noopener noreferrer"
-                whileHover={{ scale: 1.1 }}
-                className="p-3 rounded-lg bg-black/30 backdrop-blur border border-cyan-500/30 hover:border-cyan-400 hover:bg-cyan-950/30 transition-all duration-300 group"
-              >
-                {platform === "github" ? (
-                  <Github className="w-6 h-6 text-cyan-400 group-hover:text-cyan-300" />
-                ) : (
-                  <Linkedin className="w-6 h-6 text-cyan-400 group-hover:text-cyan-300" />
-                )}
-              </motion.a>
-            ))}
-          </div>
+        <div className="flex justify-center gap-4 mb-8">
+  {[
+    { 
+      platform: "github", 
+      url: "https://github.com/AsBlast",
+      icon: <Github className="w-6 h-6 text-cyan-400 group-hover:text-cyan-300" />
+    },
+    { 
+      platform: "linkedin", 
+      url: "https://linkedin.com/in/brice-yakim-andriamahefaromisa-6a8a2b200",
+      icon: <Linkedin className="w-6 h-6 text-cyan-400 group-hover:text-cyan-300" />
+    }
+  ].map(({ platform, url, icon }) => (
+    <motion.a
+      key={platform}
+      href={url}
+      target="_blank"
+      rel="noopener noreferrer"
+      whileHover={{ 
+        scale: 1.1,
+        rotate: platform === "github" ? 15 : -15,
+        boxShadow: "0 0 15px rgba(34, 211, 238, 0.4)"
+      }}
+      whileTap={{ scale: 0.95 }}
+      className="p-3 rounded-lg bg-gradient-to-br from-black/30 to-cyan-900/20 backdrop-blur-lg border border-cyan-500/30 hover:border-cyan-400 transition-all duration-300 group relative overflow-hidden"
+    >
+      {icon}
+      {/* Effet de survol amélioré */}
+      <div className="absolute inset-0 bg-[conic-gradient(from_90deg_at_50%50%,rgba(34,211,238,0.2)_0%,rgba(34,211,238,0.0)_50%)] opacity-0 group-hover:opacity-100 transition-opacity" />
+      <span className="absolute inset-0 animate-spin-slow [mask-image:linear-gradient(transparent,rgba(0,0,0,0.3))]">
+        <div className="absolute inset-0 bg-[radial-gradient(60%_60%_at_50%_50%,rgba(34,211,238,0.2)_0%,rgba(34,211,238,0)_100%)]" />
+      </span>
+    </motion.a>
+  ))}
+</div>
           
           <motion.div className="flex flex-col items-center gap-8">
             <motion.a
