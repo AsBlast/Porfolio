@@ -41,11 +41,13 @@ export function Hero() {
           </h1>
           
           <h2 className="text-3xl md:text-4xl font-bold mb-4 text-cyan-300 drop-shadow-[0_0_5px_rgba(0,255,255,0.5)]">
-            Full Stack apprentice Developer
+            Apprenti développeur Full Stack
+
           </h2>
           
           <p className="text-xl md:text-2xl text-cyan-100/80 mb-8 max-w-2xl mx-auto font-mono">
-            Passionate about creating innovative and creative web solutions <br />
+           Codeur nocturne & Architecte d'expériences digitales. <br /> Auto-formé à la lumière des écrans <br />
+ 🌙 + ☕ + 💻 = ⚡ 🚀<br />
            
           </p>
           
@@ -75,8 +77,7 @@ export function Hero() {
               whileTap={{ scale: 0.95 }}
               className="inline-flex items-center gap-2 px-8 py-3 bg-cyan-950 text-cyan-300 rounded-lg border border-cyan-500/50 hover:bg-cyan-900 hover:border-cyan-400 transition-all duration-300 backdrop-blur-sm shadow-[0_0_15px_rgba(0,255,255,0.3)] hover:shadow-[0_0_25px_rgba(0,255,255,0.5)]"
             >
-              Discover More
-            </motion.a>
+      En savoir plus            </motion.a>
 
             <motion.div
               animate={{

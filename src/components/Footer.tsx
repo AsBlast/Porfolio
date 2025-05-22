@@ -1,117 +1,142 @@
 import { motion } from "framer-motion";
-import { Github, Linkedin,  Facebook } from "lucide-react";
+import { Github, Linkedin, Facebook, Rocket, Code2, Sparkles } from "lucide-react";
 import { useState } from "react";
 
 export function Footer() {
-  const [hovered, setHovered] = useState(null);
+  const [hovered, setHovered] = useState<string | null>(null);
 
   const navItems = [
-    { name: "Home", href: "#home" },
-    { name: "About", href: "#about" },
-    { name: "Projects", href: "#projects" },
+    { name: "Accueil", href: "#home" },
+    { name: "A propos", href: "#about" },
+    { name: "Projets", href: "#projects" },
     { name: "Contact", href: "#contact" }
   ];
 
   const socialLinks = [
-    { name: "Github", icon: <Github size={20} />, href: "https://github.com/bricedev" },
-    { name: "LinkedIn", icon: <Linkedin size={20} />, href: "https://linkedin.com/in/bricedev" },
-    
-    { name: "Facebook", icon: <Facebook size={20} />, href: "https://facebook.com/bricedev" }
+    { name: "Github", icon: <Github size={24} />, href: "https://github.com/bricedev" },
+    { name: "LinkedIn", icon: <Linkedin size={24} />, href: "https://linkedin.com/in/bricedev" },
+    { name: "Facebook", icon: <Facebook size={24} />, href: "https://facebook.com/bricedev" }
   ];
 
   return (
-    <footer className="bg-gradient-to-br from-black via-purple-900/80 to-blue-900/80 backdrop-blur-sm w-full border-t border-cyan-500/20 text-cyan-300/80">
-      <div className="container mx-auto px-4 py-12">
-        <div className="flex flex-col md:flex-row gap-8 md:gap-16">
-          {/* Logo & Slogan */}
-          <div className="md:w-1/2">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.1 }}
-              className="text-3xl font-bold bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500 bg-clip-text text-transparent drop-shadow-[0_0_16px_rgba(0,255,255,0.7)] mb-4"
-            >
-              Brice-Dev
-            </motion.div>
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
-              className="text-lg text-cyan-300/80 font-mono"
-            >
-             Web development & custom digital solutions
-            </motion.p>
-          </div>
+    <footer className="relative bg-[#0F172A] w-full border-t border-cyan-500/20 overflow-hidden">
+      {/* Effets de fond */}
+      <div className="absolute inset-0 opacity-20">
+        <div className="absolute -top-1/3 left-1/4 w-[800px] h-[800px] bg-radial-gradient(from_60%_50%_at_50%_50%,#D946EF/10%,transparent_70%) animate-float" />
+        <div className="absolute -bottom-1/4 right-1/4 w-[600px] h-[600px] bg-radial-gradient(from_60%_50%_at_50%_50%,#8B5CF6/15%,transparent_70%) animate-float-delayed" />
+      </div>
 
-          {/* Quick Links */}
-          <div className="md:w-1/2">
-            <motion.h3
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3 }}
-              className="font-bold text-xl mb-6 text-violet-400 bg-gradient-to-r from-cyan-400 to-pink-500 bg-clip-text text-transparent"
+      <div className="container mx-auto px-4 py-16 relative z-10">
+        <div className="grid lg:grid-cols-3 gap-12 mb-16">
+          {/* Section Logo */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2 }}
+            className="space-y-6"
+          >
+            <div className="flex items-center gap-4">
+              <div className="p-3 bg-[#D946EF]/10 rounded-xl">
+                <Code2 className="w-8 h-8 text-[#D946EF]" />
+              </div>
+              <motion.span
+                className="text-3xl font-bold bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 bg-clip-text text-transparent"
+                whileHover={{ scale: 1.05 }}
+              >
+                Brice-Dev
+              </motion.span>
+            </div>
+            <motion.p
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              transition={{ delay: 0.4 }}
+              className="text-lg text-cyan-300/80 font-mono flex items-center gap-2"
             >
-              Navigation rapide
-            </motion.h3>
-            <ul className="grid grid-cols-2 gap-4">
+              <Sparkles className="w-5 h-5 text-purple-400" />
+             Créer l'excellence numérique
+            </motion.p>
+          </motion.div>
+
+          {/* Navigation */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3 }}
+            className="lg:col-span-2"
+          >
+            <h3 className="text-xl font-bold mb-8 bg-gradient-to-r from-cyan-400 to-pink-500 bg-clip-text text-transparent">
+             Explorez l'univers
+            </h3>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
               {navItems.map((item) => (
-                <motion.li
+                <motion.div
                   key={item.name}
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.4 + (navItems.indexOf(item) * 0.05) }}
+                  whileHover={{ x: 10 }}
+                  className="group relative"
                 >
                   <a
                     href={item.href}
-                    className="hover:text-cyan-300 transition-colors flex items-center group"
+                    className="flex items-center gap-3 text-cyan-300/80 hover:text-cyan-300 transition-colors"
                     onMouseEnter={() => setHovered(item.name)}
                     onMouseLeave={() => setHovered(null)}
                   >
-                    <span
-                      className={`w-2 h-2 rounded-full mr-2 transition-all ${
-                        hovered === item.name
-                          ? "bg-gradient-to-r from-cyan-400 to-pink-500 shadow-[0_0_8px_rgba(0,255,255,0.7)]"
-                          : "bg-cyan-500/30"
-                      }`}
-                    />
-                    <span className="font-mono text-lg">{item.name}</span>
+                    <div className={`w-2 h-2 rounded-full transition-all ${
+                      hovered === item.name 
+                        ? "bg-[#D946EF] shadow-glow-purple" 
+                        : "bg-cyan-500/30"
+                    }`} />
+                    <span className="font-medium">{item.name}</span>
                   </a>
-                </motion.li>
+                </motion.div>
               ))}
-            </ul>
-          </div>
+            </div>
+          </motion.div>
         </div>
 
         {/* Social Links */}
         <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.8 }}
-          className="flex justify-center space-x-6 mt-12"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.6 }}
+          className="flex flex-col items-center gap-8 py-12 border-y border-cyan-500/20"
         >
-          {socialLinks.map((link) => (
-            <motion.a
-              key={link.name}
-              href={link.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="bg-gradient-to-br from-cyan-900/60 via-purple-900/60 to-pink-900/60 w-12 h-12 rounded-full flex items-center justify-center text-cyan-300 hover:text-cyan-400 hover:shadow-[0_0_16px_rgba(0,255,255,0.7)] transition-all"
-              whileHover={{ scale: 1.1, rotate: 5 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              {link.icon}
-            </motion.a>
-          ))}
+          <div className="flex gap-6">
+            {socialLinks.map((link) => (
+              <motion.a
+                key={link.name}
+                href={link.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-4 bg-white/5 rounded-2xl backdrop-blur-lg hover:bg-white/10 transition-all"
+                whileHover={{ scale: 1.1, rotate: 5 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <span className="text-cyan-300 hover:text-[#D946EF] transition-colors">
+                  {link.icon}
+                </span>
+              </motion.a>
+            ))}
+          </div>
+          <motion.div
+            whileHover={{ scale: 1.05 }}
+            className="flex items-center gap-3 text-cyan-300/80 hover:text-cyan-300 cursor-pointer"
+          >
+            <Rocket className="w-6 h-6 text-purple-400 animate-launch" />
+            <span className="font-mono">Allons-y !</span>
+          </motion.div>
         </motion.div>
 
         {/* Copyright */}
         <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.9 }}
-          className="text-center text-sm text-cyan-300/60 mt-12 pt-6 border-t border-cyan-500/20"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.8 }}
+          className="text-center text-sm text-cyan-300/60 mt-12 pt-8"
         >
-          © {new Date().getFullYear()} Brice-Dev. Tous droits réservés.
+          <div className="mb-4">© {new Date().getFullYear()} Brice-Dev</div>
+          <div className="text-xs text-cyan-500/40">
+         Ce site a été créé avec <span className="text-[#D946EF]">♥</span> à Madagascar
+          </div>
         </motion.div>
       </div>
     </footer>

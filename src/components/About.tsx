@@ -5,18 +5,18 @@ export function About() {
   const skills = [
     {
       icon: <Code className="w-8 h-8 text-[#D946EF]" />,
-      title: "Frontend Development",
-      description: "Expert in React , Vite and modern JavaScript frameworks. Creating responsive and intuitive user interfaces that bring ideas to life.",
+      title: "Développement front-end",
+      description: "Expert en React, Vite et frameworks JavaScript modernes. Création d'interfaces utilisateur réactives et intuitives qui donnent vie à vos idées.",
     },
     {
       icon: <Database className="w-8 h-8 text-[#D946EF]" />,
-      title: "Backend Development",
-      description: "Proficient in Node.js, Python, and database management. Building robust and scalable server-side solutions.",
+      title: "Développement backend",
+      description: "Maîtrise de Node.js, Python et de la gestion de bases de données. Création de solutions côté serveur robustes et évolutives.",
     },
     {
       icon: <Layout className="w-8 h-8 text-[#D946EF]" />,
-      title: "UI/UX Design",
-      description: "Creating beautiful and intuitive user interfaces that combine aesthetics with functionality for optimal user experience.",
+      title: "Conception UI/UX",
+      description: "Créer des interfaces utilisateur belles et intuitives qui combinent esthétique et fonctionnalité pour une expérience utilisateur optimale.",
     },
   ];
 
@@ -29,7 +29,7 @@ export function About() {
           viewport={{ once: true }}
           className="text-3xl md:text-4xl font-bold mb-12 text-center text-white"
         >
-          About Me
+       Qui suis-je ?
         </motion.h2>
 
         <div className="grid md:grid-cols-2 gap-12 items-center mb-16">
@@ -56,22 +56,19 @@ export function About() {
             className="text-white/80"
           >
             <h3 className="text-2xl font-bold bg-gradient-to-r from-[#8B5CF6] to-[#D946EF] bg-clip-text text-transparent">
-          Passionate Developer & Creative Innovator   
+          Développeur passionné et innovateur créatif
+   
             </h3>  <br /> 
             <p className="mb-6">
-              "The only way to do great work is to love what you do." With this mindset, 
-              I approach every project with passion and dedication, pushing the boundaries 
-              of what's possible in web development.
+            <b>« La seule façon de faire du bon travail, c'est d'aimer ce que l'on fait. » </b> <br />
+      
+             <br />C'est dans cet état d'esprit que j'aborde chaque projet avec passion et dévouement, repoussant les limites du possible en développement web.
             </p>
             <p className="mb-6">
-              Based in Antananarivo, Madagascar, I specialize in creating innovative 
-              solutions that combine cutting-edge technology with intuitive design. 
-              My goal is to build digital experiences that not only meet requirements 
-              but exceed expectations.
+              Basé à Antananarivo : Madagascar, je suis spécialisé dans la création de solutions innovantes alliant technologie de pointe et design intuitif. Mon objectif est de créer des expériences numériques qui non seulement répondent aux exigences, mais dépassent les attentes.
             </p>
             <p>
-              Let's collaborate and turn your vision into reality. Together, we can 
-              create something extraordinary.
+             Collaborons et concrétisons votre vision. Ensemble, nous pouvons créer quelque chose d'extraordinaire.
             </p>
           </motion.div>
         </div>

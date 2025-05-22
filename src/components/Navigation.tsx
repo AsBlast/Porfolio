@@ -15,9 +15,9 @@ export function Navigation() {
   }, []);
 
   const menuItems = [
-    { name: "Home", href: "#home" },
-    { name: "About", href: "#about" },
-    { name: "Projects", href: "#projects" },
+    { name: "Accueil", href: "#home" },
+    { name: "A propos", href: "#about" },
+    { name: "Projets", href: "#projects" },
     { name: "Contact", href: "#contact" },
   ];
 
