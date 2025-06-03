@@ -19,6 +19,7 @@ export function Navigation() {
     { name: "A propos", href: "#about" },
     { name: "Projets", href: "#projects" },
     { name: "Contact", href: "#contact" },
+    // { name: "Recommandation", href: "#recommandation" },
   ];
 
   return (

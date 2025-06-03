@@ -18,7 +18,7 @@ export function Projects() {
     github: string;
     live: string;
     tags: string[];
-    status?: string; // Propriété optionnelle
+    status?: string; // Propriété optionnelle pour l'erreur typescript
   }
   const getStatusColor = (status: string) => {
     switch (status) {
@@ -63,11 +63,12 @@ export function Projects() {
       tags: ["WordPress", "WooCommerce", "Elementor"],
       status: "En production",
     },
+
     {
       title: "Projet Gamma",
       description:
         "Application Web complète utilisant Node JS (en cours de développement)",
-      image:"/images/AKATA.png",
+      image: "/images/AKATA.png",
       github: "https://github.com",
       live: "http://akata.netlify.app/",
       tags: ["Node JS / PHP", "MySQL", "Laravel"],
@@ -94,7 +95,7 @@ export function Projects() {
         { name: "PHP/Laravel", level: 35 },
         { name: "REST API", level: 70 },
         { name: "MySQL", level: 40 },
-         { name: "Python/Django", level: 55 },
+        { name: "Python/Django", level: 55 },
       ],
     },
     {
@@ -204,6 +205,8 @@ export function Projects() {
           ))}
         </motion.div>
       </div>
+      {/** Section Projets */}
+
       <div className="container mx-auto px-4 relative z-10 mb-24">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
@@ -228,7 +231,6 @@ export function Projects() {
               className="group bg-white/5 rounded-lg overflow-hidden hover:bg-white/10 transition-all duration-300 transform hover:-translate-y-2"
             >
               <div className="aspect-video relative">
-                
                 {/**Images */}
                 <img
                   src={project.image}
@@ -247,33 +249,33 @@ export function Projects() {
                   <Cpu className="w-5 h-5 text-[#D946EF]" />
                   <Code className="w-5 h-5 text-[#3B82F6]" />
                   {/* Ajout d'un badge de statut */}
-                <div className="absolute top-4 right-4 z-10 flex items-center gap-2">
-                  {"status" in project && (
-                    <>
-                      <span
-                        className={`px-3 py-1 text-sm rounded-full ${getStatusColor(
-                          project.status
-                        )}`}
-                      >
-                        {project.status}
-                      </span>
-                      <span className="flex h-3 w-3">
+                  <div className="absolute top-4 right-4 z-10 flex items-center gap-2">
+                    {"status" in project && (
+                      <>
                         <span
-                          className={`animate-ping absolute inline-flex h-3 w-3 rounded-full ${
-                            project.status === "En développement"
-                              ? "bg-blue-800"
-                              : "bg-green-950"
-                          } opacity-75`}
-                        ></span>
-                        <span
-                          className={`relative inline-flex rounded-full h-3 w-3 ${getStatusDotColor(
+                          className={`px-3 py-1 text-sm rounded-full ${getStatusColor(
                             project.status
                           )}`}
-                        ></span>
-                      </span>
-                    </>
-                  )}
-                </div>
+                        >
+                          {project.status}
+                        </span>
+                        <span className="flex h-3 w-3">
+                          <span
+                            className={`animate-ping absolute inline-flex h-3 w-3 rounded-full ${
+                              project.status === "En développement"
+                                ? "bg-blue-800"
+                                : "bg-green-950"
+                            } opacity-75`}
+                          ></span>
+                          <span
+                            className={`relative inline-flex rounded-full h-3 w-3 ${getStatusDotColor(
+                              project.status
+                            )}`}
+                          ></span>
+                        </span>
+                      </>
+                    )}
+                  </div>
                 </div>
                 <h3 className="text-xl font-bold mb-2 text-white group-hover:text-[#D946EF] transition-colors">
                   {project.title}
@@ -318,6 +320,8 @@ export function Projects() {
           ))}
         </motion.div>
       </div>
+      {/** Autres Projets */}
+      
     </section>
   );
 }
