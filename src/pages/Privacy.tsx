@@ -207,7 +207,7 @@ export default function Privacy() {
               
               <div className="mt-8 pt-6 border-t border-purple-500/20">
                 <a 
-                  href="/Terms" 
+                  href="Terms" 
                   className="flex items-center gap-3 text-cyan-400 hover:text-cyan-300 transition-colors"
                 >
                   <ShieldCheck className="w-5 h-5" />

@@ -164,10 +164,10 @@ export default function Terms() {
               <p>S'opposer au traitement de vos données</p>
             </div>
           </div>
-          
-          <p className="text-sm bg-[#0F172A] p-4 rounded-lg border border-pink-500/30">
+           {/* <p className="text-sm bg-[#0F172A] p-4 rounded-lg border border-pink-500/30">
             <span className="font-bold text-pink-300">Exercice des droits :</span> Pour toute demande concernant vos données personnelles, veuillez utiliser notre <a href="/contact" className="text-cyan-400 hover:underline">page de contact</a>. Nous nous engageons à répondre dans un délai maximum de 30 jours.
-          </p>
+          </p> */}
+        
         </>
       )
     }
@@ -217,7 +217,7 @@ export default function Terms() {
               
               <div className="mt-8 pt-6 border-t border-purple-500/20">
                 <a 
-                  href="/privacy" 
+                  href="privacy" 
                   className="flex items-center gap-3 text-cyan-400 hover:text-cyan-300 transition-colors"
                 >
                   <Shield className="w-5 h-5" />
