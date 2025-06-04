@@ -86,8 +86,15 @@ export function Hero() {
     </motion.a>
   ))}
 </div>
-       <div className="floating-banner p-6 bg-black/80 backdrop-blur-sm rounded-xl border border-cyan-500/30 shadow-[0_0_20px_rgba(0,255,255,0.2)] max-w-md mx-auto text-center transform transition-all hover:scale-105 duration-300">
+     <div className="floating-banner p-6 bg-black/80 backdrop-blur-sm rounded-xl border border-cyan-500/30 shadow-[0_0_20px_rgba(0,255,255,0.2)] max-w-md mx-auto text-center transform transition-all hover:scale-105 duration-300">
   <div className="flex flex-col items-center gap-4">
+    {/* Image ajoutée ici */}
+    <img 
+      src="/images/hostinger.png" 
+      alt="Hostinger Logo" 
+      className="w-32 h-auto rounded-md shadow-lg"
+    />
+
     <span className="text-2xl text-blue-500">💡 Besoin d’un hébergeur web fiable et rapide ?</span>
     <p className="text-gray-300">
       Hébergez votre site avec <strong>Hostinger</strong>, une solution abordable, performante et idéale pour les développeurs.
