@@ -53,14 +53,14 @@ const projectsData: Project[] = [
     id: 2,
     title: "Projet Beta",
     description:
-      "Solution de e-commerce avancée utilisant WordPress avec intégration WooCommerce et générateur de pages Elementor.",
+      "Site d'affiliation créée avec React avec solution d'achat redirigée vers Amazon.fr pour smartphone : Samsung Galaxy S24 Ultra ",
     image: "/images/samsung.webp",
     github: "https://github.com",
     live: "http://asblast-samsung.netlify.app/",
-    tags: ["WordPress", "WooCommerce", "Elementor"],
+    tags: ["React", "Tailwind CSS", "Vite"],
     status: "En production",
     featured: true,
-    category: "cms",
+    category: "frontend",
     date: "2023-08-22",
     complexity: 2,
   },
@@ -68,11 +68,11 @@ const projectsData: Project[] = [
     id: 3,
     title: "Projet Gamma",
     description:
-      "Application Web complète utilisant Node JS (en cours de développement).",
+      "Application Web complète utilisant React, Vite, Tailwind CSS pour le frontend et Node JS pour le backend ( en cours ).",
     image: "/images/AKATA.png",
     github: "https://github.com",
     live: "http://akata.netlify.app/",
-    tags: ["Node JS", "MySQL"],
+    tags: [ " Node JS", "MySQL", "React"],
     status: "En développement",
     category: "backend",
     date: "2023-11-05",
@@ -596,8 +596,8 @@ export function Projects() {
                   onClick={() => setViewMode("grid")}
                   className={`p-2 transition-colors ${
                     viewMode === "grid"
-                      ? "bg-[#D946EF] text-white"
-                      : "text-white/70 hover:bg-white/10"
+                      ? "bg-[#D946EF] text-white rounded-full"
+                      : "text-white/70 hover:bg-white/10 rounded-full" 
                   }`}
                 >
                   <Grip size={18} />
@@ -607,8 +607,8 @@ export function Projects() {
                   onClick={() => setViewMode("list")}
                   className={`p-2 transition-colors ${
                     viewMode === "list"
-                      ? "bg-[#D946EF] text-white"
-                      : "text-white/70 hover:bg-white/10"
+                      ? "bg-[#D946EF] text-white rounded-full"
+                      : "text-white/70 hover:bg-white/10 rounded-full"
                   }`}
                 >
                   <List size={18} />

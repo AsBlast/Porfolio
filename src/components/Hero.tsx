@@ -96,11 +96,12 @@ export function Hero() {
           </section>
           
           <a href="#about" className="mt-12 inline-flex items-center gap-2 px-8 py-3 bg-cyan-950 text-cyan-300 rounded-lg border border-cyan-500/50 hover:bg-cyan-900 transition-colors">
-            En savoir plus
+            En savoir plus 
             <motion.div animate={{ y: [0, 5, 0] }} transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}>
               <ChevronDown className="w-5 h-5" />
             </motion.div>
           </a>
+          
         </motion.div>
       </div>
     </header>

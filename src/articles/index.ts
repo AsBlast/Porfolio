@@ -1,5 +1,4 @@
 // src/articles/index.ts
-
 export interface ArticleMeta {
   slug: string;
   title: string;
@@ -19,3 +18,4 @@ export const articles: ArticleMeta[] = [
     tags: ["React", "Performance", "SEO", "Vite"],
   },
 ];
+

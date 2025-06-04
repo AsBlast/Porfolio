@@ -1,9 +1,11 @@
 // src/pages/ArticlePage.tsx
 
 import React, { Suspense, useMemo } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
-import { articles } from '../articles'; // Pour récupérer les métadonnées de l'article actuel
+import { articles } from '../articles'; 
+import { motion } from 'framer-motion';
+import { ArrowLeft, Home } from 'lucide-react';
 
 // Composant de chargement simple
 const ArticleLoader = () => (
@@ -64,9 +66,36 @@ export default function ArticlePage() {
             {/* Le contenu de l'article MDX */}
             <Suspense fallback={<ArticleLoader />}>
               <ArticleContent />
+
+              
             </Suspense>
+
+            
           </article>
+          <br />
+           <motion.div
+            initial={{ y: 20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ delay: 0.8, duration: 0.5 }}
+            className="flex flex-col sm:flex-row items-center justify-center gap-4"
+          >
+            <Link 
+              to="/"
+              className="inline-flex items-center justify-center gap-2 w-full sm:w-auto px-8 py-3 bg-[#D946EF] rounded-lg text-white text-lg font-bold hover:bg-[#C026D3] transition-colors transform hover:scale-105"
+            >
+              <Home className="w-5 h-5 " />
+              Retourner à l'accueil
+            </Link>
+            <button
+              onClick={() => window.history.back()}
+              className="inline-flex items-center justify-center gap-2 w-full sm:w-auto px-8 py-3 bg-white/10 rounded-lg text-white/80 font-semibold hover:bg-white/20 transition-colors"
+            >
+              <ArrowLeft className="w-5 h-5" />
+              Page précédente
+            </button>
+          </motion.div>
         </div>
+        
       </main>
     </>
   );
