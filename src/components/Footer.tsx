@@ -1,9 +1,12 @@
 import { motion } from "framer-motion";
 import { Github, Linkedin, Facebook, Rocket, Code2, Sparkles } from "lucide-react";
 import { useState } from "react";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 
 export function Footer() {
   const [hovered, setHovered] = useState<string | null>(null);
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const navItems = [
     { name: "Accueil", href: "#home" },
@@ -12,11 +15,33 @@ export function Footer() {
     { name: "Contact", href: "#contact" }
   ];
 
+  const legalPages = [
+    { name: "Politique de confidentialité", href: "/privacy" },
+    { name: "Mentions légales", href: "/terms" },
+  ];
+
   const socialLinks = [
     { name: "Github", icon: <Github size={24} />, href: "https://github.com/AsBlast" },
     { name: "LinkedIn", icon: <Linkedin size={24} />, href: "https://linkedin.com/in/brice-yakim-andriamahefaromisa-6a8a2b200" },
     { name: "Facebook", icon: <Facebook size={24} />, href: "https://facebook.com/" }
   ];
+
+  const handleNavClick = (sectionId: string) => {
+    if (location.pathname !== '/') {
+      navigate('/', { replace: false });
+      setTimeout(() => {
+        const element = document.getElementById(sectionId);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 100);
+    } else {
+      const element = document.getElementById(sectionId);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  };
 
   return (
     <footer className="relative bg-[#0F172A] w-full border-t border-cyan-500/20 overflow-hidden">
@@ -53,7 +78,7 @@ export function Footer() {
               className="text-lg text-cyan-300/80 font-mono flex items-center gap-2"
             >
               <Sparkles className="w-5 h-5 text-purple-400" />
-             Créer l'excellence numérique
+              Créer l'excellence numérique
             </motion.p>
           </motion.div>
 
@@ -65,7 +90,7 @@ export function Footer() {
             className="lg:col-span-2"
           >
             <h3 className="text-xl font-bold mb-8 bg-gradient-to-r from-cyan-400 to-pink-500 bg-clip-text text-transparent">
-             Explorez l'univers
+              Explorez l'univers
             </h3>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
               {navItems.map((item) => (
@@ -74,11 +99,12 @@ export function Footer() {
                   whileHover={{ x: 10 }}
                   className="group relative"
                 >
-                  <a
-                    href={item.href}
-                    className="flex items-center gap-3 text-cyan-300/80 hover:text-cyan-300 transition-colors"
+                  <button
+                    onClick={() => handleNavClick(item.href.replace('#', ''))}
+                    className="flex items-center gap-3 text-cyan-300/80 hover:text-cyan-300 transition-colors font-mono px-4 py-2 rounded-lg hover:bg-cyan-950/30"
                     onMouseEnter={() => setHovered(item.name)}
                     onMouseLeave={() => setHovered(null)}
+                    style={{ background: 'none', border: 'none', cursor: 'pointer' }}
                   >
                     <div className={`w-2 h-2 rounded-full transition-all ${
                       hovered === item.name 
@@ -86,10 +112,28 @@ export function Footer() {
                         : "bg-cyan-500/30"
                     }`} />
                     <span className="font-medium">{item.name}</span>
-                  </a>
+                  </button>
                 </motion.div>
               ))}
             </div>
+
+            {/* Section navigation légale */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.5 }}
+              className="mt-12 border-t border-cyan-500/20 pt-8 flex justify-center gap-8 text-cyan-300/80 text-sm"
+            >
+              {legalPages.map((page) => (
+                <Link
+                  key={page.name}
+                  to={page.href}
+                  className="hover:text-cyan-300 transition-colors"
+                >
+                  {page.name}
+                </Link>
+              ))}
+            </motion.div>
           </motion.div>
         </div>
 
@@ -135,7 +179,7 @@ export function Footer() {
         >
           <div className="mb-4">© {new Date().getFullYear()} Brice-Dev</div>
           <div className="text-xs text-cyan-500/40">
-         Ce site a été créé avec <span className="text-[#D946EF]">♥</span> à Madagascar
+            Ce site a été créé avec <span className="text-[#D946EF]">♥</span> à Madagascar
           </div>
         </motion.div>
       </div>

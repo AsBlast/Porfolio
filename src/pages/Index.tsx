@@ -14,7 +14,7 @@ export default function Index() {
   useEffect(() => {
     const handleScroll = () => setScrollY(window.scrollY);
     window.addEventListener("scroll", handleScroll);
-    
+
     // Simulate loading time
     const timer = setTimeout(() => {
       setIsLoading(false);
@@ -32,10 +32,10 @@ export default function Index() {
       <div className="min-h-screen bg-[#1A1F2C] text-white overflow-hidden">
         <Navigation />
         <main>
-          <Hero />
-          <About />
-          <Projects />
-          <Contact />
+          <div id="home"><Hero /></div>
+          <div id="about"><About /></div>
+          <div id="projects"><Projects /></div>
+          <div id="contact"><Contact /></div>
         </main>
       </div>
     </>
