@@ -206,13 +206,13 @@ export default function Privacy() {
               </ul>
               
               <div className="mt-8 pt-6 border-t border-purple-500/20">
-                <a 
-                  href="Terms" 
+                {/* <a 
+                  href="/Terms" 
                   className="flex items-center gap-3 text-cyan-400 hover:text-cyan-300 transition-colors"
                 >
                   <ShieldCheck className="w-5 h-5" />
                   <span>Mentions Légales</span>
-                </a>
+                </a> */}
               </div>
             </div>
           </div>

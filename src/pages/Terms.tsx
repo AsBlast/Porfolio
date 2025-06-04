@@ -216,13 +216,13 @@ export default function Terms() {
               </ul>
               
               <div className="mt-8 pt-6 border-t border-purple-500/20">
-                <a 
-                  href="privacy" 
+                {/* <a 
+                  href="/privacy" 
                   className="flex items-center gap-3 text-cyan-400 hover:text-cyan-300 transition-colors"
                 >
                   <Shield className="w-5 h-5" />
                   <span>Politique de confidentialité</span>
-                </a>
+                </a> */}
               </div>
             </div>
           </div>
