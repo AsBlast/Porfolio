@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: 
+
+Sitemap: https://asblast.space/sitemap.xml
