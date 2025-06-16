@@ -26,7 +26,7 @@ export default function Terms() {
             </div>
             <div className="bg-[#2D374B] p-5 rounded-xl border border-pink-500/20">
               <h4 className="font-bold text-pink-300 mb-3">Email</h4>
-              <p>asblastb@gmail.com</p>
+              <p>briceyakimasblast@gmail.com</p>
             </div>
             <div className="bg-[#2D374B] p-5 rounded-xl border border-white/20">
               <h4 className="font-bold text-white mb-3">Localisation</h4>
