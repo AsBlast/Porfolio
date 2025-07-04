@@ -21,7 +21,7 @@ export function LoadingScreen() {
             opacity: [0, 1, 0]
           }}
           transition={{
-            duration: 2.5,
+            duration: 1.5,
             repeat: Infinity,
             ease: "anticipate"
           }}

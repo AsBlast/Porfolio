@@ -8,8 +8,10 @@ import { Footer } from "@/components/Footer";
 import AdSenseMeta from "./AdSenseMeta"; // ajustez le chemin selon votre arborescence
 import Terms from "./pages/Terms";
 import Privacy from "./pages/Privacy";
+import React, { Suspense } from 'react';
 
 const queryClient = new QueryClient();
+// const HeavyComponent = React.lazy(() => import('./components/HeavyComponent'));
 
 const App = () => (
   <QueryClientProvider client={queryClient}>

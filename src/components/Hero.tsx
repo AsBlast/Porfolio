@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { ChevronDown, Terminal, Github, Linkedin } from "lucide-react";
+import { ChevronDown, Terminal, Github, Linkedin, Rocket, Coffee, MoonStar, Zap } from "lucide-react";
 
 export function Hero() {
   return (
@@ -51,14 +51,42 @@ export function Hero() {
           </h2>
 
           {/* Paragraphe principal optimisé pour LCP */}
-          <p
-            className="text-xl md:text-2xl text-cyan-100 opacity-95 mb-8 max-w-2xl mx-auto font-mono"
-            style={{ willChange: "opacity, transform" }}
+           {/* Paragraphe avec icônes animées */}
+          <motion.div
+            className="text-xl md:text-2xl text-cyan-100 opacity-95 mb-8 max-w-2xl mx-auto font-mono flex flex-col items-center gap-2"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.6 }}
           >
-            Codeur nocturne & Architecte d'expériences digitales. <br /> Auto-formé à la lumière des écrans <br />
-            🌙 + ☕ + 💻 = ⚡ 🚀<br />
-          </p>
-
+             <p>Codeur nocturne & Architecte d'expériences digitales.</p>
+              <p>Auto-formé à la lumière des écrans</p>
+            <div className="flex items-center gap-3 mb-3">
+              <motion.div
+                animate={{ rotate: [0, 15, 0, -15, 0] }}
+                transition={{ duration: 4, repeat: Infinity }}
+              >
+                <MoonStar className="text-purple-400" />
+              </motion.div> +
+              <motion.div
+                animate={{ y: [0, -5, 0] }}
+                transition={{ duration: 2, repeat: Infinity }}
+              >
+                <Coffee className="text-amber-400" /> 
+              </motion.div> +
+              <motion.div
+                animate={{ scale: [1, 1.2, 1] }}
+                transition={{ duration: 1.5, repeat: Infinity }}
+              >
+                <Zap className="text-yellow-400" />
+              </motion.div> =
+               <Rocket className="text-pink-500 animate-pulse" />
+            </div>
+            
+           
+           
+            
+           
+          </motion.div>
           {/* Réseaux sociaux avec animations */}
           <div className="flex justify-center gap-4 mb-8">
             {[
