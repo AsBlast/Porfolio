@@ -26,7 +26,7 @@ export default function Terms() {
             </div>
             <div className="bg-[#2D374B] p-5 rounded-xl border border-pink-500/20">
               <h4 className="font-bold text-pink-300 mb-3">Email</h4>
-              <p>asblastb@gmail.com</p>
+              <p>briceyakimasblast@gmail.com</p>
             </div>
             <div className="bg-[#2D374B] p-5 rounded-xl border border-white/20">
               <h4 className="font-bold text-white mb-3">Localisation</h4>
@@ -82,7 +82,7 @@ export default function Terms() {
       icon: <BookOpen size={20} />,
       content: (
         <>
-          <p className="mb-4">L'ensemble des éléments constituant le site <span className="text-cyan-400">brice-dev.com</span> sont protégés par les dispositions du Code de la propriété intellectuelle.</p>
+          <p className="mb-4">L'ensemble des éléments constituant le site <span className="text-cyan-400">asblast.space</span> sont protégés par les dispositions du Code de la propriété intellectuelle.</p>
           
           <div className="grid md:grid-cols-2 gap-4 mb-6">
             <div className="bg-[#2D374B] p-4 rounded-xl border border-cyan-500/20">

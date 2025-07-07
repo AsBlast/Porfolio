@@ -40,7 +40,7 @@ export default function Privacy() {
       content: (
         <>
           <p className="mb-4">Bienvenue sur la politique de confidentialité de Brice-Dev. Cette page vous informe sur la manière dont nous collectons, utilisons et protégeons vos données personnelles lorsque vous visitez mon portfolio.</p>
-          <p>Conformément au RGPD et aux réglementations en vigueur, nous nous engageons à protéger votre vie privée. Cette politique s'applique à toutes les interactions sur le site <span className="text-cyan-400">brice-dev.com</span>.</p>
+          <p>Conformément au RGPD et aux réglementations en vigueur, nous nous engageons à protéger votre vie privée. Cette politique s'applique à toutes les interactions sur le site <span className="text-cyan-400">asblast.space</span>.</p>
         </>
       )
     },
