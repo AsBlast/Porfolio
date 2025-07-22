@@ -3,14 +3,13 @@ import {
   ShoppingCart, 
   Sparkles, 
   Star,
-  Search,
   Filter,
   X
 } from "lucide-react";
 import { useState, useMemo } from "react";
-import Head from 'next/head'; // Important pour le SEO de votre page boutique
+import Head from 'next/head';
 
-// --- Données et Interfaces (Mettez-les dans un fichier partagé si besoin) ---
+// --- Données et Interfaces ---
 
 interface Product {
   id: number;
@@ -20,7 +19,8 @@ interface Product {
   image: string;
   purchaseLink: string;
   demoLink?: string;
-  price: number;
+  // L'interface est correcte, elle accepte les deux formats
+  price: number | { current: number; original?: number };
   tags: string[];
   category: "Template" | "UI Kit" | "Script";
   featured?: boolean;
@@ -34,14 +34,17 @@ interface Product {
 const productsData: Product[] = [
   {
     id: 101,
-    title: "PortfolioDev Pro",
-    tagline: "Le template Next.js ultime pour les développeurs modernes.",
-    description: "Lancez votre portfolio professionnel en quelques minutes. Entièrement responsive, optimisé SEO et facile à personnaliser avec Tailwind CSS.",
-    image: "/images/product-portfolio.png",
-    purchaseLink: "https://votre-lien.gumroad.com/l/portfolio-pro",
-    demoLink: "https://demo-portfolio-pro.netlify.app/",
-    price: 29.00,
-    tags: ["Next.js", "React", "Tailwind CSS"],
+    title: "CreativePortfolio Pro",
+    tagline: "Le template ultime pour les développeurs modernes.",
+    description: "Lancez votre portfolio professionnel en quelques minutes. Entièrement responsive, optimisé SEO et facile à personnaliser",
+    image: "/images/creativePortfolio.png",
+    purchaseLink: "https://payhip.com/b/ZufXm",
+    demoLink: "https://creative-portfolio-pro.netlify.app/",
+    price: {
+      current: 2.00,
+      original: 7.00
+    },
+    tags: ["html5", "CSS3", "JavaScript"],
     category: "Template",
     featured: true,
     benefits: ["SEO Optimisé", "Personnalisation Facile", "Code de Qualité", "Déploiement Rapide"],
@@ -51,28 +54,13 @@ const productsData: Product[] = [
     }
   },
   {
-    id: 102,
-    title: "Dashboard UI Kit",
-    tagline: "Construisez des dashboards magnifiques et fonctionnels.",
-    description: "Un ensemble de plus de 50 composants React/TypeScript conçus pour l'analyse de données. Gagnez des semaines de développement.",
-    image: "/images/product-dashboard.png",
-    purchaseLink: "https://votre-lien.payhip.com/b/dashboard-kit",
-    demoLink: "https://demo-dashboard-kit.netlify.app/",
-    price: 49.00,
-    tags: ["React", "TypeScript", "Chart.js"],
-    category: "UI Kit",
-    featured: false,
-    benefits: ["Accessible (WCAG)", "+50 Composants", "Responsive", "Documentation Incluse"]
-  },
-  
-  
-  {
     id: 103,
     title: "Analyseur de Texte - Offline",
     tagline: "Analyser vos textes avec précision sans connexion internet.",
     description: "Conçue pour fournir une analyse détaillée de n’importe quel texte saisi, sans limite de mots",
     image: "/images/TextAnalis.png",
     purchaseLink: "https://payhip.com/b/SB18R",
+    // Produit sans promotion, on garde le format simple
     price: 5.00,
     tags: ["React, Vite, Tailwind CSS"],
     demoLink: "https://textanalyser.netlify.app/",
@@ -80,24 +68,10 @@ const productsData: Product[] = [
     featured: false,
     benefits: ["Sécurisé", "Prêt à l'Emploi", "Hors ligne", "Structure Claire"]
   },
-
-  {
-    id: 104,
-    title: "Automation scrapping",
-    tagline: "Automatiser vos tâches avec mes scripts Python",
-    description: "Un ensemble de plus de 50 composants React/TypeScript conçus pour l'analyse de données. Gagnez des semaines de développement.",
-    image: "/images/product-dashboard.png",
-    purchaseLink: "https://votre-lien.payhip.com/b/dashboard-kit",
-    demoLink: "https://demo-dashboard-kit.netlify.app/",
-    price: 9.00,
-    tags: ["Python"],
-    category: "Script",
-    featured: false,
-    benefits: ["Automatisation", "Responsive", "Documentation Incluse"]
-  }
+  // ... autres produits
 ];
 
-// --- Animations (réutilisées de votre code projet) ---
+// --- Animations ---
 
 const containerVariants = { 
   hidden: { opacity: 0 }, 
@@ -108,7 +82,7 @@ const itemVariants = {
   visible: { y: 0, opacity: 1, transition: { type: "spring" as const, stiffness: 100 } } 
 };
 
-// --- Composants de la page ---
+// --- Composants ---
 
 const ProductCard = ({ product }: { product: Product }) => (
   <motion.div 
@@ -141,7 +115,16 @@ const ProductCard = ({ product }: { product: Product }) => (
       </div>
 
       <div className="flex items-center justify-between mt-auto">
-        <span className="text-2xl font-bold text-white">{product.price.toFixed(2)}€</span>
+        <div className="flex items-baseline gap-2">
+          <span className="text-2xl font-bold text-white">
+            {typeof product.price === 'object' ? product.price.current.toFixed(2) : product.price.toFixed(2)}€
+          </span>
+          {typeof product.price === 'object' && product.price.original && (
+            <span className="line-through text-lg font-normal text-white/50">
+              {product.price.original.toFixed(2)}€
+            </span>
+          )}
+        </div>
         <a
           href={product.purchaseLink}
           target="_blank"
@@ -194,11 +177,33 @@ const FeaturedProduct = ({ product }: { product: Product }) => (
         </blockquote>
       )}
 
+      {/* --- CORRECTION DE LA STRUCTURE HTML --- */}
+      {/* On utilise un conteneur flex pour aligner le bouton et le lien de démo */}
       <div className="flex flex-wrap items-center gap-4">
-        <a href={product.purchaseLink} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 px-6 py-3 bg-[#D946EF] rounded-lg text-white text-lg font-bold hover:bg-[#C026D3] transition-colors transform hover:scale-105">
+        <a 
+          href={product.purchaseLink} 
+          target="_blank" 
+          rel="noopener noreferrer" 
+          className="flex items-center gap-3 px-6 py-3 bg-[#D946EF] rounded-lg text-white text-lg font-bold hover:bg-[#C026D3] transition-colors transform hover:scale-105"
+        >
           <ShoppingCart className="w-5 h-5" />
-          Obtenir pour {product.price.toFixed(2)}€
+          <div className="flex items-baseline gap-2">
+            {/* La logique d'affichage est maintenant correcte car les données le sont */}
+            {typeof product.price === 'object' ? (
+              <>
+                <span>Obtenir pour {product.price.current.toFixed(2)}€</span>
+                {product.price.original && (
+                  <span className="line-through text-base font-normal text-white/60">
+                    {product.price.original.toFixed(2)}€
+                  </span>
+                )}
+              </>
+            ) : (
+              <span>Obtenir pour {product.price.toFixed(2)}€</span>
+            )}
+          </div>
         </a>
+
         {product.demoLink && (
           <a href={product.demoLink} target="_blank" rel="noopener noreferrer" className="text-white/70 hover:text-white transition-colors font-semibold">
             Voir la démo live
@@ -209,7 +214,7 @@ const FeaturedProduct = ({ product }: { product: Product }) => (
   </div>
 );
 
-
+// --- Page principale ---
 export default function ProductsPage() {
   const [filterCategory, setFilterCategory] = useState<string>("Tous");
   const categories = ["Tous", ...Array.from(new Set(productsData.map(p => p.category)))];
@@ -248,7 +253,7 @@ export default function ProductsPage() {
               transition={{ duration: 0.5, delay: 0.1 }}
               className="max-w-2xl mx-auto text-lg text-white/70"
             >
-              Des templates et kits UI prêts à l'emploi, conçus avec soin pour vous faire gagner du temps et produire un travail de qualité professionnelle.
+              Des templates prêts à l'emploi, conçus avec soin pour vous faire gagner du temps et produire un travail de qualité professionnelle.
             </motion.p>
           </div>
         </section>
@@ -276,9 +281,16 @@ export default function ProductsPage() {
                     }`}
                   >
                     {category}
-                    {filterCategory === category && (
-                      <X size={14} className="text-white" />
-                    )}
+                    <span
+                      onClick={(e) => {
+                        if (filterCategory === category) {
+                          e.stopPropagation();
+                          setFilterCategory("Tous");
+                        }
+                      }}
+                    >
+                      {filterCategory === category && <X size={14} className="text-white" />}
+                    </span>
                   </button>
                 ))}
               </div>
