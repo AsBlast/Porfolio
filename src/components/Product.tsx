@@ -242,8 +242,7 @@ export default function ProductsPage() {
     <>
       <Helmet>
         <title>
-          Boutique - Templates et Outils pour Développeurs par Brice A.
-        </title>
+            Brice Yakim AsBlast| Développeur Web Full Stack à Madagascar | Portfolio AsBlast </title>
         <meta
           name="description"
           content="Découvrez des templates, kits UI et scripts de haute qualité, conçus pour accélérer vos projets de développement web et mobile."
