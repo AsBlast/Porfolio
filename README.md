@@ -47,7 +47,7 @@ This project is built with .
 - shadcn-ui
 - Tailwind CSS
 
-### Version Français :
+### Version en Français :
 
 ## Informations sur le projet
 
@@ -59,6 +59,7 @@ Le seul prérequis est d'avoir Node.js & npm d'installés - [installer avec nvm]
 
 Suivez ces étapes :
 
+```sh
 # Étape 1 : Clonez le dépôt en utilisant l'URL Git du projet.
 git clone <URL_GIT_DE_VOTRE_PROJET>
 
