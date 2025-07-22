@@ -46,3 +46,27 @@ This project is built with .
 - React
 - shadcn-ui
 - Tailwind CSS
+
+### Version Français :
+
+## Informations sur le projet
+
+## Comment modifier ce code ?
+
+Il existe plusieurs façons de modifier votre application.
+
+Le seul prérequis est d'avoir Node.js & npm d'installés - [installer avec nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+
+Suivez ces étapes :
+
+# Étape 1 : Clonez le dépôt en utilisant l'URL Git du projet.
+git clone <URL_GIT_DE_VOTRE_PROJET>
+
+# Étape 2 : Allez dans le répertoire du projet.
+cd <NOM_DE_VOTRE_PROJET>
+
+# Étape 3 : Installez les dépendances nécessaires.
+npm i
+
+# Étape 4 : Démarrez le serveur de développement avec rechargement automatique et aperçu instantané.
+npm run dev
