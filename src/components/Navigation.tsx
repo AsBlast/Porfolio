@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, Home, User, Folder, Mail } from "lucide-react";
+import { Menu, X, Home, User, Folder, Mail, Store } from "lucide-react";
 import { useNavigate, useLocation } from 'react-router-dom';
 
 type NavigationProps = {
@@ -58,7 +58,7 @@ export function Navigation({ navigateToSection }: NavigationProps) {
       setScrolled(window.scrollY > 50);
       
       // Détection de la section visible
-      const sections = ['home', 'about', 'projects', 'contact'];
+      const sections = ['home', 'about', 'projects', 'products', 'contact'];
       let currentSection = 'home';
       
       for (const section of sections) {
@@ -104,6 +104,13 @@ export function Navigation({ navigateToSection }: NavigationProps) {
       icon: <User className="w-5 h-5" />,
       aria: "Aller à la section À propos"
     },
+
+    { 
+      name: "Produits", 
+      href: "products", 
+      icon: <Store className="w-5 h-5" />,
+      aria: "Aller à la section Produits"
+    },
     { 
       name: "Projets", 
       href: "projects", 
@@ -148,7 +155,7 @@ export function Navigation({ navigateToSection }: NavigationProps) {
           </motion.a>
 
           {/* Desktop Menu avec surlignage gauche-droite */}
-          <div className="hidden md:flex space-x-2 relative">
+          <div className="hidden md:flex space-x-0 relative">
             {menuItems.map((item) => (
               <motion.button
                 key={item.name}

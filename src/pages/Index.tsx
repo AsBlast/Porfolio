@@ -6,6 +6,7 @@ import { About } from "@/components/About";
 import { Projects } from "@/components/Projects";
 import { Contact } from "@/components/Contact";
 import { LoadingScreen } from "@/components/LoadingScreen";
+import Product from "@/components/Product";
 
 export default function Index() {
   const [isLoading, setIsLoading] = useState(true);
@@ -34,6 +35,7 @@ export default function Index() {
         <main>
           <div id="home"><Hero /></div>
           <div id="about"><About /></div>
+          <div id="products"><Product /></div>
           <div id="projects"><Projects /></div>
           <div id="contact"><Contact /></div>
         </main>

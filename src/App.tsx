@@ -5,7 +5,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import { Footer } from "@/components/Footer";
-import AdSenseMeta from "./AdSenseMeta"; // ajustez le chemin selon votre arborescence
+import AdSenseMeta from "./AdSenseMeta"; 
 import Terms from "./pages/Terms";
 import Privacy from "./pages/Privacy";
 import React, { Suspense } from 'react';

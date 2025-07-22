@@ -59,7 +59,7 @@ export function About() {
   ];
 
   const stats = [
-    { value: "3+", label: "Années d'expérience" },
+    { value: "2+", label: "Années d'expérience" },
     { value: "10+", label: "Projets réalisés" },
     { value: "98%", label: "Satisfaction clients" },
     { value: "7+", label: "Technologies maîtrisées" }

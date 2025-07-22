@@ -50,7 +50,7 @@ export function Hero() {
             Apprenti développeur Full Stack
           </h2>
 
-          {/* Paragraphe principal optimisé pour LCP */}
+        
            {/* Paragraphe avec icônes animées */}
           <motion.div
             className="text-xl md:text-2xl text-cyan-100 opacity-95 mb-8 max-w-2xl mx-auto font-mono flex flex-col items-center gap-2"
