@@ -3,21 +3,29 @@ import { motion } from "framer-motion";
 export function LoadingScreen() {
   const letters = "Brice-Dev".split("");
 
+
   return (
     <motion.div
+      key="loading-screen" 
       initial={{ opacity: 1 }}
-      animate={{ opacity: 0 }}
-      transition={{ duration: 0.5, delay: 3 }}
-      onAnimationComplete={() => (document.body.style.overflow = "auto")}
-      className="fixed inset-0 z-50 flex items-center justify-center bg-[#1A1F2C]"
+      animate={{ opacity: 1 }} // Reste visible tant qu'il est monté
+      exit={{ opacity: 0 }} 
+      transition={{ duration: 0.5 }}
+      
+      // La manipulation du DOM (onAnimationComplete) est supprimée.
+      className="fixed inset-0 z-[100] flex items-center justify-center bg-[#1A1F2C]"
+     
+      role="status"
+      aria-live="polite"
     >
+      <span className="sr-only">Chargement en cours...</span>
+
       <div className="relative w-40 h-40">
         {/* Cercles animés */}
         <motion.div
-          initial={{ scale: 0 }}
           animate={{
             scale: [0, 1.2, 0],
-            rotate: 360,
+            rotate: [0, 360],
             opacity: [0, 1, 0]
           }}
           transition={{
@@ -29,10 +37,9 @@ export function LoadingScreen() {
         />
 
         <motion.div
-          initial={{ scale: 0 }}
           animate={{
             scale: [0, 1.5, 0],
-            rotate: -360,
+            rotate: [0, -360],
             opacity: [0, 0.8, 0]
           }}
           transition={{
@@ -50,18 +57,15 @@ export function LoadingScreen() {
             {letters.map((letter, index) => (
               <motion.span
                 key={index}
-                initial={{ y: 40, opacity: 0 }}
+                initial={{ y: 20, opacity: 0 }}
                 animate={{
-                  y: [40, -10, 0],
-                  opacity: [0, 1, 1],
-                  scale: [0.5, 1.2, 1]
+                  y: [20, -5, 0],
+                  opacity: 1
                 }}
                 transition={{
-                  duration: 0.8,
-                  delay: index * 0.1,
-                  repeat: Infinity,
-                  repeatDelay: 1.5,
-                  times: [0, 0.8, 1]
+                  duration: 0.5,
+                  delay: 0.5 + index * 0.1, 
+                  ease: "easeOut"
                 }}
                 className="inline-block text-transparent bg-gradient-to-r from-cyan-400 to-fuchsia-600 bg-clip-text text-2xl font-bold"
               >
@@ -70,20 +74,6 @@ export function LoadingScreen() {
             ))}
           </div>
         </div>
-
-        {/* Points de suspension centrés */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: [0, 1, 0] }}
-          transition={{
-            duration: 1.2,
-            repeat: Infinity,
-            repeatDelay: 0.5
-          }}
-          className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-6"
-        >
-          <span className="text-white animate-pulse">...</span>
-        </motion.div>
       </div>
     </motion.div>
   );
