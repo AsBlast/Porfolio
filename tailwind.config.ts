@@ -1,12 +1,17 @@
 import type { Config } from "tailwindcss";
+// --- NOUVEAU : Importez les plugins en haut du fichier ---
+import tailwindcssAnimate from "tailwindcss-animate";
+import tailwindcssTypography from "@tailwindcss/typography";
 
-export default {
+const config: Config = {
   darkMode: ["class"],
   content: [
     "./pages/**/*.{ts,tsx}",
     "./components/**/*.{ts,tsx}",
     "./app/**/*.{ts,tsx}",
     "./src/**/*.{ts,tsx}",
+    // --- AMÉLIORATION : Assurez-vous d'inclure les fichiers .mdx pour le purge CSS ---
+    "./src/articles/**/*.mdx", 
   ],
   prefix: "",
   theme: {
@@ -60,6 +65,7 @@ export default {
       },
     },
   },
-  // eslint-disable-next-line @typescript-eslint/no-require-imports
-  plugins: [require("tailwindcss-animate")],
-} satisfies Config;
+  plugins: [tailwindcssAnimate, tailwindcssTypography],
+};
+
+export default config;

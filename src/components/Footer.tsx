@@ -11,6 +11,7 @@ export function Footer() {
     { name: "A propos", href: "#about" },
     { name: "Produits", href: "#products" },
     { name: "Projets", href: "#projects" },
+    { name: "Blog", href: "/blog" },
     { name: "Contact", href: "#contact" }
   ];
 
@@ -25,14 +26,23 @@ export function Footer() {
     { name: "Facebook", icon: <Facebook size={24} />, href: "https://facebook.com/" }
   ];
 
-  const handleNavClick = (sectionId: string) => {
-    if (location.pathname === '/') {
-      const element = document.getElementById(sectionId);
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
+  // --- CORRECTION : Une nouvelle fonction de navigation plus polyvalente ---
+  const handleFooterLinkClick = (href: string) => {
+    // Cas 1 : C'est une route de page (ex: /blog)
+    if (href.startsWith('/')) {
+      navigate(href);
+    } 
+    // Cas 2 : C'est un lien d'ancrage pour la page d'accueil (ex: #home)
+    else if (href.startsWith('#')) {
+      const sectionId = href.substring(1); // Retire le '#'
+
+      // Si on est déjà sur la page d'accueil, on défile simplement
+      if (location.pathname === '/') {
+        document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
+      } else {
+        // Sinon, on navigue vers la page d'accueil et on lui dit de défiler
+        navigate('/', { state: { scrollToSection: sectionId } });
       }
-    } else {
-      navigate('/', { state: { scrollToSection: sectionId } });
     }
   };
 
@@ -53,9 +63,9 @@ export function Footer() {
               <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
                 {navItems.map((item) => (
                   <motion.div key={item.name} whileHover={{ x: 5 }} className="group">
-                    {/* --- CORRECTION : Utilisation de <button> avec la logique JS --- */}
                     <button
-                      onClick={() => handleNavClick(item.href.replace('#', ''))}
+                      // --- CORRECTION : Utilisation de la nouvelle fonction ---
+                      onClick={() => handleFooterLinkClick(item.href)}
                       className="flex items-center gap-3 text-cyan-300/80 hover:text-cyan-300 transition-colors font-mono py-2 rounded-lg"
                     >
                       <div className="w-2 h-2 rounded-full transition-all bg-cyan-500/30 group-hover:bg-[#D946EF] group-hover:shadow-glow-purple" />
@@ -78,11 +88,11 @@ export function Footer() {
             ))}
           </div>
            
-          <a href="#home" onClick={(e) => { e.preventDefault(); handleNavClick('home'); }} className="flex items-center gap-3 text-cyan-300/80 hover:text-cyan-300 cursor-pointer">
+          <button onClick={() => handleFooterLinkClick('#home')} className="flex items-center gap-3 text-cyan-300/80 hover:text-cyan-300 cursor-pointer">
              <ChevronUpIcon className="w-6 h-6 text-purple-400 animate-launch" />
             <span className="font-mono">Retourner en haut   </span>
             <ChevronUpIcon className="w-6 h-6 text-purple-400 animate-launch" />
-          </a>
+          </button>
            <Rocket className="w-6 h-6 text-purple-400 animate-launch" />
 
         </motion.div>

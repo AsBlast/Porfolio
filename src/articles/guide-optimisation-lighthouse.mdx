@@ -1,0 +1,114 @@
+---
+title: "Comment j'ai optimisé mon portfolio pour un score Lighthouse de 86+"
+date: "2024-07-24"
+summary: "De 38 à 86 en performance : un guide détaillé des optimisations techniques, de la gestion des images au code-splitting, que j'ai appliquées à mon portfolio React."
+image: "/images/blog/lighthouse.png"
+tags: ["React", "Performance", "SEO", "Vite"]
+---
+
+## Introduction : Le Point de Départ Douloureux
+
+Après avoir mis en ligne la première version de mon portfolio, j'étais fier du design. Mais le premier audit Lighthouse a été une douche froide : un score de performance de 38 ! Le site était lent, plombé par des animations coûteuses et des images non optimisées.
+
+Voici le récit détaillé de chaque étape que j'ai suivie pour transformer ce score en une note dont je peux être fier.
+
+### 1. Le Diagnostic : Comprendre le Rapport Lighthouse
+
+Le rapport pointait plusieurs coupables :
+- **Largest Contentful Paint (LCP)** de plus de 9 secondes.
+- **Total Blocking Time (TBT)** très élevé à cause du JavaScript.
+- Des **animations non-composées** qui bloquaient le thread principal.
+
+### 2. Attaquer le LCP : La Chasse à l'Image
+
+Mon LCP de 9 secondes était principalement dû à l'énorme image de fond de ma section "Hero". Elle était non seulement lourde, mais aussi mal chargée. Voici ma stratégie en deux temps :
+
+#### **Optimisation des Images : Le Régime Drastique**
+
+J'ai appliqué trois règles à toutes mes images, sans exception :
+
+1.  **Le bon format :** J'ai converti toutes mes images (PNG, JPG) au format **WebP**. C'est un format moderne qui offre une excellente qualité pour un poids de fichier bien inférieur. Des outils en ligne comme [Squoosh](https://squoosh.app/) sont parfaits pour cela.
+
+2.  **La bonne taille :** Servir une image de 4000px de large à un mobile est un gaspillage monumental. J'ai créé plusieurs versions de mes images clés (petite, moyenne, grande) et j'utilise la balise `<picture>` pour que le navigateur choisisse la plus adaptée.
+
+    ```html
+    <picture>
+      <source media="(max-width: 768px)" srcset="/images/hero-mobile.webp">
+      <source media="(min-width: 769px)" srcset="/images/hero-desktop.webp">
+      <img src="/images/hero-desktop.webp" alt="Description de l'image">
+    </picture>
+    ```
+
+3.  **Le bon chargement :**
+    - Pour l'image principale de la section "Hero" (mon LCP), j'ai dit au navigateur de la charger en priorité en ajoutant `fetchPriority="high"` à ma balise `<img>`.
+    - Pour toutes les autres images situées plus bas sur la page, j'ai utilisé le chargement différé (lazy loading) : `loading="lazy"`. Le navigateur ne les chargera que lorsque l'utilisateur s'apprête à les voir.
+
+Ces actions seules ont fait chuter mon LCP de 9s à moins de 3s.
+
+### 3. Dompter le TBT : Alléger le Fardeau JavaScript
+
+Un TBT élevé signifie que mon site "gèle" au chargement car il est trop occupé à exécuter du JavaScript. La solution : ne charger que le strict nécessaire.
+
+#### **Code-Splitting par Route**
+
+Mon application chargeait tout le code de toutes les pages d'un seul coup. Grâce à Vite et React, la solution est élégante : le **code-splitting** avec `React.lazy()`.
+
+J'ai modifié mon routeur pour qu'il charge le code d'une page uniquement lorsque l'utilisateur la visite.
+
+```jsx
+// Dans mon fichier de routage App.tsx
+
+import React, { Suspense } from 'react';
+
+// Avant : import BlogPage from './pages/BlogPage';
+// Après :
+const BlogPage = React.lazy(() => import('./pages/BlogPage'));
+const HomePage = React.lazy(() => import('./pages/Index'));
+
+function App() {
+  return (
+    <BrowserRouter>
+      <Suspense fallback={<div>Chargement...</div>}>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/blog" element={<BlogPage />} />
+        </Routes>
+      </Suspense>
+    </BrowserRouter>
+  );
+}
+```
+
+
+
+### 4. Animations Performantes : Laisser le GPU Travailler
+Le poids du JavaScript initial a été divisé par trois, rendant le site interactif presque instantanément.
+
+
+Mes animations initiales modifiaient des propriétés CSS comme `width`, `margin`, ou `left`. C'est une erreur de débutant : ces animations forcent le navigateur à tout recalculer et redessiner (ce qu'on appelle le "layout reflow"), ce qui est très lent.
+
+> **La règle d'or :** n'animer que les propriétés `transform` (scale, rotate, translate) et `opacity`.
+
+Ces propriétés sont gérées directement par le GPU (la carte graphique) et ne bloquent pas le thread principal du navigateur.
+
+#### Exemple concret avec Framer Motion :
+
+-   **Avant (lent et coûteux) :**
+    ```jsx
+    animate={{ height: 100 }}
+    ```
+
+-   **Après (rapide et performant) :**
+    ```jsx
+    animate={{ scaleY: 1 }}
+    ```
+
+J'ai passé en revue toutes mes animations pour m'assurer qu'elles utilisaient `x`, `y` (pour `translateX`, `translateY`), `scale`, `rotate` et `opacity`. Ce changement a rendu les animations fluides comme du beurre et a fait disparaître les alertes de "layout shift" et d'animations non-composées dans mon rapport Lighthouse.
+
+## Conclusion : Un Voyage Qui en Vaut la Peine
+
+Passer d'un score de 38 à 86 n'a pas été magique. C'était une série de petites victoires techniques, chacune basée sur les fondamentaux de la performance web. L'optimisation des images et le code-splitting ont représenté 80% du gain.
+
+Ce processus a été incroyablement formateur. Non seulement mon portfolio est maintenant rapide et agréable à utiliser, mais j'ai aussi acquis des compétences essentielles que j'applique à tous mes projets. La prochaine étape ? Viser le score parfait de 100 !
+
+*Et vous, quelles sont vos astuces incontournables pour l'optimisation des performances ?*

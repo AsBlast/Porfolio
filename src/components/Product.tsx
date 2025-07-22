@@ -1,9 +1,17 @@
 import { motion } from "framer-motion";
-import { ShoppingCart, Sparkles, Star, Filter, X } from "lucide-react";
+import {
+  ShoppingCart,
+  Sparkles,
+  Star,
+  Filter,
+  X,
+  Target,
+  BrainCircuit,
+} from "lucide-react";
 import { useState, useMemo } from "react";
-import { Helmet } from "react-helmet-async"; // Remplacement de next/head
+import { Helmet } from "react-helmet-async";
 
-// --- Données et Interfaces  ---
+// --- Interface Product ---
 interface Product {
   id: number;
   title: string;
@@ -18,50 +26,67 @@ interface Product {
   featured?: boolean;
   benefits: string[];
   testimonial?: { text: string; author: string };
+  challenge?: string;
+  solution?: string;
 }
+
+// --- Données des Produits ---
 const productsData: Product[] = [
   {
     id: 101,
     title: "CreativePortfolio Pro",
-    tagline: "Le template ultime pour les développeurs modernes.",
+    tagline: "Le template ultime pour les créatifs et freelances du web.",
     description:
-      "Lancez votre portfolio professionnel en quelques minutes. Entièrement responsive, optimisé SEO et facile à personnaliser",
+      "Lancez votre portfolio professionnel en quelques minutes. Parfait pour les développeurs, designers, photographes et tous les créateurs de contenu.",
     image: "/images/creativePortfolio.png",
     purchaseLink: "https://payhip.com/b/ZufXm",
     demoLink: "https://creative-portfolio-pro.netlify.app/",
     price: { current: 2.0, original: 7.0 },
-    tags: ["html5", "CSS3", "JavaScript"],
+    tags: ["Design Moderne", "Portfolio", "Responsive"],
     category: "Template",
     featured: true,
     benefits: [
       "SEO Optimisé",
       "Personnalisation Facile",
-      "Code de Qualité",
-      "Déploiement Rapide",
+      "Rapide et Performant",
+      "Mise en Ligne Simple",
     ],
     testimonial: {
-      text: "Ce template m'a fait gagner des jours de travail. Le code est incroyablement propre !",
-      author: "Alex D., Développeur Freelance",
+      text: "Ce template m'a fait gagner des jours de travail. Le design est incroyable et le code est propre !",
+      author: "Alex D., Freelance",
     },
+    challenge:
+      "Les freelances et créatifs ont besoin d'une présence en ligne professionnelle pour attirer des clients, mais n'ont souvent pas le temps ou le budget pour un site sur mesure. Le défi était de créer un template qui soit à la fois esthétiquement premium, ultra-rapide et simple à personnaliser sans compétences techniques avancées.",
+    solution:
+      "J'ai conçu ce template 'mobile-first' en me concentrant sur l'impact visuel et la facilité d'utilisation. La structure est intuitive, permettant à n'importe qui d'ajouter ses projets et de personnaliser les couleurs en quelques minutes. Les performances sont optimisées pour garantir une excellente première impression auprès des visiteurs.",
   },
   {
     id: 103,
     title: "Analyseur de Texte - Offline",
-    tagline: "Analyser vos textes avec précision sans connexion internet.",
+    tagline: "Votre analyseur de texte 100% privé et qui fonctionne partout.",
     description:
-      "Conçue pour fournir une analyse détaillée de n’importe quel texte saisi, sans limite de mots",
+      "Un outil puissant pour écrivains, étudiants et professionnels. Obtenez une analyse détaillée de vos textes en temps réel, directement dans votre navigateur. Vos données ne quittent JAMAIS votre machine.",
     image: "/images/TextAnalis.webp",
     purchaseLink: "https://payhip.com/b/SB18R",
     price: 5.0,
-    tags: ["React, Vite, Tailwind CSS"],
+    tags: ["React", "Vite", "Tailwind CSS", "Sécurité"],
     demoLink: "https://textanalyser-offline.netlify.app/",
     category: "Template",
     featured: false,
-    benefits: ["Sécurisé", "Prêt à l'Emploi", "Hors ligne", "Structure Claire"],
+    benefits: [
+      "100% Confidentiel",
+      "Fonctionne Sans Internet",
+      "Analyse Instantanée",
+      "Aucune Limite de Mots",
+    ],
+    challenge:
+      "Les outils d'analyse de texte en ligne forcent les utilisateurs à envoyer leurs écrits, parfois confidentiels, sur des serveurs externes, créant un risque pour la vie privée. De plus, leur dépendance à une connexion internet les rend inutilisables en déplacement.",
+    solution:
+      "Cet outil a été conçu comme une application web qui s'exécute entièrement côté client. En utilisant React et Vite, l'application est non seulement ultra-rapide, mais elle garantit aussi que 100% des calculs sont effectués sur votre appareil. Aucune donnée n'est jamais transmise, pour une tranquillité d'esprit totale.",
   },
 ];
 
-// --- Animations ---
+// --- Animations et Sous-Composants ---
 const containerVariants = {
   hidden: { opacity: 0 },
   visible: { opacity: 1, transition: { staggerChildren: 0.1 } },
@@ -70,9 +95,6 @@ const itemVariants = {
   hidden: { y: 20, opacity: 0 },
   visible: { y: 0, opacity: 1, transition: { type: "spring", stiffness: 100 } },
 };
-
-// --- Sous-Composants ---
-
 const ProductCard = ({ product }: { product: Product }) => (
   <motion.div
     variants={itemVariants}
@@ -145,15 +167,14 @@ const ProductCard = ({ product }: { product: Product }) => (
     </div>
   </motion.div>
 );
-
 const FeaturedProduct = ({ product }: { product: Product }) => (
-  <div className="grid lg:grid-cols-2 gap-8 md:gap-12 items-center bg-white/5 border border-white/10 rounded-2xl p-8 md:p-12">
+  <div className="grid lg:grid-cols-2 gap-8 md:gap-12 items-center">
     <motion.div
       initial={{ opacity: 0, scale: 0.9 }}
       whileInView={{ opacity: 1, scale: 1 }}
       viewport={{ once: true }}
       transition={{ duration: 0.5 }}
-      className="aspect-video rounded-lg overflow-hidden"
+      className="aspect-video rounded-lg overflow-hidden border border-white/10 shadow-lg"
     >
       <img
         src={product.image}
@@ -170,16 +191,36 @@ const FeaturedProduct = ({ product }: { product: Product }) => (
       viewport={{ once: true }}
       transition={{ duration: 0.5, delay: 0.2 }}
     >
-      <div className="flex items-center gap-2 mb-4 text-sm font-bold text-[#D946EF]">
-        <Star className="w-4 h-4" />
+      <div className="flex items-center gap-2 mb-4 text-sm font-bold text-yellow-400">
+        <Star className="w-4 h-4" fill="currentColor" />
         <span>Produit en Vedette</span>
       </div>
       <h2 className="text-3xl md:text-4xl font-bold text-white mb-3">
         {product.title}
       </h2>
-      <p className="text-white/70 mb-6">{product.tagline}</p>
+      <p className="text-white/70 mb-8">{product.tagline}</p>
+      <div className="space-y-6 bg-white/5 p-6 rounded-lg border border-white/10 mb-8">
+        <div>
+          <h3 className="flex items-center gap-3 text-lg font-bold text-white mb-2">
+            <Target className="text-[#D946EF]" />
+            Le Défi
+          </h3>
+          <p className="text-white/70 text-sm leading-relaxed">
+            {product.challenge}
+          </p>
+        </div>
+        <div>
+          <h3 className="flex items-center gap-3 text-lg font-bold text-white mb-2">
+            <BrainCircuit className="text-[#D946EF]" />
+            La Solution
+          </h3>
+          <p className="text-white/70 text-sm leading-relaxed">
+            {product.solution}
+          </p>
+        </div>
+      </div>
       {product.testimonial && (
-        <blockquote className="border-l-4 border-[#D946EF] pl-4 italic text-white/80 mb-6">
+        <blockquote className="border-l-4 border-[#D946EF] pl-4 italic text-white/80 mb-8">
           <p>"{product.testimonial.text}"</p>
           <cite className="block text-right mt-2 not-italic text-sm text-white/60">
             - {product.testimonial.author}
@@ -242,7 +283,8 @@ export default function ProductsPage() {
     <>
       <Helmet>
         <title>
-            Développeur Web Full Stack à Madagascar | Brice Yakim AsBlast | Templates Kits Scripts  </title>
+          Boutique - Templates et Outils pour Développeurs par Brice A.
+        </title>
         <meta
           name="description"
           content="Découvrez des templates, kits UI et scripts de haute qualité, conçus pour accélérer vos projets de développement web et mobile."
@@ -300,6 +342,7 @@ export default function ProductsPage() {
                 {categories.map((category) => (
                   <button
                     key={category}
+                    // --- CORRECTION DE LA SYNTAXE ---
                     onClick={() => setFilterCategory(category)}
                     className={`px-4 py-2 rounded-full text-sm font-medium transition-all flex items-center gap-2 ${
                       filterCategory === category

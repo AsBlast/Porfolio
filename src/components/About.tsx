@@ -3,7 +3,7 @@ import { Code, Database, Layout, Box, Download, Award, Globe } from "lucide-reac
 import { useEffect, useState, useRef } from "react";
 import { Tooltip } from './Tooltip';
 
-// --- PERFORMANCE & UX : Le Typewriter ne se lance que lorsqu'il est visible ---
+// Le Typewriter ne se lance que lorsqu'il est visible ---
 function Typewriter({ text }) {
   const [displayed, setDisplayed] = useState("");
   const [startTyping, setStartTyping] = useState(false);
@@ -14,7 +14,7 @@ function Typewriter({ text }) {
       ([entry]) => {
         if (entry.isIntersecting) {
           setStartTyping(true);
-          observer.unobserve(ref.current); // Ne lance l'animation qu'une seule fois
+          observer.unobserve(ref.current); 
         }
       },
       { threshold: 0.1 }
@@ -74,7 +74,7 @@ export function About() {
     "« La seule façon de faire du bon travail, c'est d'aimer ce que l'on fait. »",
     "C'est dans cet état d'esprit que j'aborde chaque projet avec passion et dévouement, repoussant les limites du possible en développement web.",
     "Basé à Antananarivo, Madagascar, je suis spécialisé dans la création de solutions innovantes alliant technologie de pointe et design intuitif. Mon objectif est de créer des expériences numériques qui non seulement répondent aux exigences, mais dépassent les attentes.",
-    "Collaborons et concrétisons votre vision. Ensemble, nous pouvons créer quelque chose d'extraordinaire.",
+"Chaque produit que je crée est le fruit de cette passion, conçu pour vous fournir des outils de qualité professionnelle et vous faire gagner un temps précieux."
   ];
   
   return (
