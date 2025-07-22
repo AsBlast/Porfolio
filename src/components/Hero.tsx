@@ -48,13 +48,13 @@ export function Hero() {
           <div className="text-xl md:text-2xl text-cyan-100/90 font-mono mb-8 max-w-2xl mx-auto min-h-[110px]">
             <TypeAnimation
               sequence={[
-                'Codeur nocturne.',
+                'Codeur nocturne',
                 1500,
                 (element) => { element.textContent = ''; },
-                'Architecte d\'expériences digitales.',
+                'Architecte d\'expériences digitales',
                 1500,
                 (element) => { element.textContent = ''; },
-                'Auto-formé à la lumière des écrans.',
+                'Auto-formé à la lumière des écrans',
                 1500,
                 (element) => { element.textContent = ''; },
               ]}
