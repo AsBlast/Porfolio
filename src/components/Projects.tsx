@@ -54,7 +54,7 @@ const projectsData: Project[] = [
     title: "Projet Beta",
     description:
       "Solution de e-commerce avancée utilisant WordPress avec intégration WooCommerce et générateur de pages Elementor.",
-    image: "/images/samsung.png",
+    image: "/images/samsung.webp",
     github: "https://github.com",
     live: "http://asblast-samsung.netlify.app/",
     tags: ["WordPress", "WooCommerce", "Elementor"],

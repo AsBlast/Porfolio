@@ -50,7 +50,7 @@ const productsData: Product[] = [
     tagline: "Analyser vos textes avec précision sans connexion internet.",
     description:
       "Conçue pour fournir une analyse détaillée de n’importe quel texte saisi, sans limite de mots",
-    image: "/images/TextAnalis.png",
+    image: "/images/TextAnalis.webp",
     purchaseLink: "https://payhip.com/b/SB18R",
     price: 5.0,
     tags: ["React, Vite, Tailwind CSS"],

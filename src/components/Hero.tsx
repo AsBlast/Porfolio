@@ -39,12 +39,15 @@ export function Hero() {
           {/* Icône animée (inchangée) */}
           <div className="flex justify-center mb-6">
             <motion.div
-              animate={{ boxShadow: ["0 0 20px #0ff", "0 0 40px #f0f", "0 0 20px #0ff"] }}
-              transition={{ duration: 2, repeat: Infinity }}
-              className="rounded-full p-4 bg-black/50 backdrop-blur-sm"
-            >
-              <Terminal className="w-16 h-16 text-cyan-400" />
-            </motion.div>
+  animate={{
+    scale: [1, 1.1, 1],
+    opacity: [0.7, 1, 0.7]
+  }}
+  transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+  className="rounded-full p-4 bg-black/50 backdrop-blur-sm shadow-lg shadow-violet-500"
+>
+  <Terminal className="w-16 h-16 text-cyan-400" />
+</motion.div>
           </div>
 
           {/* Nom avec dégradé et ombre (ajout de l'id pour aria-labelledby) */}

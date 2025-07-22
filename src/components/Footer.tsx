@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Github, Linkedin, Facebook, Rocket, Code2, Sparkles } from "lucide-react";
+import { Github, Linkedin, Facebook, Rocket, Code2, Sparkles, ChevronUpIcon } from "lucide-react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 
 export function Footer() {
@@ -76,10 +76,14 @@ export function Footer() {
               <motion.a key={link.name} href={link.href} target="_blank" rel="noopener noreferrer" aria-label={`Visiter mon profil ${link.name}`} className="p-4 bg-white/5 rounded-2xl backdrop-blur-lg hover:bg-white/10 transition-all text-cyan-300 hover:text-[#D946EF]" whileHover={{ scale: 1.1, rotate: 5 }} whileTap={{ scale: 0.95 }}>{link.icon}</motion.a>
             ))}
           </div>
+           
           <a href="#home" onClick={(e) => { e.preventDefault(); handleNavClick('home'); }} className="flex items-center gap-3 text-cyan-300/80 hover:text-cyan-300 cursor-pointer">
-            <Rocket className="w-6 h-6 text-purple-400 animate-launch" />
-            <span className="font-mono">Retourner en haut</span>
+             <ChevronUpIcon className="w-6 h-6 text-purple-400 animate-launch" />
+            <span className="font-mono">Retourner en haut   </span>
+            <ChevronUpIcon className="w-6 h-6 text-purple-400 animate-launch" />
           </a>
+           <Rocket className="w-6 h-6 text-purple-400 animate-launch" />
+
         </motion.div>
 
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.8 }} className="text-center text-sm text-cyan-300/60 mt-12 pt-8">
