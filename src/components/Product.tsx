@@ -242,7 +242,7 @@ export default function ProductsPage() {
     <>
       <Helmet>
         <title>
-            Développeur Web Full Stack à Madagascar | Brice Yakim AsBlast | Portfolio Développeur Madagascar  </title>
+            Développeur Web Full Stack à Madagascar | Brice Yakim AsBlast | Templates Kits Scripts  </title>
         <meta
           name="description"
           content="Découvrez des templates, kits UI et scripts de haute qualité, conçus pour accélérer vos projets de développement web et mobile."
