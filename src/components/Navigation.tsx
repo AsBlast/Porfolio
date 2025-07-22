@@ -3,12 +3,11 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Home, User, Folder, Mail, Store } from "lucide-react";
 
-// Le hook useActiveSection reste le même, il ne s'activera que sur la page d'accueil
 function useActiveSection(sectionIds: string[], isHomePage: boolean): string {
   const [activeSection, setActiveSection] = useState(sectionIds[0]);
 
   useEffect(() => {
-    if (!isHomePage) return; // N'exécute l'observer que sur la page d'accueil
+    if (!isHomePage) return;
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -57,12 +56,8 @@ export function Navigation() {
   const handleNavClick = (sectionId: string) => {
     setIsOpen(false);
     if (isHomePage) {
-      const element = document.getElementById(sectionId);
-      if (element) {
-        element.scrollIntoView(); // Le CSS gère le padding et le behavior
-      }
+      document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
     } else {
-      
       navigate('/', { state: { scrollToSection: sectionId } });
     }
   };
@@ -82,7 +77,7 @@ export function Navigation() {
           <span>Brice-Dev</span>
         </button>
 
-        <div className="hidden md:flex items-center space-x-2">
+        <div className="hidden md:flex items-center ml-auto space-x-2">
           {menuItems.map((item) => (
             <button
               key={item.name}
@@ -99,7 +94,7 @@ export function Navigation() {
           ))}
         </div>
 
-        <div className="md:hidden">
+        <div className="md:hidden ml-auto"> 
           <motion.button onClick={() => setIsOpen(!isOpen)} aria-label={isOpen ? "Fermer le menu" : "Ouvrir le menu"} aria-expanded={isOpen} aria-controls="mobile-menu" className="p-2 rounded-md text-cyan-300">
             {isOpen ? <X size={24} /> : <Menu size={24} />}
           </motion.button>
@@ -111,11 +106,7 @@ export function Navigation() {
           <motion.div id="mobile-menu" initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }} className="md:hidden bg-black/90 backdrop-blur-xl border-t border-cyan-500/20">
             <div className="flex flex-col p-4 space-y-2">
               {menuItems.map((item) => (
-                <button
-                  key={`mobile-${item.name}`}
-                  onClick={() => handleNavClick(item.sectionId)}
-                  className={`px-3 py-3 rounded-md flex items-center gap-3 text-lg transition-colors ${isHomePage && activeSection === item.sectionId ? "text-cyan-300 bg-cyan-500/10" : "text-cyan-300/80 hover:bg-cyan-500/5"}`}
-                >
+                <button key={`mobile-${item.name}`} onClick={() => handleNavClick(item.sectionId)} className={`px-3 py-3 rounded-md flex items-center gap-3 text-lg transition-colors ${isHomePage && activeSection === item.sectionId ? "text-cyan-300 bg-cyan-500/10" : "text-cyan-300/80 hover:bg-cyan-500/5"}`}>
                   {item.icon}
                   <span>{item.name}</span>
                 </button>
