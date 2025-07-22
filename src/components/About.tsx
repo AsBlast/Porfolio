@@ -99,7 +99,7 @@ export function About() {
             className="relative rounded-lg overflow-hidden"
           >
             <img
-              src="/images/1699548679409.jpeg"
+              src="/images/1699548679409.webp"
               alt="Photo de Brice Yakim, développeur web, dans un environnement de travail."
               className="w-full h-full object-cover rounded-lg"
               width="500"

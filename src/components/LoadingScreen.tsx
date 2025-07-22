@@ -11,15 +11,14 @@ export function LoadingScreen() {
       animate={{ opacity: 1 }} // Reste visible tant qu'il est monté
       exit={{ opacity: 0 }} 
       transition={{ duration: 0.5 }}
-      
+
       // La manipulation du DOM (onAnimationComplete) est supprimée.
       className="fixed inset-0 z-[100] flex items-center justify-center bg-[#1A1F2C]"
      
       role="status"
       aria-live="polite"
     >
-      <span className="sr-only">Chargement en cours...</span>
-
+     
       <div className="relative w-40 h-40">
         {/* Cercles animés */}
         <motion.div

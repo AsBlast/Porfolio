@@ -27,7 +27,7 @@ const PageLoader = () => (
     color: 'white',
     fontFamily: 'sans-serif'
   }}>
-    Chargement de la page...
+    Chargement ...
   </div>
 );
 
