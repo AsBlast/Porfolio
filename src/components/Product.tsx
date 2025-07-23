@@ -38,7 +38,7 @@ const productsData: Product[] = [
     tagline: "Le template ultime pour les créatifs et freelances du web.",
     description:
       "Lancez votre portfolio professionnel en quelques minutes. Parfait pour les développeurs, designers, photographes et tous les créateurs de contenu.",
-    image: "/images/creativePortfolio.png",
+    image: "/images/creativePortfolio.webp",
     purchaseLink: "https://payhip.com/b/ZufXm",
     demoLink: "https://creative-portfolio-pro.netlify.app/",
     price: { current: 2.0, original: 7.0 },

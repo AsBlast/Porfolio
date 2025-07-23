@@ -39,7 +39,7 @@ const projectsData: Project[] = [
     title: "Projet Alpha",
     description:
       "Application Web moderne créée avec React, exploitant Tailwind CSS pour le style et Vite pour un développement ultra-rapide.",
-    image: "/images/alpha.png",
+    image: "/images/alpha.webp",
     github: "https://github.com",
     live: "http://mg-remote-work.netlify.app/",
     tags: ["React", "Tailwind CSS", "Vite"],
@@ -69,7 +69,7 @@ const projectsData: Project[] = [
     title: "Projet Gamma",
     description:
       "Application Web complète utilisant React, Vite, Tailwind CSS pour le frontend et Node JS pour le backend ( en cours ).",
-    image: "/images/AKATA.png",
+    image: "/images/AKATA.webp",
     github: "https://github.com",
     live: "http://akata.netlify.app/",
     tags: [ " Node JS", "MySQL", "React"],
