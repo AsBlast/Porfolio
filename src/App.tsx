@@ -1,5 +1,6 @@
-import React, { Suspense, useEffect } from "react"; // --- NOUVEAU : import de useEffect ---
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import React, { Suspense } from "react";
+// --- NOUVEAUX IMPORTS pour le routing ---
+import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { HelmetProvider } from "react-helmet-async";
 
@@ -7,12 +8,11 @@ import { HelmetProvider } from "react-helmet-async";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
-import ScrollToTop from "@/components/ScrollToTop";
 
-// Initialisation du client React Query (singleton)
+// Initialisation du client React Query
 const queryClient = new QueryClient();
 
-// --- Performance : Code-Splitting avec React.lazy ---
+// --- Performance : Code-Splitting ---
 const IndexPage = React.lazy(() => import("./pages/Index"));
 const PrivacyPage = React.lazy(() => import("./pages/Privacy"));
 const TermsPage = React.lazy(() => import("./pages/Terms"));
@@ -27,33 +27,51 @@ const PageLoader = () => (
   </div>
 );
 
+const RootLayout = () => {
+  return (
+    <>
+      <Navigation />
+      <main>
+        <Outlet />
+      </main>
+      <Footer />
+    </>
+  );
+};
+
+const router = createBrowserRouter(
+  [
+    {
+      path: "/",
+      element: <RootLayout />, 
+      children: [ 
+        { index: true, element: <IndexPage /> }, 
+        { path: "privacy", element: <PrivacyPage /> },
+        { path: "terms", element: <TermsPage /> },
+        { path: "blog", element: <BlogPage /> },
+        { path: "blog/:slug", element: <ArticlePage /> },
+        { path: "*", element: <NotFoundPage /> },
+      ],
+    },
+  ],
+  {
+    future: {
+      v7_relativeSplatPath: true,
+      v7_startTransition : true
+    },
+  }
+);
+
+
 const App = () => {
-  useEffect(() => {
-    // Vérifie si la fonctionnalité existe dans le navigateur
-    if ('scrollRestoration' in window.history) {
-      window.history.scrollRestoration = 'manual';
-    }
-  }, []); 
 
   return (
     <HelmetProvider>
       <QueryClientProvider client={queryClient}>
         <TooltipProvider>
-          <BrowserRouter>
-            <ScrollToTop />
-            <Navigation />
-            <Suspense fallback={<PageLoader />}>
-              <Routes>
-                <Route path="/" element={<IndexPage />} />
-                <Route path="/privacy" element={<PrivacyPage />} />
-                <Route path="/terms" element={<TermsPage />} />
-                <Route path="/blog" element={<BlogPage />} />
-                <Route path="/blog/:slug" element={<ArticlePage />} />
-                <Route path="*" element={<NotFoundPage />} />
-              </Routes>
-            </Suspense>
-            <Footer />
-          </BrowserRouter>
+          <Suspense fallback={<PageLoader />}>
+            <RouterProvider router={router} />
+          </Suspense>
         </TooltipProvider>
       </QueryClientProvider>
     </HelmetProvider>

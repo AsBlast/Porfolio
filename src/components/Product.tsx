@@ -181,7 +181,7 @@ const FeaturedProduct = ({ product }: { product: Product }) => (
         alt={`Image principale du produit ${product.title}`}
         width="600"
         height="338"
-        fetchPriority="high"
+        fetchpriority="high"
         className="w-full h-full object-cover"
       />
     </motion.div>

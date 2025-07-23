@@ -13,7 +13,7 @@ export function Hero() {
             src="/photo-1526374965328-7f61d4dc18c5.jpg"
             alt="Arrière-plan abstrait de code informatique"
             className="w-full h-full object-cover"
-            fetchPriority="high"
+            fetchpriority="high"
           />
         </picture>
       </div>
@@ -88,7 +88,7 @@ export function Hero() {
 
           <section aria-labelledby="affiliate-heading" className="floating-banner p-6 bg-black/80 backdrop-blur-sm rounded-xl border border-cyan-500/30 shadow-[0_0_20px_rgba(0,255,255,0.2)] max-w-md mx-auto transform transition-all hover:scale-105 duration-300">
             <div className="flex flex-col items-center gap-4">
-              <img src="/images/hostinger.png" alt="Logo Hostinger" width="128" height="45" className="rounded-md shadow-lg" loading="lazy" fetchPriority="auto" />
+              <img src="/images/hostinger.png" alt="Logo Hostinger" width="128" height="45" className="rounded-md shadow-lg" loading="lazy" fetchpriority="auto" />
               <h3 id="affiliate-heading" className="text-2xl text-blue-500 font-bold">💡 Besoin d’un hébergeur web fiable ?</h3>
               <p className="text-gray-300">Hébergez votre site avec <strong>Hostinger</strong>, une solution abordable et performante pour les développeurs.</p>
               <motion.a href="https://hostinger.com?REFERRALCODE=W8MBRICEYA9R" target="_blank" rel="sponsored noopener noreferrer" whileHover={{ scale: 1.05 }} className="inline-flex items-center gap-3 px-8 py-3 text-lg font-medium text-cyan-300 border border-cyan-400 rounded-lg hover:bg-cyan-950 hover:text-cyan-100 transition-all duration-300 shadow-[0_0_15px_rgba(0,255,255,0.3)] hover:shadow-[0_0_25px_rgba(0,255,255,0.5)]">Profitez de 20 % de réduction</motion.a>
