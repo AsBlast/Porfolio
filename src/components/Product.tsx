@@ -22,7 +22,7 @@ interface Product {
   demoLink?: string;
   price: number | { current: number; original?: number };
   tags: string[];
-  category: "Template" | "UI Kit" | "Script";
+  category: "Template" | "UI Kit" | "Script" | "Outil";
   featured?: boolean;
   benefits: string[];
   testimonial?: { text: string; author: string };
@@ -41,10 +41,10 @@ const productsData: Product[] = [
     image: "/images/creativePortfolio.webp",
     purchaseLink: "https://payhip.com/b/ZufXm",
     demoLink: "https://creative-portfolio-pro.netlify.app/",
-    price: { current: 2.0, original: 7.0 },
+    price: { current: 2.0, original: 6.0 },
     tags: ["Design Moderne", "Portfolio", "Responsive"],
     category: "Template",
-    featured: true,
+    featured: false, 
     benefits: [
       "SEO Optimisé",
       "Personnalisation Facile",
@@ -56,9 +56,9 @@ const productsData: Product[] = [
       author: "Alex D., Freelance",
     },
     challenge:
-      "Les freelances et créatifs ont besoin d'une présence en ligne professionnelle pour attirer des clients, mais n'ont souvent pas le temps ou le budget pour un site sur mesure. Le défi était de créer un template qui soit à la fois esthétiquement premium, ultra-rapide et simple à personnaliser sans compétences techniques avancées.",
+      "Les freelances et créatifs ont besoin d'une présence en ligne professionnelle pour attirer des clients, mais n'ont souvent pas le temps ou le budget pour un site sur mesure.",
     solution:
-      "J'ai conçu ce template 'mobile-first' en me concentrant sur l'impact visuel et la facilité d'utilisation. La structure est intuitive, permettant à n'importe qui d'ajouter ses projets et de personnaliser les couleurs en quelques minutes. Les performances sont optimisées pour garantir une excellente première impression auprès des visiteurs.",
+      "J'ai conçu ce template 'mobile-first' en me concentrant sur l'impact visuel et la facilité d'utilisation. La structure est intuitive, permettant à n'importe qui d'ajouter ses projets et de personnaliser les couleurs en quelques minutes.",
   },
   {
     id: 103,
@@ -68,17 +68,21 @@ const productsData: Product[] = [
       "Un outil puissant pour écrivains, étudiants et professionnels. Obtenez une analyse détaillée de vos textes en temps réel, directement dans votre navigateur. Vos données ne quittent JAMAIS votre machine.",
     image: "/images/TextAnalis.webp",
     purchaseLink: "https://payhip.com/b/SB18R",
-    price: 5.0,
+    price: { current: 5.0, original: 7.0 }, // <-- PRIX MIS À JOUR AVEC REMISE
     tags: ["React", "Vite", "Tailwind CSS", "Sécurité"],
     demoLink: "https://textanalyser-offline.netlify.app/",
-    category: "Template",
-    featured: false,
+    category: "Outil",
+    featured: true,
     benefits: [
       "100% Confidentiel",
       "Fonctionne Sans Internet",
       "Analyse Instantanée",
       "Aucune Limite de Mots",
     ],
+    testimonial: {
+      text: "En tant que juriste, je manipule des documents confidentiels. Cet outil est une révolution. Je peux analyser des contrats sans jamais craindre une fuite de données.",
+      author: "Claire L., Avocate",
+    },
     challenge:
       "Les outils d'analyse de texte en ligne forcent les utilisateurs à envoyer leurs écrits, parfois confidentiels, sur des serveurs externes, créant un risque pour la vie privée. De plus, leur dépendance à une connexion internet les rend inutilisables en déplacement.",
     solution:
@@ -342,7 +346,6 @@ export default function ProductsPage() {
                 {categories.map((category) => (
                   <button
                     key={category}
-                    // --- CORRECTION DE LA SYNTAXE ---
                     onClick={() => setFilterCategory(category)}
                     className={`px-4 py-2 rounded-full text-sm font-medium transition-all flex items-center gap-2 ${
                       filterCategory === category
