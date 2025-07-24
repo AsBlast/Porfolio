@@ -1,30 +1,25 @@
+// src/components/Hero.tsx
+
 import { motion } from "framer-motion";
 import { TypeAnimation } from "react-type-animation";
+import { AnimatedBackground } from "./AnimatedBackground"; 
+
 import { ChevronDown, Github, Linkedin, Rocket, Coffee, MoonStar, Zap, Terminal } from "lucide-react";
 
 export function Hero() {
-  return (
-    <header id="home" aria-labelledby="main-heading" className="min-h-screen flex flex-col items-center justify-center pt-28 relative overflow-hidden bg-black">
-      {/* Arrière-plan (inchangé) */}
-      <div className="absolute inset-0 z-0 opacity-5 mix-blend-color-dodge">
-        <picture>
-          <source srcSet="/photo-1526374965328-7f61d4dc18c5.webp" type="image/webp" />
-          <img
-            src="/photo-1526374965328-7f61d4dc18c5.jpg"
-            alt="Arrière-plan abstrait de code informatique"
-            className="w-full h-full object-cover"
-            fetchpriority="high"
-          />
-        </picture>
-      </div>
-      <div className="absolute inset-0 z-1 bg-[linear-gradient(transparent_1px,_#000_1px),_linear-gradient(90deg,transparent_1px,_#000_1px)] bg-[size:20px_20px] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_50%,_#000_70%,transparent_100%)] opacity-30" />
-      <div className="absolute inset-0 z-2 bg-gradient-to-br from-cyan-500/20 via-purple-500/20 to-pink-500/20" />
 
-      <div className="container mx-auto px-4 relative z-10 flex flex-col items-center">
+  return (
+    <header
+      id="home"
+      aria-labelledby="main-heading"
+      className="min-h-screen flex flex-col items-center justify-center pt-28 relative overflow-hidden bg-black"
+    >
+      <AnimatedBackground />
+      
+      <div className="container mx-auto px-4 relative z-20 flex flex-col items-center">
+        
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} className="text-center">
           
-          {/* --- NOUVEAU : Icône Terminal animée et centrée --- */}
-          {/* La marge en bas (mb-8) prévient le "layout shift" pour un meilleur score Lighthouse */}
           <div className="flex justify-center mb-8">
             <motion.div
               animate={{ scale: [1, 1.1, 1], opacity: [0.7, 1, 0.7] }}
@@ -48,27 +43,15 @@ export function Hero() {
           <div className="text-xl md:text-2xl text-cyan-100/90 font-mono mb-8 max-w-2xl mx-auto min-h-[110px]">
             <TypeAnimation
               sequence={[
-                'Codeur nocturne',
-                1500,
-                (element) => { element.textContent = ''; },
-                'Architecte d\'expériences digitales',
-                1500,
-                (element) => { element.textContent = ''; },
-                'Auto-formé à la lumière des écrans',
-                1500,
-                (element) => { element.textContent = ''; },
+                'Codeur nocturne', 1500, (element) => { if(element) element.textContent = ''; },
+                'Architecte d\'expériences digitales', 1500, (element) => { if(element) element.textContent = ''; },
+                'Auto-formé à la lumière des écrans', 1500, (element) => { if(element) element.textContent = ''; },
               ]}
-              wrapper="p"
-              speed={50}
-              cursor={true}
-              className="mb-4"
-              repeat={Infinity}
+              wrapper="p" speed={50} cursor={true} className="mb-4" repeat={Infinity}
             />
             <motion.div 
               className="flex items-center justify-center gap-3 text-2xl"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.8, duration: 1 }}
+              initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.8, duration: 1 }}
             >
               <motion.div animate={{ rotate: [0, 15, 0, -15, 0] }} transition={{ duration: 4, repeat: Infinity, delay: 1 }}><MoonStar className="text-purple-400" /></motion.div>
               <span>+</span>

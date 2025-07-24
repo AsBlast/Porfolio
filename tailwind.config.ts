@@ -1,5 +1,4 @@
 import type { Config } from "tailwindcss";
-// --- NOUVEAU : Importez les plugins en haut du fichier ---
 import tailwindcssAnimate from "tailwindcss-animate";
 import tailwindcssTypography from "@tailwindcss/typography";
 
@@ -10,7 +9,6 @@ const config: Config = {
     "./components/**/*.{ts,tsx}",
     "./app/**/*.{ts,tsx}",
     "./src/**/*.{ts,tsx}",
-    // --- AMÉLIORATION : Assurez-vous d'inclure les fichiers .mdx pour le purge CSS ---
     "./src/articles/**/*.mdx", 
   ],
   prefix: "",
@@ -24,6 +22,7 @@ const config: Config = {
     },
     extend: {
       colors: {
+        // --- VOS COULEURS EXISTANTES RESTENT INCHANGÉES ---
         primary: {
           DEFAULT: "#00A09D",
           foreground: "#FFFFFF",
@@ -63,6 +62,32 @@ const config: Config = {
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
       },
+      
+      // --- AJOUTS NÉCESSAIRES POUR LE FOOTER ---
+      boxShadow: {
+        'glow-purple': '0 0 15px rgba(217, 70, 239, 0.6)',
+        'glow-cyan': '0 0 15px rgba(34, 211, 238, 0.5)',
+      },
+      keyframes: {
+        // Le plugin tailwindcss-animate s'occupe de ses propres keyframes (ex: accordion).
+        // Nous ajoutons seulement les nôtres.
+        launch: {
+          '0%, 100%': { transform: 'translateY(0)', opacity: '1' },
+          '50%': { transform: 'translateY(-10px)', opacity: '0.8' },
+        },
+        aurora: {
+          '0%': { backgroundPosition: '0% 50%' },
+          '50%': { backgroundPosition: '100% 50%' },
+          '100%': { backgroundPosition: '0% 50%' },
+        },
+      },
+      animation: {
+        // Le plugin tailwindcss-animate s'occupe de ses propres animations.
+        // Nous ajoutons les nôtres ici pour pouvoir utiliser des classes comme "animate-aurora".
+        'launch': 'launch 1.5s ease-in-out infinite',
+        'aurora': 'aurora 20s linear infinite',
+      },
+      // --- FIN DES AJOUTS ---
     },
   },
   plugins: [tailwindcssAnimate, tailwindcssTypography],
