@@ -27,11 +27,15 @@ export default defineConfig({
       // On liste ici toutes les "pages" de votre application
       // que le plugin ne peut pas deviner, comme les articles de blog.
       dynamicRoutes: [
+        // Pages principales
+        '/blog',
+        
+        // Pages légales 
+        '/privacy',
+        '/terms',
+
+        //Articles
         '/blog/guide-optimisation-lighthouse',
-        // --- autres pages et futurs articles ---
-        // Ex: '/boutique',
-        // Ex: '/contact',
-        // Ex: '/blog/mon-nouvel-article'
       ]
     })
   ],
