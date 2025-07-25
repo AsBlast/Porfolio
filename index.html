@@ -1,56 +1,60 @@
 <!DOCTYPE html>
 <html lang="fr">
-
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="google-adsense-platform-account" content="ca-pub-2734152198256091">
-  <meta name="google-adsense-platform-domain" content="asblast.space">
-
-  <!-- Titre et Description -->
-  <title> Apprenti Développeur Web Full Stack à Madagascar | Portfolio | Brice Yakim AsBlast </title>
-  <meta name="description"
-    content="Découvrez le portfolio de Brice Yakim, développeur web Full Stack basé à Antananarivo, Madagascar. Spécialisé en développement web, outsourcing, assistance virtuelle et création d’expériences digitales innovantes pour startups et PME." />
-
-  <meta name="author" content="Brice Yakim - AsBlast" />
+  <meta name="author" content="Brice Yakim AsBlast" />
+  
+  <!-- SEO & Titre -->
+  <title>Brice Yakim AsBlast | Développeur Full Stack à Madagascar</title>
+  <meta name="description" content="Portfolio de Brice Yakim, Développeur Full Stack à Madagascar. Spécialisé en React, Node.js et création d'expériences web interactives pour startups et PME." />
   <link rel="canonical" href="https://asblast.space/"/>
 
-  <!-- Open Graph -->
-  <meta property="og:title" content="Brice Yakim | Développeur Web Full Stack à Madagascar | Portfolio AsBlast" />
-  <meta property="og:description"
-    content="Portfolio professionnel de Brice Yakim, expert en développement web, outsourcing et création d’expériences digitales innovantes pour startups et PME." />
-  <meta property="og:image" content="/og-image.png" /> 
+  <!-- Open Graph (pour le partage sur les réseaux sociaux) -->
+  <meta property="og:title" content="Brice Yakim AsBlast | Développeur Full Stack à Madagascar" />
+  <meta property="og:description" content="Découvrez le portfolio et les projets de Brice Yakim, spécialiste en expériences digitales innovantes." />
+  <meta property="og:image" content="https://asblast.space/og-image.png" />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://asblast.space/" />
-  
-  <!-- Préchargement de l'image pour la performance : la plus importante -->
-  <link rel="preload" as="image" href="/photo-1526374965328-7f61d4dc18c5.webp" />
 
-  <style>
-    body {
-      background-color: #1A1F2C; 
-    }
-  </style>
+  <!-- Performance : Préchargement de l'image la plus importante (LCP) -->
+  <link rel="preload" as="image" href="public/images/hostinger.png" fetchPriority="high" />
+
+  <style> body { background-color: #1A1F2C; } </style>
 </head>
 
 <body>
   <div id="root"></div>
-
   <script type="module" src="/src/main.tsx"></script>
 
-  <!-- Google tag (gtag.js) : pour google analytic -->
-  <script defer src="https://www.googletagmanager.com/gtag/js?id=G-S9G3MPQ0EJ"></script>
+  <!-- Données Structurées pour Google (Rich Snippets) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Brice Yakim AsBlast",
+    "url": "https://asblast.space",
+    "sameAs": [
+      "https://github.com/AsBlast",
+      "https://linkedin.com/in/brice-yakim-andriamahefaromisa-6a8a2b200"
+    ],
+    "jobTitle": "Développeur Full Stack",
+    "image": "https://asblast.space/brice-yakim-photo.webp", // REMPLACEZ PAR L'URL DE VOTRE VRAIE PHOTO
+    "description": "Développeur Full Stack spécialisé dans la création d'expériences web interactives avec React, Framer Motion et les technologies IA. Basé à Madagascar.",
+    "knowsAbout": ["React", "JavaScript", "Node.js", "Framer Motion", "Web Performance", "SEO"]
+  }
+  </script>
+
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-S9G3MPQ0EJ"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
-    function gtag() { dataLayer.push(arguments); }
+    function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
     gtag('config', 'G-S9G3MPQ0EJ');
   </script>
   
-  <!-- Google AdSense  -->
-  <script defer src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2734152198256091"
-    crossorigin="anonymous"></script>
+  <!--  balises AdSense dans l'attente une fois que le site a un trafic établi.  -->
 
 </body>
-
 </html>
