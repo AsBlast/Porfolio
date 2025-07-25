@@ -1,6 +1,6 @@
 # netlify.toml
 
-# Configuration de base pour la construction de votre projet Vite
+# Configuration de base pour la construction du projet Vite
 [build]
   command = "npm run build"
   publish = "dist"
@@ -8,9 +8,9 @@
 
 # Configuration pour le développement local avec `netlify dev`
 [dev]
-  command = "npm run dev" # La commande pour démarrer votre serveur Vite
+  command = "npm run dev" # La commande pour démarrer le serveur Vite
   targetPort = 8080       # Le port sur lequel Vite tourne (ne pas changer)
-  port = 8888             # Le port sur lequel vous accéderez à votre site (ex: http://localhost:8888)
+  port = 8888             # Le port sur lequel accéder au site (http://localhost:8888)
   publish = "dist"
   framework = "vite"
 
