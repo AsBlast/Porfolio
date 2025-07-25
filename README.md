@@ -84,6 +84,5 @@ Cela signifie que vous êtes libre d'utiliser, de modifier et de vous inspirer d
 *   **Portfolio :** [asblast.space](https://asblast.space)
 *   **LinkedIn :** [Brice Yakim Andriamahefaromisa](https://linkedin.com/in/brice-yakim-andriamahefaromisa-6a8a2b200)
 
----
+
 _Ce README a été conçu pour être aussi soigné que le projet qu'il décrit. N'hésitez pas à me contacter pour toute question ou opportunité._
-```
