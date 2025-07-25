@@ -1,73 +1,46 @@
+# Portfolio de Brice Yakim AsBlast (asblast.space)
 
-## Project info
+![Aperçu du Portfolio AsBlast](https://asblast.space/og-image.png)
 
-## How can I edit this code?
+Bienvenue dans le code source de mon portfolio personnel. Ce projet n'est pas seulement une vitrine de mes travaux, c'est une démonstration tangible de ma philosophie : **"Créer l'excellence numérique"**. En tant que développeur autodidacte, chaque ligne de code de ce site a été une opportunité d'apprendre, d'expérimenter et de repousser les limites de ce qu'un portfolio peut être.
 
-There are several ways of editing your application.
+[![Voir le site en direct](https://img.shields.io/badge/Voir%20le%20site-asblast.space-blue?style=for-the-badge&logo=netlify)](https://asblast.space)
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+## ✨ Fonctionnalités Clés
 
-Follow these steps:
+Ce portfolio va au-delà d'une simple page statique. Il intègre plusieurs fonctionnalités complexes pour créer une expérience utilisateur unique :
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+*   **🤖 Majordome IA Personnel :** Un agent conversationnel intelligent, propulsé par **Groq** et le **Vercel AI SDK**, capable de répondre aux questions sur mon parcours, mes compétences et mes projets en se basant sur un "Manuel du Majordome" détaillé.
+*   **🌌 Fond Animé en Canvas :** Une animation de particules entièrement codée en JavaScript natif pour créer une atmosphère immersive et dynamique, sans impacter lourdement les performances.
+*   **⚡️ Performance Exceptionnelle :** Le site a été méticuleusement optimisé pour atteindre des scores Lighthouse impressionnants, avec **94+ sur Bureau** et **78+ sur Mobile**, malgré la complexité des animations.
+*   **🛍️ Système de Blog & Boutique :** Une architecture complète pour partager des articles techniques (via MDX) et vendre des produits numériques, faisant de ce site une véritable plateforme de contenu.
+*   **🎨 Design System cohérant :** Une interface utilisateur moderne et élégante construite avec **Tailwind CSS** et **shadcn-ui**, et animée avec fluidité grâce à **Framer Motion**.
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+## 🚀 Stack Technique
 
-# Step 3: Install the necessary dependencies.
-npm i
+Ce projet a été construit avec un ensemble de technologies modernes et performantes :
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
-```
+| Catégorie      | Technologies                                                                   |
+| -------------- | ------------------------------------------------------------------------------ |
+| **Framework**  | [React](https://react.dev/) via [Vite](https://vitejs.dev/)                      |
+| **Langage**    | [TypeScript](https://www.typescriptlang.org/)                                  |
+| **Styling**    | [Tailwind CSS](https://tailwindcss.com/), [shadcn-ui](https://ui.shadcn.com/)   |
+| **Animation**  | [Framer Motion](https://www.framer.com/motion/)                                |
+| **Blog**       | [MDX](https://mdxjs.com/) (Markdown avec des composants JSX)                     |
+| **Backend IA** | [Netlify Functions](https://www.netlify.com/products/functions/), [Vercel AI SDK](https://sdk.vercel.ai/docs), [Groq API](https://groq.com/) |
+| **Déploiement**| [Netlify](https://www.netlify.com/)                                              |
 
-**Edit a file directly in GitHub**
+## 🔧 Lancer le projet localement
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+Si vous souhaitez explorer le code, le tester ou voir comment il est structuré, suivez ces étapes :
 
-**Use GitHub Codespaces**
+### Prérequis
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+*   [Node.js](https://nodejs.org/) (version 18 ou supérieure recommandée)
+*   [npm](https://www.npmjs.com/) ou [yarn](https://yarnpkg.com/)
 
-## What technologies are used for this project?
-
-This project is built with .
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-### Version en Français :
-
-## Informations sur le projet
-
-## Comment modifier ce code ?
-
-Il existe plusieurs façons de modifier votre application.
-
-Le seul prérequis est d'avoir Node.js & npm d'installés - [installer avec nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Suivez ces étapes :
+### 1. Cloner le Dépôt
 
 ```sh
-# Étape 1 : Clonez le dépôt en utilisant l'URL Git du projet.
-git clone <URL_GIT_DE_VOTRE_PROJET>
-
-# Étape 2 : Allez dans le répertoire du projet.
-cd <NOM_DE_VOTRE_PROJET>
-
-# Étape 3 : Installez les dépendances nécessaires.
-npm i
-
-# Étape 4 : Démarrez le serveur de développement avec rechargement automatique et aperçu instantané.
-npm run dev
+git clone https://github.com/AsBlast/votre-nom-de-repo.git
+cd votre-nom-de-repo

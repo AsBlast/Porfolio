@@ -68,15 +68,42 @@ export function Hero() {
               <motion.a key={platform} href={url} target="_blank" rel="noopener noreferrer" aria-label={`Visiter mon profil ${platform}`} whileHover={{ scale: 1.1, boxShadow: "0 0 15px rgba(34,211,238,0.4)" }} whileTap={{ scale: 0.95 }} className="p-3 rounded-full bg-black/30 backdrop-blur-sm border border-cyan-500/30 hover:border-cyan-400 transition-colors">{icon}</motion.a>
             ))}
           </div>
+<section aria-labelledby="affiliate-heading" className="floating-banner p-6 bg-black/80 backdrop-blur-sm rounded-xl border border-cyan-500/30 shadow-[0_0_20px_rgba(0,255,255,0.2)] max-w-md mx-auto transform transition-all hover:scale-105 duration-300">
+  <div className="flex flex-col items-center text-center gap-4">
+    <img 
+      src="/images/hostinger.png" 
+      alt="Logo Hostinger" 
+      width="128" 
+      height="45" 
+      className="rounded-md shadow-lg" 
+      loading="lazy" 
+    />
 
-          <section aria-labelledby="affiliate-heading" className="floating-banner p-6 bg-black/80 backdrop-blur-sm rounded-xl border border-cyan-500/30 shadow-[0_0_20px_rgba(0,255,255,0.2)] max-w-md mx-auto transform transition-all hover:scale-105 duration-300">
-            <div className="flex flex-col items-center gap-4">
-              <img src="/images/hostinger.png" alt="Logo Hostinger" width="128" height="45" className="rounded-md shadow-lg" loading="lazy" fetchpriority="auto" />
-              <h3 id="affiliate-heading" className="text-2xl text-blue-500 font-bold">💡 Besoin d’un hébergeur web fiable ?</h3>
-              <p className="text-gray-300">Hébergez votre site avec <strong>Hostinger</strong>, une solution abordable et performante pour les développeurs.</p>
-              <motion.a href="https://hostinger.com?REFERRALCODE=W8MBRICEYA9R" target="_blank" rel="sponsored noopener noreferrer" whileHover={{ scale: 1.05 }} className="inline-flex items-center gap-3 px-8 py-3 text-lg font-medium text-cyan-300 border border-cyan-400 rounded-lg hover:bg-cyan-950 hover:text-cyan-100 transition-all duration-300 shadow-[0_0_15px_rgba(0,255,255,0.3)] hover:shadow-[0_0_25px_rgba(0,255,255,0.5)]">Profitez de 20 % de réduction</motion.a>
-            </div>
-          </section>
+    {/* Un titre alternatif possible, plus affirmé */}
+    <h3 id="affiliate-heading" className="text-2xl text-cyan-400 font-bold">
+      🚀 L'Hébergeur que j'utilise et recommande
+    </h3>
+
+    <p className="text-gray-300">
+      Démarrez votre projet sur une solution performante et abordable, idéale pour les développeurs.
+    </p>
+
+    <motion.a 
+      href="https://hostinger.com?REFERRALCODE=W8MBRICEYA9R" 
+      target="_blank" 
+      rel="sponsored noopener noreferrer" 
+      whileHover={{ scale: 1.05 }} 
+      className="inline-flex items-center gap-3 px-8 py-3 text-lg font-medium text-cyan-300 border border-cyan-400 rounded-lg hover:bg-cyan-950 hover:text-cyan-100 transition-all duration-300 shadow-[0_0_15px_rgba(0,255,255,0.3)] hover:shadow-[0_0_25px_rgba(0,255,255,0.5)]"
+    >
+      Profitez de 20 % de réduction
+    </motion.a>
+
+    
+    <p className="text-xs text-gray-400/80 italic mt-2">
+      (Note : ce lien est affilié. Il me soutient sans aucun coût supplémentaire pour vous.)
+    </p>
+  </div>
+</section>
           
           <a href="#about" className="mt-12 inline-flex items-center gap-2 px-8 py-3 bg-cyan-950 text-cyan-300 rounded-lg border border-cyan-500/50 hover:bg-cyan-900 transition-colors">
             En savoir plus 
