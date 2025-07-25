@@ -8,14 +8,24 @@
 
 # Configuration pour le développement local avec `netlify dev`
 [dev]
-  command = "npm run dev" # La commande pour démarrer le serveur Vite
-  targetPort = 8080       # Le port sur lequel Vite tourne (ne pas changer)
-  port = 8888             # Le port sur lequel accéder au site (http://localhost:8888)
+  command = "npm run dev" 
+  targetPort = 8080       
+  port = 8888             
   publish = "dist"
   framework = "vite"
 
-# Redirection pour que les appels à /api/chat fonctionnent
+# --- RÈGLES DE REDIRECTION ---
+
+# Règle 1 : Spécifique pour les appels API (à venir)
 [[redirects]]
   from = "/api/*"
   to = "/.netlify/functions/:splat"
+  status = 200
+
+# Règle 2 : La règle "Attrape-Tout" pour la SPA ( MODIFICATION IMPORTANTE)
+# Cette règle doit être la DERNIÈRE car elle est la plus générale.
+# redirection vers index.html
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
   status = 200
