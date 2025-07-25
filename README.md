@@ -42,5 +42,48 @@ Si vous souhaitez explorer le code, le tester ou voir comment il est structuré,
 ### 1. Cloner le Dépôt
 
 ```sh
-git clone https://github.com/AsBlast/votre-nom-de-repo.git
+git clone https://github.com/AsBlast/Porfolio.git
 cd votre-nom-de-repo
+```
+*(Remplacez `Porfolio` par le nom réel de votre dépôt)*
+
+### 2. Installer les Dépendances
+
+```sh
+npm install
+```
+
+### 3. Configurer les Variables d'Environnement
+
+L'assistant IA a besoin d'une clé API pour fonctionner.
+
+1.  À la racine du projet, créez un fichier nommé `.env.local`.
+2.  Copiez le contenu du fichier `.env.example` (s'il existe) ou ajoutez la ligne suivante :
+
+    ```env
+    GROQ_API_KEY="votre_clé_api_groq_ici"
+    ```
+    *Vous pouvez obtenir une clé API gratuite sur le site de [GroqCloud](https://console.groq.com/keys).*
+
+### 4. Démarrer le Serveur de Développement
+
+```sh
+npm run dev
+```
+
+Votre projet sera maintenant accessible sur `http://localhost:8080` (ou le port indiqué dans votre terminal).
+
+## 📜 Licence
+
+Ce projet est sous **Licence MIT**.
+
+Cela signifie que vous êtes libre d'utiliser, de modifier et de vous inspirer de ce code pour vos propres projets, à condition d'inclure la notice de copyright originale. Voir le fichier `LICENSE` pour plus de détails.
+
+## 👋 Contact
+
+*   **Portfolio :** [asblast.space](https://asblast.space)
+*   **LinkedIn :** [Brice Yakim Andriamahefaromisa](https://linkedin.com/in/brice-yakim-andriamahefaromisa-6a8a2b200)
+
+---
+_Ce README a été conçu pour être aussi soigné que le projet qu'il décrit. N'hésitez pas à me contacter pour toute question ou opportunité._
+```
