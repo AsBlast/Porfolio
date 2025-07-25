@@ -22,3 +22,8 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Grok
+.env.local
+# Local Netlify folder
+.netlify

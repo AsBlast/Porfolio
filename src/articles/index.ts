@@ -18,4 +18,3 @@ export const articles: ArticleMeta[] = [
     tags: ["React", "Performance", "SEO", "Vite"],
   },
 ];
-
