@@ -1,6 +1,6 @@
 # Portfolio de Brice Yakim AsBlast (asblast.space)
 
-![Aperçu du Portfolio AsBlast](https://asblast.space/og-image.png)
+![Aperçu du Portfolio AsBlast](https://asblast.space/og-image.jpg)
 
 Bienvenue dans le code source de mon portfolio personnel. Ce projet n'est pas seulement une vitrine de mes travaux, c'est une démonstration tangible de ma philosophie : **"Créer l'excellence numérique"**. En tant que développeur autodidacte, chaque ligne de code de ce site a été une opportunité d'apprendre, d'expérimenter et de repousser les limites de ce qu'un portfolio peut être.
 
