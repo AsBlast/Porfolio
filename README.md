@@ -43,9 +43,8 @@ Si vous souhaitez explorer le code, le tester ou voir comment il est structuré,
 
 ```sh
 git clone https://github.com/AsBlast/Porfolio.git
-cd votre-nom-de-repo
+cd Porfolio
 ```
-*(Remplacez `Porfolio` par le nom réel de votre dépôt)*
 
 ### 2. Installer les Dépendances
 
