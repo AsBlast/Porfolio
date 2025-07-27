@@ -36,6 +36,7 @@ export default defineConfig({
 
         //Articles
         '/blog/guide-optimisation-lighthouse',
+        '/blog/creation-majordome-ai',
       ]
     })
   ],
