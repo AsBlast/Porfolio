@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import { useChat } from "ai/react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Bot, CornerDownLeft, X } from "lucide-react";
-import { useFirstVisit } from "../hooks/useFirstVisit";
+import { useFirstVisit } from "../hooks/useFirstVisit"; // Assurez-vous que ce hook est corrigé comme dans notre première discussion
 
 const getApiEndpoint = () => {
   if (import.meta.env.PROD) return "/.netlify/functions/chat";
@@ -12,7 +12,6 @@ const getApiEndpoint = () => {
 export function AIChat() {
   const { isFirstVisit } = useFirstVisit();
 
-  // On initialise toujours le chat comme fermé par défaut.
   const [isOpen, setIsOpen] = useState(false);
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
@@ -30,11 +29,12 @@ export function AIChat() {
   const glassStyle =
     "bg-slate-900/40 backdrop-blur-md border border-cyan-500/10";
 
+  // Fait défiler vers le bas quand un message arrive
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages, isLoading]);
 
-  // Ce useEffect est le chef d'orchestre. Il attend le signal de `isFirstVisit`.
+  // Ouvre le chat lors de la première visite
   useEffect(() => {
     if (isFirstVisit) {
       const welcomeTimer = setTimeout(() => {
@@ -43,23 +43,32 @@ export function AIChat() {
 
       return () => clearTimeout(welcomeTimer);
     }
-  }, [isFirstVisit]); //  ne s'exécute que lorsque isFirstVisit devient true.
+  }, [isFirstVisit]);
 
-  // Gère uniquement l'auto-fermeture.
+  // *** BLOC CORRIGÉ ***
+  // Gère l'auto-fermeture uniquement si l'utilisateur est inactif
   useEffect(() => {
-    // Si la fenêtre est ouverte (par n'importe quel moyen) ET que l'utilisateur n'a pas interagi...
-    if (isOpen && messages.length === 0 && !isLoading) {
+    // La condition pour lancer le minuteur est :
+    // 1. Le chat est ouvert
+    // 2. Aucun message n'a encore été envoyé
+    // 3. L'IA ne génère pas de réponse
+    // 4. L'utilisateur N'A PAS commencé à taper dans le champ de saisie
+    if (isOpen && messages.length === 0 && !isLoading && input.trim() === '') {
       const autoCloseTimer = setTimeout(() => {
         setIsOpen(false);
       }, 8000);
 
-      // On nettoie le timer si l'utilisateur interagit ou ferme la fenêtre.
+      // Le nettoyage est crucial : il annule le minuteur si une des dépendances change.
+      // Par exemple, si l'utilisateur commence à taper, `input` change, l'effet
+      // est nettoyé, et le minuteur est annulé.
       return () => clearTimeout(autoCloseTimer);
     }
-  }, [isOpen, messages, isLoading]);
+    // On ajoute `input` aux dépendances pour que l'effet se ré-exécute à chaque frappe.
+  }, [isOpen, messages, isLoading, input]);
 
   return (
     <>
+      {/* Bouton flottant */}
       <motion.button
         onClick={() => setIsOpen(!isOpen)}
         className="fixed bottom-6 right-6 z-50 w-16 h-16 bg-gradient-to-br from-purple-600 to-cyan-500 rounded-full flex items-center justify-center shadow-lg shadow-purple-500/50"
@@ -90,6 +99,7 @@ export function AIChat() {
         </AnimatePresence>
       </motion.button>
 
+      {/* Fenêtre de chat */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
