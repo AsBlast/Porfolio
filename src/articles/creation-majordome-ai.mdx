@@ -1,0 +1,167 @@
+---
+title: "Comment j'ai créé un Majordome IA ultra-rapide avec Groq et React"
+date: "2024-05-23"
+summary: "Le récit complet de la création d'un agent conversationnel proactif. De la quête de vitesse avec Groq à l'expérience utilisateur soignée avec React et Framer Motion, découvrez l'envers du décor de mon assistant numérique."
+image: "/images/blog/majordome.webp"
+tags: ["React", "AI", "Groq", "Netlify", "Vercel AI SDK", "Performance"]
+---
+
+## Introduction : Au-delà du Simple Portfolio
+
+Quand j'ai commencé à refondre mon portfolio, je voulais créer plus qu'une simple vitrine. Je voulais une expérience. Une page "Contact" c'est bien, mais un assistant personnel qui guide le visiteur de manière interactive ? C'est mémorable.
+
+C'est de là qu'est née l'idée de "AsBlast AI" : un majordome numérique, toujours disponible, mais surtout, qui a le savoir-vivre d'accueillir personnellement les visiteurs à leur arrivée. Voici le carnet de bord de sa création, de la pile technique au raffinement de l'expérience utilisateur.
+
+### Le Choix Déterminant : Pourquoi Groq et pas un autre ?
+
+J'aurais pu utiliser l'API d'OpenAI (GPT-3.5/4), qui est un standard de l'industrie. Mais mon objectif était double : la pertinence et la **vitesse**. Pour un chatbot, la latence est l'ennemi numéro un de l'expérience utilisateur. Personne n'aime attendre devant un indicateur de frappe qui clignote pendant de longues secondes.
+
+C'est là que **Groq** entre en jeu. Groq n'est pas un modèle de langage, mais un moteur d'inférence qui exécute des modèles open-source (comme Llama 3) sur son matériel spécialisé, le **LPU (Language Processing Unit)**. Le résultat est bluffant : des vitesses de génération de plusieurs centaines de tokens par seconde.
+
+Concrètement, pour l'utilisateur, les réponses du majordome sont **quasi instantanées**. C'est un avantage concurrentiel qui transforme complètement la perception du chatbot : il n'est plus lent et laborieux, il est vif et intelligent.
+
+### La Pile Technique Complète
+
+Avec cet objectif de vitesse en tête, voici les outils que j'ai assemblés :
+
+1.  **Le Cerveau (Modèle) :** **Meta Llama 3**, un modèle open-source puissant.
+2.  **Le Moteur (Inférence) :** **Groq Cloud** pour une exécution ultra-rapide.
+3.  **Frontend :** **React** (via Vite) pour une interface réactive et modulaire.
+4.  **Backend (Serverless) :** **Netlify Functions** pour créer un point d'API sécurisé sans gérer de serveur.
+5.  **La Plomberie de l'IA :** Le **Vercel AI SDK** et sa librairie `@ai-sdk/react` pour connecter facilement mon frontend à mon backend en gérant le streaming des réponses.
+6.  **L'Âme (Animations) :** **Framer Motion** pour donner vie à l'interface.
+
+## Étape 1 : Donner une Voix au Majordome (Le Backend sur Netlify)
+
+La première étape était de créer une "passerelle" sécurisée vers l'API de Groq. Je ne pouvais pas exposer ma clé d'API côté client. Une fonction serverless sur Netlify est parfaite pour ça.
+
+Le rôle de cette fonction (`/netlify/functions/chat.ts`) est simple :
+- Recevoir la conversation de l'utilisateur depuis le frontend.
+- Y ajouter un **prompt système** secret qui donne sa personnalité et ses instructions au majordome.
+- Envoyer le tout à l'API de Groq et streamer la réponse vers le client en temps réel.
+
+Voici le cœur de la fonction, qui utilise le SDK officiel de Groq :
+
+```typescript
+// Dans /netlify/functions/chat.ts
+import Groq from 'groq-sdk';
+import { streamText } from 'ai';
+import { createGroq } from '@ai-sdk/groq';
+
+// On initialise le provider Groq avec la clé d'API
+// stockée dans les variables d'environnement de Netlify
+const groq = createGroq({ apiKey: process.env.GROQ_API_KEY });
+
+export const config = { runtime: 'edge' };
+
+export default async function handler(req: Request) {
+  const { messages } = await req.json();
+
+  const result = await streamText({
+    model: groq('llama3-8b-8192'), // Le modèle qu'on souhaite utiliser
+    system: `Tu es AsBlast AI, un assistant virtuel expert sur le portfolio du développeur Brice. Tu es amical, serviable et un peu geek. Tu réponds aux questions sur ses projets, ses compétences (React, Node.js, TypeScript...) et comment le contacter. Tes réponses sont concises et directes. Ne réponds qu'à des questions liées à Brice.`,
+    messages,
+  });
+
+  return result.toAIStreamResponse();
+}
+```
+
+## Étape 2 : Construire son Corps (L'Interface React)
+
+Avec un backend fonctionnel, il était temps de créer une interface à la hauteur. Le Vercel AI SDK, et plus précisément son hook `useChat` de `@ai-sdk/react`, a rendu cette tâche incroyablement simple.
+
+Mon composant `AIChat.tsx` peut ainsi se concentrer sur l'essentiel : l'expérience utilisateur.
+
+```jsx
+// Extrait simplifié de AIChat.tsx
+import { useChat } from '@ai-sdk/react';
+import { motion } from 'framer-motion';
+
+export function AIChat() {
+  const { messages, input, handleInputChange, handleSubmit, isLoading } = useChat({
+    api: '/.netlify/functions/chat', // Le point d'API que nous avons créé
+  });
+
+  return (
+    <motion.div>
+      {/* ...Le header et le reste de l'UI du chat... */}
+      <div className="message-list">
+        {messages.map(m => (
+          <div key={m.id} className={`message-bubble ${m.role}`}>
+            <p>{m.content}</p>
+          </div>
+        ))}
+        {/* L'indicateur de frappe animé quand l'IA répond */}
+        {isLoading && <div className="typing-indicator" />}
+      </div>
+      
+      <form onSubmit={handleSubmit}>
+        <input 
+          value={input} 
+          onChange={handleInputChange} 
+          placeholder="Posez une question..." 
+        />
+        <button type="submit" disabled={isLoading || !input.trim()}>Envoyer</button>
+      </form>
+    </motion.div>
+  );
+}
+```
+
+## Étape 3 : Le Raffinement - D'un Outil à un Majordome
+
+Un chatbot fonctionnel, c'est bien. Un majordome proactif, c'est mieux. C'est ce comportement qui allait définir l'expérience et la rendre unique.
+
+#### La Logique de l'Accueil
+
+1.  **Détecter la Première Visite :** J'ai créé un hook `useFirstVisit` qui utilise `sessionStorage` pour n'accueillir l'utilisateur qu'une seule fois par session. Pour le rendre robuste face au `StrictMode` de React (qui monte les composants deux fois en développement), j'ai utilisé une `useRef` pour m'assurer que la vérification ne se fasse qu'une seule fois.
+
+    ```typescript
+    // hooks/useFirstVisit.ts
+    export const useFirstVisit = () => {
+      const [isFirstVisit, setIsFirstVisit] = useState(false);
+      const hasChecked = useRef(false);
+
+      useEffect(() => {
+        if (hasChecked.current) return;
+        hasChecked.current = true;
+        if (!sessionStorage.getItem('hasBeenWelcomedByAI')) {
+          sessionStorage.setItem('hasBeenWelcomedByAI', 'true');
+          setIsFirstVisit(true);
+        }
+      }, []);
+      return { isFirstVisit };
+    };
+    ```
+
+2.  **L'Ouverture Automatique & la Retraite Discrète :** Dans `AIChat.tsx`, un `useEffect` écoute le signal de `isFirstVisit`. Si c'est `true`, il commande l'ouverture de la fenêtre de chat après une seconde. Un autre `useEffect` s'assure que si l'utilisateur n'interagit pas avec le chat ouvert, celui-ci se referme gracieusement après 8 secondes. Le majordome a salué, puis s'est retiré, restant disponible via une icône flottante.
+
+## Étape 4 : Le Diable est dans les Détails (L'UX soignée)
+
+Pour qu'une interaction soit vraiment agréable, plusieurs micro-détails sont essentiels :
+
+*   **Auto-défilement :** Un chat sans auto-défilement est inutilisable. J'ai implémenté un `useRef` sur un élément vide à la fin de la liste des messages et un `useEffect` qui appelle `scrollIntoView()` à chaque nouveau message.
+*   **Indicateur de Frappe Animé :** Plutôt qu'un texte statique, j'ai utilisé `Framer Motion` pour créer une petite animation de trois points qui dansent. Cela rend l'attente (même si elle est très courte avec Groq) plus agréable.
+*   **Gestion des États du Bouton :** Le bouton d'envoi est désactivé si le champ de saisie est vide (`!input.trim()`) ou si l'IA est en train de répondre (`isLoading`). C'est un détail fondamental pour éviter les soumissions multiples ou vides.
+
+## Étape 5 : Les Défis Rencontrés et les Leçons Apprises
+
+Aucun projet n'est un long fleuve tranquille. Voici quelques-uns des obstacles et ce qu'ils m'ont appris :
+
+1.  **Le Piège du `StrictMode` de React :** Comme mentionné, mon hook `useFirstVisit` ne fonctionnait pas initialement. Le double-montage a été un excellent rappel de l'importance de coder des effets idempotents.
+2.  **L'Art du Prompt Engineering :** Mon premier prompt système était trop vague. L'IA répondait de manière trop longue. J'ai dû l'itérer plusieurs fois, en ajoutant des contraintes comme "Tes réponses sont concises et directes" pour affiner sa personnalité.
+3.  **L'Écosystème de l'IA SDK :** Le Vercel AI SDK a récemment évolué vers `@ai-sdk/react`. J'ai dû m'adapter aux nouvelles API, comme `streamText` et `toAIStreamResponse`, ce qui fut un bon exercice pour rester à jour sur un écosystème qui bouge très vite.
+
+## Conclusion : Vitesse, Expérience et Compétences
+
+La création de ce majordome a été un voyage technique passionnant. Le choix de Groq s'est avéré décisif, transformant une fonctionnalité potentiellement gadget en un outil performant et agréable.
+
+Ce projet n'est pas juste une ligne sur mon CV. Il démontre concrètement :
+- Ma capacité à intégrer des services d'IA tiers de manière sécurisée.
+- Ma maîtrise de l'écosystème React, des hooks personnalisés à la gestion d'état.
+- Mon obsession pour la performance et l'expérience utilisateur.
+
+Au final, la meilleure façon de se présenter n'est pas toujours une longue biographie, mais une conversation fluide et instantanée.
+
+*Et vous, quelle technologie émergente vous enthousiasme le plus pour améliorer l'expérience web ?*
