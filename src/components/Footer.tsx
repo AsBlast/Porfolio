@@ -1,4 +1,8 @@
 // src/components/Footer.tsx
+/**
+ * @copyright Copyright (c) 2025 Brice-Dev
+ * @license   Licensed under the MIT license.
+ */
 
 import { motion } from "framer-motion";
 import { Github, Linkedin, Facebook, Rocket, Code2, Sparkles } from "lucide-react";
@@ -124,7 +128,7 @@ export function Footer() {
           <div className="flex justify-center gap-8 mb-6">
             {legalPages.map((page) => (<Link key={page.name} to={page.href} className="hover:text-white transition-colors">{page.name}</Link>))}
           </div>
-          <p className="mb-4">© {new Date().getFullYear()} Brice-Dev. Tous droits réservés.</p>
+          <p className="mb-4">© {new Date().getFullYear()} Brice-Dev. </p>
           <p className="text-xs text-slate-500">Conçu et développé avec <span className="text-[#D946EF]">♥</span> à Madagascar</p>
         </motion.div>
       </div>
