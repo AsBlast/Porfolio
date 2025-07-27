@@ -23,8 +23,8 @@ const ArticlePage = React.lazy(() => import("./pages/ArticlePage"));
 
 // Composant de chargement pour le fallback de Suspense
 const PageLoader = () => (
-  <div style={{ display: "flex", justifyContent: "center", alignItems: "center", minHeight: "100vh", backgroundColor: "#1A1F2C", color: "white", fontFamily: "sans-serif" }}>
-    Chargement ...
+  <div className="flex justify-center items-center min-h-screen bg-slate-900">
+    <div className="w-16 h-16 border-4 border-dashed rounded-full animate-spin border-cyan-500"></div>
   </div>
 );
 
