@@ -3,25 +3,21 @@
 import React, { Suspense, lazy, useState, useEffect } from "react";
 import { Helmet } from 'react-helmet-async';
 import { AnimatePresence, motion } from "framer-motion";
-import { useLocation, Link } from 'react-router-dom'; // <-- AJOUT DE LINK
-import { ArrowRight } from "lucide-react"; // <-- AJOUT POUR L'ICÔNE DU BOUTON
+import { useLocation, Link } from 'react-router-dom'; 
+import { ArrowRight } from "lucide-react"; 
 
 // Composants
 import { LoadingScreen } from "@/components/LoadingScreen";
 import { Hero } from "@/components/Hero";
-// Navigation n'a plus besoin d'être importé ici car il est dans le RootLayout
-
-// --- CORRECTION : Suppression de l'import de l'ancien composant Product ---
-// const Product = lazy(() => import('@/components/Product')); // <-- CETTE LIGNE EST SUPPRIMÉE
 
 // Lazy loading pour les autres sections
 const About = lazy(() => import('@/components/About').then(module => ({ default: module.About })));
 const Projects = lazy(() => import('@/components/Projects').then(module => ({ default: module.Projects })));
 const Contact = lazy(() => import('@/components/Contact').then(module => ({ default: module.Contact })));
 
-// --- NOUVEAU COMPOSANT : Appel à l'action pour la boutique ---
+// --- Composant : Appel à l'action pour la boutique ---
 const CtaShopSection = () => (
-  <section id="shop-cta" className="py-20 md:py-32 bg-[#1A1F2C]"> {/* Changement de l'ID pour éviter les conflits */}
+  <section id="shop-cta" className="py-20 md:py-32 bg-[#1A1F2C]">
     <div className="container mx-auto px-4 text-center">
       <motion.h2 
         initial={{ opacity: 0, y: 20 }}
@@ -48,7 +44,7 @@ const CtaShopSection = () => (
         transition={{ duration: 0.5, delay: 0.2 }}
       >
         <Link 
-          to="/produits" // <-- Lien vers votre nouvelle page catalogue
+          to="/produits"
           className="inline-flex items-center gap-3 px-8 py-3 bg-[#D946EF] rounded-lg text-white text-lg font-bold hover:bg-[#C026D3] transition-colors shadow-lg shadow-[#D946EF]/20"
         >
           Visiter la boutique
@@ -66,7 +62,6 @@ export default function IndexPage() {
   const [isLoading, setIsLoading] = useState(true);
   const location = useLocation();
 
-  // Les hooks useEffect restent inchangés, ils sont corrects.
   useEffect(() => {
     const timer = setTimeout(() => setIsLoading(false), 1500);
     return () => clearTimeout(timer);
@@ -90,23 +85,27 @@ export default function IndexPage() {
   return (
     <>
       <Helmet>
-        <title>Brice Yakim | Développeur Web Full Stack à Madagascar | Portfolio AsBlast</title>
-        <meta name="description" content="Portfolio de Brice Yakim, développeur web Full Stack créatif basé à Madagascar. Découvrez mes projets, compétences en React, Node.js, et ma passion pour les expériences digitales innovantes." />
-        <link rel="canonical" href="https://asblast.space/" />
+        {/* --- BALISES SEO MISES À JOUR --- */}
+        <title>Brice Yakim AsBlast | Développeur Full Stack à Madagascar</title>
+        <meta name="description" content="Portfolio de Brice Yakim, Développeur Full Stack à Madagascar. Spécialisé en React, Node.js et création d'expériences web interactives pour startups et PME." />
+        <link rel="canonical" href="https://asblast.space/"/>
+        
+        {/* Open Graph (pour le partage sur les réseaux sociaux) */}
+        <meta property="og:title" content="Brice Yakim AsBlast | Développeur Full Stack à Madagascar" />
+        <meta property="og:description" content="Découvrez le portfolio et les projets de Brice Yakim, spécialiste en expériences digitales innovantes." />
+        <meta property="og:image" content="https://asblast.space/og-image.jpg" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://asblast.space/" />
       </Helmet>
       
       <div style={{ visibility: isLoading ? 'hidden' : 'visible' }}>
         <div className="min-h-screen bg-[#1A1F2C] text-white overflow-x-hidden">
-          {/* La navigation est maintenant gérée par RootLayout, donc plus besoin de l'appeler ici */}
           <main>
             <section id="home" aria-labelledby="hero-heading"><Hero /></section>
             <Suspense fallback={<SectionLoader />}><section id="about" aria-labelledby="about-heading"><About /></section></Suspense>
-            
-            {/* --- CORRECTION : Remplacement de l'ancienne section produit --- */}
             <Suspense fallback={<SectionLoader />}>
               <CtaShopSection />
             </Suspense>
-
             <Suspense fallback={<SectionLoader />}><section id="projects" aria-labelledby="projects-heading"><Projects /></section></Suspense>
             <Suspense fallback={<SectionLoader />}><section id="contact" aria-labelledby="contact-heading"><Contact /></section></Suspense>
           </main>

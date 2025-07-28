@@ -5,29 +5,25 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="author" content="Brice Yakim AsBlast" />
   
-  <!-- SEO & Titre -->
-  <title>Brice Yakim AsBlast | Développeur Full Stack à Madagascar</title>
-  <meta name="description" content="Portfolio de Brice Yakim, Développeur Full Stack à Madagascar. Spécialisé en React, Node.js et création d'expériences web interactives pour startups et PME." />
-  <link rel="canonical" href="https://asblast.space/"/>
+  <!-- Titre et description de secours très génériques -->
+  <title>Brice-Dev | Développeur Full Stack</title>
+  <meta name="description" content="Portfolio et projets de Brice Yakim (AsBlast), développeur web et créateur d'expériences digitales." />
 
-  <!-- Open Graph (pour le partage sur les réseaux sociaux) -->
-  <meta property="og:title" content="Brice Yakim AsBlast | Développeur Full Stack à Madagascar" />
-  <meta property="og:description" content="Découvrez le portfolio et les projets de Brice Yakim, spécialiste en expériences digitales innovantes." />
-  <meta property="og:image" content="https://asblast.space/og-image.jpg" />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://asblast.space/" />
-
-  <!-- Performance : Préchargement de l'image la plus importante (LCP) -->
-  <link rel="preload" as="image" href="public/images/hostinger.png" fetchPriority="high" />
+  <!-- Performance : Préchargement de l'image principale de la page d'accueil -->
+  <link rel="preload" as="image" href="/images/hostinger.png" fetchPriority="high" />
 
   <style> body { background-color: #1A1F2C; } </style>
+
+  <!-- Google AdSense Script -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2734152198256091"
+     crossorigin="anonymous"></script>
 </head>
 
 <body>
   <div id="root"></div>
   <script type="module" src="/src/main.tsx"></script>
 
-  <!-- Données Structurées pour Google (Rich Snippets) -->
+  <!-- Données Structurées Globales (Person) -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -39,7 +35,7 @@
       "https://linkedin.com/in/brice-yakim-andriamahefaromisa-6a8a2b200"
     ],
     "jobTitle": "Développeur Full Stack",
-    "image": "https://asblast.space/brice-yakim-photo.webp", 
+    "image": "https://asblast.space/brice-yakim-photo.webp",
     "description": "Développeur Full Stack spécialisé dans la création d'expériences web interactives avec React, Framer Motion et les technologies IA. Basé à Madagascar.",
     "knowsAbout": ["React", "JavaScript", "Node.js", "Framer Motion", "Web Performance", "SEO"]
   }
@@ -53,9 +49,5 @@
     gtag('js', new Date());
     gtag('config', 'G-S9G3MPQ0EJ');
   </script>
-  
-  <!--  balises AdSense dans l'attente une fois que le site a un trafic établi.  -->
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2734152198256091"
-     crossorigin="anonymous"></script>
 </body>
 </html>
