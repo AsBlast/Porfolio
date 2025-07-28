@@ -5,32 +5,45 @@ import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { Calendar, Tag } from "lucide-react";
 
-import { articles, ArticleMeta } from '../articles';
+import { articles, ArticleMeta } from '../articles'; // Assurez-vous que le chemin est correct
 
-// Composant pour une carte d'article
-const ArticleCard = ({ article }: { article: ArticleMeta }) => (
-  <motion.div
-    initial={{ opacity: 0, y: 20 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    viewport={{ once: true }}
-    transition={{ duration: 0.5 }}
-    className="bg-white/5 rounded-lg overflow-hidden border border-white/10 group"
-  >
-    <Link to={`/blog/${article.slug}`}>
-      <div className="aspect-video overflow-hidden">
-        <img src={article.image} alt={article.title} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
-      </div>
-      <div className="p-6">
-        <div className="flex items-center gap-4 text-xs text-white/60 mb-2">
-          <span className="flex items-center gap-1.5"><Calendar size={14} /> {new Date(article.date).toLocaleDateString('fr-FR')}</span>
-          <span className="flex items-center gap-1.5"><Tag size={14} /> {article.tags[0]}</span>
+// Composant pour une carte d'article - VERSION AVEC BACKGROUND IMAGE (ROBUSTE)
+const ArticleCard = ({ article }: { article: ArticleMeta }) => {
+  // On détermine la classe de position pour le background.
+  // Tailwind génère ces classes car elles sont statiques (`bg-top`, `bg-center`, etc.)
+  const positionClass = article.imagePosition ? `bg-${article.imagePosition}` : 'bg-center';
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.5 }}
+      className="bg-white/5 rounded-lg overflow-hidden border border-white/10 group flex flex-col"
+    >
+      <Link to={`/blog/${article.slug}`} className="flex flex-col flex-grow">
+        {/* L'image est maintenant un div avec un style en ligne pour l'URL et une classe pour la position */}
+        <div
+          className={`aspect-video w-full bg-cover transition-transform duration-500 group-hover:scale-105 ${positionClass}`}
+          style={{ backgroundImage: `url(${article.image})` }}
+          role="img"
+          aria-label={article.title}
+        ></div>
+        
+        <div className="p-6 flex flex-col flex-grow">
+          <div className="flex items-center gap-4 text-xs text-white/60 mb-2">
+            <span className="flex items-center gap-1.5"><Calendar size={14} /> {new Date(article.date).toLocaleDateString('fr-FR')}</span>
+            <span className="flex items-center gap-1.5"><Tag size={14} /> {article.tags[0]}</span>
+          </div>
+          <h3 className="text-xl font-bold text-white mb-2 group-hover:text-[#D946EF] transition-colors">{article.title}</h3>
+          {/* J'ai ajouté mt-auto pour pousser le résumé vers le bas, utile avec flex-grow */}
+          <p className="text-white/70 text-sm line-clamp-3">{article.summary}</p>
         </div>
-        <h3 className="text-xl font-bold text-white mb-2 group-hover:text-[#D946EF] transition-colors">{article.title}</h3>
-        <p className="text-white/70 text-sm line-clamp-3">{article.summary}</p>
-      </div>
-    </Link>
-  </motion.div>
-);
+      </Link>
+    </motion.div>
+  );
+};
+
 
 export default function BlogPage() {
   return (
@@ -39,7 +52,6 @@ export default function BlogPage() {
         <title>Blog - Brice Yakim | Développement Web & Tech</title>
         <meta name="description" content="Découvrez mes articles sur le développement web, React, la performance, et d'autres sujets techniques." />
       </Helmet>
-      
       
       <main className="bg-[#1A1F2C] text-white">
         <section className="pt-32 pb-20">

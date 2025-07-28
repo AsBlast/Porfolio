@@ -6,6 +6,8 @@ export interface ArticleMeta {
   summary: string;
   image: string;
   tags: string[];
+  imagePosition?: 'top' | 'bottom' | 'center' | 'left' | 'right'; // <-- Ajoutez cette ligne
+
 }
 
 export const articles: ArticleMeta[] = [
@@ -23,6 +25,7 @@ export const articles: ArticleMeta[] = [
     date: "2025-07-27",
     summary: "Le récit complet de la création d'un agent conversationnel proactif. De l'idée à l'intégration, découvrez comment React, Netlify Functions et le Vercel AI SDK se sont assemblés pour donner vie à mon assistant numérique.",
     image: "/images/blog/majordome.webp", 
+    imagePosition: 'top',
     tags: ["React", "AI", "Netlify", "Vercel AI SDK", "TypeScript"],
   },
 ];
