@@ -37,7 +37,7 @@ export function Hero() {
           </h1>
 
           <h2 className="text-3xl md:text-4xl font-bold mb-4 text-cyan-300 drop-shadow-[0_0_5px_rgba(0,255,255,0.5)]">
-            Apprenti développeur Full Stack
+            Développeur Full Stack & Créateur Numérique
           </h2>
 
           <div className="text-xl md:text-2xl text-cyan-100/90 font-mono mb-8 max-w-2xl mx-auto min-h-[110px]">

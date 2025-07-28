@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Code, Database, Layout, Box, Download, Award, Globe } from "lucide-react";
+import { Code, Database, Layout, Box, Download, Award, Globe, Star, User } from "lucide-react";
 import { useEffect, useState, useRef } from "react";
 import { Tooltip } from './Tooltip';
 
@@ -44,11 +44,10 @@ function Typewriter({ text }) {
   }, [startTyping, text]);
 
   return (
-    // L'attribut aria-label rend le texte complet immédiatement accessible
     <h3
       ref={ref}
       aria-label={text}
-      className="text-2xl font-bold bg-gradient-to-r from-[#8B5CF6] to-[#D946EF] bg-clip-text text-transparent mb-6 h-16 sm:h-auto" // Hauteur fixe pour éviter le saut de page
+      className="text-2xl font-bold bg-gradient-to-r from-[#8B5CF6] to-[#D946EF] bg-clip-text text-transparent mb-6 h-16 sm:h-auto"
     >
       {displayed}
     </h3>
@@ -72,11 +71,11 @@ export function About() {
 
   const paragraphs = [
     "« La seule façon de faire du bon travail, c'est d'aimer ce que l'on fait. »",
-    "C'est dans cet état d'esprit que j'aborde chaque projet avec passion et dévouement, repoussant les limites du possible en développement web.",
-    "Basé à Antananarivo, Madagascar, je suis spécialisé dans la création de solutions innovantes alliant technologie de pointe et design intuitif. Mon objectif est de créer des expériences numériques qui non seulement répondent aux exigences, mais dépassent les attentes.",
-"Chaque produit que je crée est le fruit de cette passion, conçu pour vous fournir des outils de qualité professionnelle et vous faire gagner un temps précieux."
+    "Mon approche est simple : je ne suis pas le développeur qui exécute une liste de fonctionnalités. Je suis celui qui traque le problème réel derrière la demande, obsédé par l'idée de le dissoudre dans une solution radicalement efficace.",
+    "C'est pourquoi ma règle d'or est non négociable : la puissance sans la clarté est inutile. Un outil brillant mais confus est comme une bibliothèque remplie de trésors, mais sans catalogue pour les trouver. La valeur est là, mais elle reste hors de portée.",
+    "Depuis Antananarivo, Madagascar, je ne construis donc pas des logiciels. Je forge des leviers de productivité : des solutions autonomes, puissantes et intuitives, conçues pour vous donner un avantage tangible et vous rendre maître de votre temps."
   ];
-  
+
   return (
     <section id="about" aria-labelledby="about-heading" className="py-20 bg-[#221F26]">
       <div className="container mx-auto px-4">
@@ -115,7 +114,8 @@ export function About() {
             viewport={{ once: true }}
             className="text-white/80"
           >
-            <Typewriter text="Développeur engagé et créatif, toujours à la recherche d’innovation." />
+            {/* AMÉLIORATION 1 : Titre plus percutant */}
+            <Typewriter text="Je transforme la complexité en leviers de productivité." />
 
             {paragraphs.map((text, i) => (
               <motion.p key={i} initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.3 + i * 0.3 }} className="mb-6">{text}</motion.p>
@@ -144,6 +144,25 @@ export function About() {
                 Voir mes projets
               </motion.a>
             </div>
+            
+            {/* AMÉLIORATION 2 : Section "Mes principes directeurs" */}
+            <div className="mt-12">
+              <h4 className="text-xl font-semibold text-white mb-4">Mes principes directeurs :</h4>
+              <div className="flex flex-wrap gap-3">
+                {["Simplicité Radicale", "L'Utilisateur d'Abord", "Impact > Fonctionnalités", "Itération Continue"].map((value, i) => (
+                  <motion.div
+                    key={i}
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: i * 0.1 }}
+                    className="px-4 py-2 bg-white/10 text-white rounded-full text-sm font-medium"
+                  >
+                    {value}
+                  </motion.div>
+                ))}
+              </div>
+            </div>
           </motion.div>
         </div>
 
@@ -151,7 +170,7 @@ export function About() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16"
+          className="grid grid-cols-2 md:grid-cols-4 gap-6"
         >
           {stats.map((stat, index) => (
             <motion.div
@@ -168,6 +187,8 @@ export function About() {
           ))}
         </motion.div>
 
+        {/* AMÉLIORATION 3 : Titre explicite pour la section des compétences */}
+        <h3 className="text-3xl md:text-4xl font-bold text-center text-white mt-20 mb-12">Mes Outils de Prédilection</h3>
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
           {skills.map((skill, index) => (
             <motion.div
@@ -184,9 +205,9 @@ export function About() {
                 <div className="mb-4">{skill.icon}</div>
                 <h3 className="text-xl font-bold mb-2 text-white">{skill.title}</h3>
                 
-                <div className="mt-4 mb-4" role="meter" aria-valuenow={skill.level} aria-valuemin={0} aria-valuemax={100} aria-label={`Niveau de maîtrise : ${skill.level} sur 100`}>
+                <div className="mt-4 mb-4" role="meter" aria-valuenow={skill.level} aria-valuemin={0} aria-valuemax={100} aria-label={`Niveau d'affinité : ${skill.level} sur 100`}>
                   <div className="flex justify-between text-sm text-gray-400 mb-1" aria-hidden="true">
-                    <span>Maîtrise</span>
+                    <span>Affinité</span>
                     <span>{skill.level}%</span>
                   </div>
                   <div className="w-full bg-gray-800 rounded-full h-2" aria-hidden="true">
@@ -212,12 +233,65 @@ export function About() {
             </motion.div>
           ))}
         </div>
+
+        {/* AMÉLIORATION 4 : Section Témoignages pour la preuve sociale */}
+        <div className="mt-20">
+          <h3 className="text-3xl md:text-4xl font-bold text-center text-white mb-12">Ce qu'ils en disent</h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="bg-white/5 p-6 rounded-lg border border-gray-800"
+            >
+              <div className="flex text-yellow-400 mb-4">
+                <Star fill="currentColor" /><Star fill="currentColor" /><Star fill="currentColor" /><Star fill="currentColor" /><Star fill="currentColor" />
+              </div>
+              <blockquote className="text-white/80 italic mb-4">
+                "Brice n'a pas seulement développé notre site, il a compris notre vision. Son obsession pour l'UX a transformé notre idée complexe en un outil incroyablement simple à utiliser. Un vrai levier de productivité pour nous."
+              </blockquote>
+              <div className="flex items-center gap-3 mt-auto">
+                <div className="w-12 h-12 rounded-full bg-gradient-to-r from-[#8B5CF6] to-[#D946EF] flex items-center justify-center">
+                    <User className="text-white" />
+                </div>
+                <div>
+                  <div className="font-bold text-white">Client Heureux</div>
+                  <div className="text-gray-400">CEO, Entreprise Fictive</div>
+                </div>
+              </div>
+            </motion.div>
+
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2 }}
+              className="bg-white/5 p-6 rounded-lg border border-gray-800"
+            >
+              <div className="flex text-yellow-400 mb-4">
+                <Star fill="currentColor" /><Star fill="currentColor" /><Star fill="currentColor" /><Star fill="currentColor" /><Star fill="currentColor" />
+              </div>
+              <blockquote className="text-white/80 italic mb-4">
+                "Sa capacité à transformer un problème abstrait en une solution concrète est impressionnante. Il ne suit pas les instructions aveuglément, il les améliore. Le résultat final a dépassé toutes nos attentes."
+              </blockquote>
+              <div className="flex items-center gap-3 mt-auto">
+                <div className="w-12 h-12 rounded-full bg-gradient-to-r from-[#8B5CF6] to-[#D946EF] flex items-center justify-center">
+                    <User className="text-white" />
+                </div>
+                <div>
+                  <div className="font-bold text-white">Partenaire Satisfait</div>
+                  <div className="text-gray-400">Chef de Projet, Startup</div>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        </div>
         
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="mt-16 bg-gradient-to-r from-[#D946EF]/10 to-[#8B5CF6]/10 p-8 rounded-2xl border border-[#D946EF]/30"
+          className="mt-20 bg-gradient-to-r from-[#D946EF]/10 to-[#8B5CF6]/10 p-8 rounded-2xl border border-[#D946EF]/30"
         >
           <div className="flex items-center gap-4 mb-6">
             <Award className="w-10 h-10 text-[#D946EF]" />
