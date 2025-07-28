@@ -34,11 +34,13 @@ export function Footer() {
   const navigate = useNavigate();
   const location = useLocation();
 
+  // La seule modification est ici : href: "/produits"
   const navItems = [
     { name: "Accueil", href: "#home" }, { name: "A propos", href: "#about" },
-    { name: "Produits", href: "#products" }, { name: "Projets", href: "#projects" },
+    { name: "Produits", href: "/produits" }, { name: "Projets", href: "#projects" },
     { name: "Blog", href: "/blog" }, { name: "Contact", href: "#contact" }
   ];
+  
   const legalPages = [
     { name: "Politique de confidentialité", href: "/privacy" },
     { name: "Mentions légales", href: "/terms" },

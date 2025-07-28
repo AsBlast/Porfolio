@@ -32,11 +32,11 @@ export function Navigation() {
   const [isScrolled, setIsScrolled] = useState(false);
 
   const isHomePage = location.pathname === '/';
-
+  
   const menuItems = [
     { name: "Accueil", sectionId: "home", icon: <Home size={20} /> },
     { name: "À propos", sectionId: "about", icon: <User size={20} /> },
-    { name: "Produits", sectionId: "products", icon: <Store size={20} /> },
+    { name: "Produits", sectionId: "/produits", icon: <Store size={20} /> }, 
     { name: "Projets", sectionId: "projects", icon: <Folder size={20} /> },
     { name: "Blog", sectionId: "/blog", icon: <Feather size={20} /> },
     { name: "Contact", sectionId: "contact", icon: <Mail size={20} /> },
@@ -44,18 +44,15 @@ export function Navigation() {
 
   const sectionIds = menuItems.filter(item => !item.sectionId.startsWith('/')).map(item => item.sectionId);
   const activeSection = useActiveSection(sectionIds, isHomePage);
-
+  
   const handleNavClick = (sectionId: string) => {
     setIsOpen(false);
-    // Si c'est une route (commence par '/'), on navigue.
     if (sectionId.startsWith('/')) {
       navigate(sectionId);
     } 
-    // Sinon, si on est sur la homepage, on scroll.
     else if (isHomePage) {
       document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
     } 
-    // Sinon, on va à la homepage et on demande de scroller une fois là-bas.
     else {
       navigate('/', { state: { scrollToSection: sectionId } });
     }
@@ -67,36 +64,45 @@ export function Navigation() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const getIsActive = (itemSectionId: string) => {
+    if (itemSectionId.startsWith('/')) {
+      return location.pathname.startsWith(itemSectionId);
+    }
+    return isHomePage && activeSection === itemSectionId;
+  };
+
   return (
     <header className={`fixed w-full z-50 transition-all duration-300 ${isScrolled ? "bg-black/80 backdrop-blur-lg border-b border-cyan-500/20 py-3 shadow-xl" : "py-4 bg-transparent"}`}>
       <nav className="container mx-auto px-4 flex justify-between items-center" aria-label="Navigation principale">
         
-        {/* Colonne 1 : Logo */}
+        {/* --- LOGO RESTAURÉ --- */}
         <button onClick={() => handleNavClick('home')} aria-label="Retour à l'accueil" className="text-2xl font-bold bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500 bg-clip-text text-transparent flex items-center gap-2">
           <div className="bg-cyan-500/10 p-2 rounded-full"><div className="bg-gradient-to-r from-cyan-400 to-purple-500 w-3 h-3 rounded-full animate-pulse"></div></div>
           <span>Brice-Dev</span>
         </button>
-
         
-        {/* Colonne 3 : Menu */}
+        {/* Menu Desktop */}
         <div className="hidden md:flex items-center space-x-2">
-          {menuItems.map((item) => (
-            <button
-              key={item.name}
-              onClick={() => handleNavClick(item.sectionId)}
-              aria-label={`Aller à la section ${item.name}`}
-              className={`px-4 py-2 rounded-lg relative flex items-center gap-2 transition-colors duration-300 ${isHomePage && activeSection === item.sectionId ? "text-cyan-300" : "text-cyan-300/60 hover:text-cyan-300"}`}
-            >
-              {item.icon}
-              {item.name}
-              {(isHomePage && activeSection === item.sectionId) && (
-                <motion.div className="absolute bottom-0 left-0 right-0 h-0.5 bg-cyan-400" layoutId="underline" transition={{ type: "spring", stiffness: 380, damping: 30 }}/>
-              )}
-            </button>
-          ))}
+          {menuItems.map((item) => {
+            const isActive = getIsActive(item.sectionId);
+            return (
+              <button
+                key={item.name}
+                onClick={() => handleNavClick(item.sectionId)}
+                aria-current={isActive ? "page" : undefined}
+                className={`px-4 py-2 rounded-lg relative flex items-center gap-2 transition-colors duration-300 ${isActive ? "text-cyan-300" : "text-cyan-300/60 hover:text-cyan-300"}`}
+              >
+                {item.icon}
+                {item.name}
+                {isActive && (
+                  <motion.div className="absolute bottom-0 left-0 right-0 h-0.5 bg-cyan-400" layoutId="underline" transition={{ type: "spring", stiffness: 380, damping: 30 }}/>
+                )}
+              </button>
+            )
+          })}
         </div>
         
-        {/* Bouton mobile */}
+        {/* --- BOUTON MOBILE RESTAURÉ --- */}
         <div className="md:hidden"> 
           <motion.button onClick={() => setIsOpen(!isOpen)} aria-label={isOpen ? "Fermer le menu" : "Ouvrir le menu"} aria-expanded={isOpen} aria-controls="mobile-menu" className="p-2 rounded-md text-cyan-300">
             {isOpen ? <X size={24} /> : <Menu size={24} />}
@@ -104,17 +110,20 @@ export function Navigation() {
         </div>
       </nav>
 
-      {/* Menu mobile */}
+      {/* --- MENU MOBILE RESTAURÉ --- */}
       <AnimatePresence>
         {isOpen && (
           <motion.div id="mobile-menu" initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }} className="md:hidden bg-black/90 backdrop-blur-xl border-t border-cyan-500/20">
             <div className="flex flex-col p-4 space-y-2">
-              {menuItems.map((item) => (
-                <button key={`mobile-${item.name}`} onClick={() => handleNavClick(item.sectionId)} className={`px-3 py-3 rounded-md flex items-center gap-3 text-lg transition-colors ${(isHomePage && activeSection === item.sectionId) ? "text-cyan-300 bg-cyan-500/10" : "text-cyan-300/80 hover:bg-cyan-500/5"}`}>
-                  {item.icon}
-                  <span>{item.name}</span>
-                </button>
-              ))}
+              {menuItems.map((item) => {
+                const isActive = getIsActive(item.sectionId);
+                return (
+                  <button key={`mobile-${item.name}`} onClick={() => handleNavClick(item.sectionId)} className={`px-3 py-3 rounded-md flex items-center gap-3 text-lg transition-colors ${isActive ? "text-cyan-300 bg-cyan-500/10" : "text-cyan-300/80 hover:bg-cyan-500/5"}`}>
+                    {item.icon}
+                    <span>{item.name}</span>
+                  </button>
+                )
+              })}
             </div>
           </motion.div>
         )}
