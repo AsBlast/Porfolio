@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Home, User, Folder, Mail, Store, Feather } from "lucide-react"; 
 
@@ -46,17 +46,26 @@ export function Navigation() {
   const activeSection = useActiveSection(sectionIds, isHomePage);
   
   const handleNavClick = (sectionId: string) => {
-    setIsOpen(false);
-    if (sectionId.startsWith('/')) {
-      navigate(sectionId);
-    } 
-    else if (isHomePage) {
-      document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
-    } 
-    else {
-      navigate('/', { state: { scrollToSection: sectionId } });
+    if (isOpen) {
+      setIsOpen(false);
     }
+
+    setTimeout(() => {
+      if (sectionId.startsWith('/')) {
+        // Naviguer vers une nouvelle page
+        navigate(sectionId);
+      } 
+      else if (isHomePage) {
+        // Scroller sur la page d'accueil
+        document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
+      } 
+      else {
+        // Revenir à la page d'accueil puis scroller
+        navigate('/', { state: { scrollToSection: sectionId } });
+      }
+    }, 150); 
   };
+
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 50);
@@ -75,7 +84,6 @@ export function Navigation() {
     <header className={`fixed w-full z-50 transition-all duration-300 ${isScrolled ? "bg-black/80 backdrop-blur-lg border-b border-cyan-500/20 py-3 shadow-xl" : "py-4 bg-transparent"}`}>
       <nav className="container mx-auto px-4 flex justify-between items-center" aria-label="Navigation principale">
         
-        {/* --- LOGO RESTAURÉ --- */}
         <button onClick={() => handleNavClick('home')} aria-label="Retour à l'accueil" className="text-2xl font-bold bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500 bg-clip-text text-transparent flex items-center gap-2">
           <div className="bg-cyan-500/10 p-2 rounded-full"><div className="bg-gradient-to-r from-cyan-400 to-purple-500 w-3 h-3 rounded-full animate-pulse"></div></div>
           <span>Brice-Dev</span>
@@ -88,7 +96,7 @@ export function Navigation() {
             return (
               <button
                 key={item.name}
-                onClick={() => handleNavClick(item.sectionId)}
+                onClick={() => handleNavClick(item.sectionId)} 
                 aria-current={isActive ? "page" : undefined}
                 className={`px-4 py-2 rounded-lg relative flex items-center gap-2 transition-colors duration-300 ${isActive ? "text-cyan-300" : "text-cyan-300/60 hover:text-cyan-300"}`}
               >
@@ -102,7 +110,6 @@ export function Navigation() {
           })}
         </div>
         
-        {/* --- BOUTON MOBILE RESTAURÉ --- */}
         <div className="md:hidden"> 
           <motion.button onClick={() => setIsOpen(!isOpen)} aria-label={isOpen ? "Fermer le menu" : "Ouvrir le menu"} aria-expanded={isOpen} aria-controls="mobile-menu" className="p-2 rounded-md text-cyan-300">
             {isOpen ? <X size={24} /> : <Menu size={24} />}
@@ -110,7 +117,6 @@ export function Navigation() {
         </div>
       </nav>
 
-      {/* --- MENU MOBILE RESTAURÉ --- */}
       <AnimatePresence>
         {isOpen && (
           <motion.div id="mobile-menu" initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }} className="md:hidden bg-black/90 backdrop-blur-xl border-t border-cyan-500/20">
