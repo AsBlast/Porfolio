@@ -2,8 +2,8 @@ import { useEffect } from "react";
 import { motion } from "framer-motion";
 import { Helmet } from 'react-helmet-async';
 import { Link } from "react-router-dom";
-import { Navigation } from "@/components/Navigation";
-import { Scale, BookOpen, Shield, FileText, Mail, Briefcase } from "lucide-react";
+import { Navigation } from "@/components/Navigation"; // Assurez-vous que ce chemin est correct
+import { Scale, BookOpen, Shield, FileText, Mail, Briefcase, Github } from "lucide-react";
 
 // Données des sections (contenu JSX complet)
 const sections = [
@@ -44,16 +44,32 @@ const sections = [
     },
     {
       id: "intellectual",
-      title: "Propriété intellectuelle",
+      title: "Propriété Intellectuelle & Code Source",
       icon: <BookOpen size={20} />,
       content: (
         <>
-          <p className="mb-4">L'ensemble des éléments constituant le site <span className="text-cyan-400">asblast.space</span> sont protégés par les dispositions du Code de la propriété intellectuelle.</p>
+          <p className="mb-4">
+            Ce projet est construit sur une double philosophie : le code est ouvert, le contenu est personnel.
+          </p>
           <div className="grid md:grid-cols-2 gap-4 mb-6">
-            <div className="bg-[#2D374B] p-4 rounded-xl border border-cyan-500/20"><h4 className="font-bold text-cyan-300 mb-2">Contenu du site</h4><p>Textes, images, vidéos, graphismes, logo sont la propriété exclusive de Brice-Dev</p></div>
-            <div className="bg-[#2D374B] p-4 rounded-xl border border-purple-500/20"><h4 className="font-bold text-purple-300 mb-2">Reproduction interdite</h4><p>Toute reproduction sans autorisation écrite est strictement interdite</p></div>
+            <div className="bg-[#2D374B] p-4 rounded-xl border border-cyan-500/20">
+              <h4 className="font-bold text-cyan-300 mb-2 flex items-center gap-2">
+                <Github size={18} /> Code Source (Licence MIT)
+              </h4>
+              <p className="text-sm">
+                Le code source de ce portfolio est open-source. Vous êtes libre de le réutiliser, modifier et distribuer conformément aux termes de la licence MIT, disponible sur le dépôt GitHub du projet.
+              </p>
+            </div>
+            <div className="bg-[#2D374B] p-4 rounded-xl border border-purple-500/20">
+              <h4 className="font-bold text-purple-300 mb-2">Contenu & Marque</h4>
+              <p className="text-sm">
+                Cependant, les textes, articles de blog, études de cas, ainsi que les logos et noms ("AsBlast", "Brice-Dev") restent ma propriété intellectuelle exclusive. Leur reproduction nécessite une autorisation explicite.
+              </p>
+            </div>
           </div>
-          <p className="text-sm bg-[#0F172A] p-4 rounded-lg border border-purple-500/30"><span className="font-bold text-purple-300">Exception :</span> Les icônes utilisées sur le site proviennent de <a href="https://lucide.dev" target="_blank" rel="noopener noreferrer" className="text-cyan-400 hover:underline">Lucide Icons</a> sous licence MIT.</p>
+          <p className="text-sm bg-[#0F172A] p-4 rounded-lg border border-purple-500/30">
+            <span className="font-bold text-purple-300">Crédits :</span> Les icônes utilisées sur le site proviennent de <a href="https://lucide.dev" target="_blank" rel="noopener noreferrer" className="text-cyan-400 hover:underline">Lucide Icons</a>, également sous licence open-source.
+          </p>
         </>
       )
     },
