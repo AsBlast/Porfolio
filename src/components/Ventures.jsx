@@ -1,81 +1,148 @@
 // src/components/Ventures.tsx
 
 import { motion } from "framer-motion";
-import { ArrowUpRight } from "lucide-react";
+import { Facebook, ArrowUpRight } from "lucide-react"; // On garde les icônes pertinentes
 
 const ventures = [
   {
     title: "Félin Fashion Mada",
-    description: "Une boutique en ligne dédiée aux accessoires stylés pour chiens et chats à Madagascar, conçue pour renforcer le lien avec une communauté Facebook de plus de 10k passionnés.",
-    image: "/images/ventures/felin-fashion.webp", 
-    link: "https://shop.asblast.space",
-    stack: ["React", "Tailwind CSS", "Meta API", "Netlify"],
-    status: "En ligne"
+    description: "Boutique en ligne pionnière d'accessoires stylés pour chiens et chats à Madagascar, créant un pont digital avec une communauté Facebook de plus de 10k passionnés.",
+    image: "/images/felin-fashion.webp",
+    facebookLink: "https://web.facebook.com/profile.php?id=61555557527535",
+    stack: ["React", "Boutique Facebook", "Meta API", "Community Management"],
+    status: "En ligne sur Facebook" 
   },
 ];
 
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.2, delayChildren: 0.1 },
+  },
+};
+
+const itemVariants = {
+  hidden: { y: 20, opacity: 0 },
+  visible: {
+    y: 0,
+    opacity: 1,
+    transition: { type: "spring", stiffness: 100, damping: 15 },
+  },
+};
+
 export function Ventures() {
   return (
-    <section id="ventures" className="py-20 bg-[#1A1F2C]">
-      <div className="container mx-auto px-4">
-        <motion.h2
+    <section 
+      id="ventures" 
+      className="py-16 md:py-24 bg-gradient-to-b from-[#100a1c] to-[#0a0f1f]"
+      aria-labelledby="ventures-heading"
+    >
+      <div className="container mx-auto px-4 max-w-6xl">
+       <motion.h2
           id="ventures-heading"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-3xl md:text-4xl font-bold mb-12 text-center text-white"
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.6 }}
+          className="text-4xl md:text-5xl font-bold mb-16 text-center text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500"
         >
-          Mes Ventures
+          Mes Ventures Numériques
         </motion.h2>
 
-        <div className="grid md:grid-cols-1 lg:grid-cols-1 gap-8 max-w-4xl mx-auto">
-          {ventures.map((venture, index) => (
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.1, margin: "-50px" }}
+          className="grid gap-10 max-w-5xl mx-auto"
+        >
+          {ventures.map((venture) => (
             <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.2 }}
-              className="bg-white/5 rounded-lg border border-white/10 group overflow-hidden"
+              key={venture.title}
+              variants={itemVariants}
+              whileHover={{ 
+                y: -8,
+                boxShadow: "0 25px 50px -12px rgba(217, 70, 239, 0.25)",
+                transition: { duration: 0.4, ease: "easeInOut" } 
+              }}
+              className="bg-gradient-to-br from-[#1e1b4b] to-[#172554] rounded-2xl border border-purple-500/30 group overflow-hidden flex flex-col md:flex-row shadow-2xl shadow-black/30 relative"
             >
-              <div className="grid md:grid-cols-[1fr_0.75fr] items-center">
-                <div className="p-8 flex flex-col h-full">
-                  <span className="px-3 py-1 bg-[#D946EF]/20 text-[#D946EF] text-xs font-bold rounded-full self-start mb-4">
+              <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_30%_20%,rgba(217,70,239,0.15)_0%,transparent_50%)] opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              
+              <div className="p-6 md:p-8 flex flex-col md:w-[58%] relative z-10">
+                <div className="flex items-center gap-4 mb-5">
+                  <span className={`px-3 py-1 text-xs font-bold rounded-full ${
+                    venture.status === 'En ligne sur Facebook' 
+                      ? 'bg-gradient-to-r from-cyan-500/30 to-purple-500/30 text-cyan-300 shadow-[0_0_8px_rgba(103,232,249,0.3)]' 
+                      : 'bg-gradient-to-r from-pink-500/20 to-purple-500/20 text-pink-300'
+                  }`}>
                     {venture.status}
                   </span>
-                  <h3 className="text-2xl font-bold mb-2 text-white">{venture.title}</h3>
-                  <p className="text-white/70 mb-4 flex-grow">{venture.description}</p>
-                  
-                  <div className="flex flex-wrap gap-2 mb-6">
-                    {venture.stack.map((tech, i) => (
-                      <span key={i} className="px-3 py-1 bg-gray-800/50 text-gray-300 text-sm rounded-full">{tech}</span>
-                    ))}
-                  </div>
-
-                  <a 
-                    href={venture.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 text-[#D946EF] font-bold group-hover:text-white transition-colors self-start"
-                    aria-label={`Visiter le site de ${venture.title}`}
-                  >
-                    Visiter le site
-                    <ArrowUpRight size={18} className="transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
-                  </a>
+                  <div className="h-px flex-grow bg-gradient-to-r from-purple-500/30 via-pink-500/20 to-transparent"></div>
                 </div>
                 
-                <a href={venture.link} target="_blank" rel="noopener noreferrer" aria-hidden="true" tabIndex={-1} className="overflow-hidden h-full hidden md:block">
+                <h3 className="text-2xl md:text-3xl font-bold mb-3 text-white">
+                  {venture.title}
+                </h3>
+                
+                <p className="text-purple-200/80 mb-6 flex-grow text-lg leading-relaxed">
+                  {venture.description}
+                </p>
+                
+                <div className="flex flex-wrap gap-3 mb-8">
+                  {venture.stack.map((tech) => (
+                    <span 
+                      key={tech} 
+                      className="px-3 py-1.5 bg-purple-900/40 text-purple-200 text-sm rounded-lg border border-purple-500/30"
+                    >
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+
+                <div className="mt-auto">
+                  <a 
+                    href={venture.facebookLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center gap-3 w-full sm:w-auto font-bold text-white bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-500 hover:to-cyan-400 px-6 py-3 rounded-lg border border-blue-400/50 shadow-lg shadow-blue-500/20 hover:shadow-cyan-500/30 transition-all transform hover:scale-105"
+                    aria-label={`Découvrir et commander sur la page Facebook de ${venture.title}`}
+                  >
+                    <Facebook size={20} />
+                    <span>Découvrir & Commander sur Facebook</span>
+                    <ArrowUpRight size={18} className="hidden sm:inline-block transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
+                  </a>
+                </div>
+              </div>
+              
+              <div className="md:w-[42%] flex-shrink-0 bg-black/30 p-4 flex items-center justify-center relative overflow-hidden">
+                <div className="relative w-full h-64 md:h-full">
                   <img 
                     src={venture.image} 
-                    alt={`Aperçu du projet ${venture.title}`} 
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    alt={`Logo de ${venture.title}`} 
+                    className="w-full h-full object-contain transition-all duration-500 group-hover:scale-110"
                     loading="lazy"
                   />
-                </a>
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/20 to-transparent pointer-events-none"></div>
+                  <div className="absolute inset-0 ring-1 ring-inset ring-purple-500/20 rounded-xl pointer-events-none"></div>
+                </div>
               </div>
             </motion.div>
           ))}
-        </div>
+        </motion.div>
+        
+       <motion.div
+  initial={{ opacity: 0 }}
+  whileInView={{ opacity: 1 }}
+  viewport={{ once: true }}
+  transition={{ delay: 0.5 }}
+  className="mt-16 text-center"
+>
+  <p className="text-purple-300 text-lg font-medium">
+    Et ce n'est que le début...
+  </p>
+</motion.div>
       </div>
     </section>
   );

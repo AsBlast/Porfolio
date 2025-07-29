@@ -22,7 +22,6 @@ const config: Config = {
     },
     extend: {
       colors: {
-        // --- VOS COULEURS EXISTANTES RESTENT INCHANGÉES ---
         primary: {
           DEFAULT: "#00A09D",
           foreground: "#FFFFFF",
@@ -80,12 +79,24 @@ const config: Config = {
           '50%': { backgroundPosition: '100% 50%' },
           '100%': { backgroundPosition: '0% 50%' },
         },
+         'pulse-glow': {
+          '0%, 100%': { 
+            boxShadow: '0 0 10px rgba(219, 39, 119, 0.4)',
+            transform: 'scale(1)'
+          },
+          '50%': { 
+            boxShadow: '0 0 20px rgba(219, 39, 119, 0.7)',
+            transform: 'scale(1.05)'
+          },
+        },
       },
+      
       animation: {
         // Le plugin tailwindcss-animate s'occupe de ses propres animations.
         // Nous ajoutons les nôtres ici pour pouvoir utiliser des classes comme "animate-aurora".
         'launch': 'launch 1.5s ease-in-out infinite',
         'aurora': 'aurora 20s linear infinite',
+        'pulse-glow': 'pulse-glow 3s ease-in-out infinite',
       },
       // --- FIN DES AJOUTS ---
     },
