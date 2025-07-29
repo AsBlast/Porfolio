@@ -96,6 +96,7 @@ export default function IndexPage() {
         <meta property="og:image" content="https://asblast.space/og-image.jpg" />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://asblast.space/" />
+        <meta property="fb:app_id" content="4052806348318447" />
       </Helmet>
       
       <div style={{ visibility: isLoading ? 'hidden' : 'visible' }}>
