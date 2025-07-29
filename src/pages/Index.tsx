@@ -108,7 +108,6 @@ export default function IndexPage() {
             
             <Suspense fallback={<SectionLoader />}><section id="projects" aria-labelledby="projects-heading"><Projects /></section></Suspense>
             
-            {/* --- NOUVELLE SECTION INTÉGRÉE ICI --- */}
             <Suspense fallback={<SectionLoader />}><section id="ventures" aria-labelledby="ventures-heading"><Ventures /></section></Suspense>
 
             <Suspense fallback={<SectionLoader />}>

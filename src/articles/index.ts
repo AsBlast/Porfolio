@@ -28,4 +28,13 @@ export const articles: ArticleMeta[] = [
     imagePosition: 'top',
     tags: ["React", "AI", "Netlify", "Vercel AI SDK", "TypeScript"],
   },
+   {
+    slug: "connecter-site-facebook",
+    title: "J'ai optimisé mon portfolio pour un partage parfait sur Facebook, comment ?",
+    date: "2025-07-28",
+    summary: "De la frustration d'un aperçu cassé à une carte de partage professionnelle. Suivez mon guide complet pour lier votre site React (SPA) à Facebook avec les balises Open Graph et le Debugger.",
+    image: "/images/blog/portfolio-facebook.jpg", 
+    imagePosition: 'top',
+    tags: ["React", "SEO", "Facebook", "Développement Web", "Tutoriel"],
+  },
 ];
