@@ -23,6 +23,7 @@ const TermsPage = React.lazy(() => import("./pages/Terms"));
 const NotFoundPage = React.lazy(() => import("./pages/NotFoundPage"));
 const BlogPage = React.lazy(() => import("./pages/BlogPage"));
 const ArticlePage = React.lazy(() => import("./pages/ArticlePage"));
+const DataDeletionPage = React.lazy(() => import('./pages/DataDeletionPage'));
 
 // --- Import des nouvelles pages de produits ---
 const ProductsPage = React.lazy(() => import("./pages/ProductsPage"));
@@ -63,6 +64,7 @@ const router = createBrowserRouter(
         // Pages statiques
         { path: "privacy", element: <PrivacyPage /> },
         { path: "terms", element: <TermsPage /> },
+        { path: "data-deletion", element: <DataDeletionPage /> },
 
         // Routes pour le Blog
         { path: "blog", element: <BlogPage /> },

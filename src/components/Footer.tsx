@@ -44,6 +44,8 @@ export function Footer() {
   const legalPages = [
     { name: "Politique de confidentialité", href: "/privacy" },
     { name: "Mentions légales", href: "/terms" },
+    { name: "Suppression des données", href: "/data-deletion" },
+
   ];
   const socialLinks = [
     { name: "Github", icon: <Github size={24} />, href: "https://github.com/AsBlast" },
