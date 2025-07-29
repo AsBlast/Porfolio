@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Code, Database, Layout, Box, Download, Award, Globe, Star, User } from "lucide-react";
+import { Code, Database, Layout, Box, Download, Award, Globe, Star, User, ShieldCheck, Zap, LayoutTemplate } from "lucide-react";
 import { useEffect, useState, useRef } from "react";
 import { Tooltip } from './Tooltip';
 
@@ -235,57 +235,65 @@ export function About() {
         </div>
 
         {/* AMÉLIORATION 4 : Section Témoignages pour la preuve sociale */}
-        <div className="mt-20">
-          <h3 className="text-3xl md:text-4xl font-bold text-center text-white mb-12">Ce qu'ils en disent</h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="bg-white/5 p-6 rounded-lg border border-gray-800"
-            >
-              <div className="flex text-yellow-400 mb-4">
-                <Star fill="currentColor" /><Star fill="currentColor" /><Star fill="currentColor" /><Star fill="currentColor" /><Star fill="currentColor" />
-              </div>
-              <blockquote className="text-white/80 italic mb-4">
-                "Brice n'a pas seulement développé notre site, il a compris notre vision. Son obsession pour l'UX a transformé notre idée complexe en un outil incroyablement simple à utiliser. Un vrai levier de productivité pour nous."
-              </blockquote>
-              <div className="flex items-center gap-3 mt-auto">
-                <div className="w-12 h-12 rounded-full bg-gradient-to-r from-[#8B5CF6] to-[#D946EF] flex items-center justify-center">
-                    <User className="text-white" />
-                </div>
-                <div>
-                  <div className="font-bold text-white">Client Heureux</div>
-                  <div className="text-gray-400">CEO, Entreprise Fictive</div>
-                </div>
-              </div>
-            </motion.div>
+       <div className="mt-20">
+  <h3 className="text-3xl md:text-4xl font-bold text-center text-white mb-16">
+    Mon Approche du Développement
+  </h3>
+  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+    
+    {/* Carte 1: Expérience Utilisateur */}
+    <motion.div 
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.5 }}
+      className="bg-white/5 p-8 rounded-2xl border border-gray-800 flex flex-col items-start text-left hover:border-violet-500/50 transition-colors"
+    >
+      <div className="w-16 h-16 mb-6 rounded-full bg-gradient-to-r from-[#8B5CF6] to-[#D946EF] flex items-center justify-center shadow-lg shadow-violet-500/20">
+        <LayoutTemplate className="text-white w-8 h-8" />
+      </div>
+      <h4 className="font-bold text-xl text-white mb-3">Expérience Utilisateur d'Abord</h4>
+      <p className="text-white/80 leading-relaxed">
+        Un bon design n'est pas seulement esthétique, il est fonctionnel. Je conçois des interfaces intuitives qui guident l'utilisateur et rendent chaque interaction fluide et logique.
+      </p>
+    </motion.div>
 
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.2 }}
-              className="bg-white/5 p-6 rounded-lg border border-gray-800"
-            >
-              <div className="flex text-yellow-400 mb-4">
-                <Star fill="currentColor" /><Star fill="currentColor" /><Star fill="currentColor" /><Star fill="currentColor" /><Star fill="currentColor" />
-              </div>
-              <blockquote className="text-white/80 italic mb-4">
-                "Sa capacité à transformer un problème abstrait en une solution concrète est impressionnante. Il ne suit pas les instructions aveuglément, il les améliore. Le résultat final a dépassé toutes nos attentes."
-              </blockquote>
-              <div className="flex items-center gap-3 mt-auto">
-                <div className="w-12 h-12 rounded-full bg-gradient-to-r from-[#8B5CF6] to-[#D946EF] flex items-center justify-center">
-                    <User className="text-white" />
-                </div>
-                <div>
-                  <div className="font-bold text-white">Partenaire Satisfait</div>
-                  <div className="text-gray-400">Chef de Projet, Startup</div>
-                </div>
-              </div>
-            </motion.div>
-          </div>
-        </div>
+    {/* Carte 2: Sécurité par Conception */}
+    <motion.div 
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.5, delay: 0.15 }}
+      className="bg-white/5 p-8 rounded-2xl border border-gray-800 flex flex-col items-start text-left hover:border-pink-500/50 transition-colors"
+    >
+      <div className="w-16 h-16 mb-6 rounded-full bg-gradient-to-r from-[#D946EF] to-[#ec4899] flex items-center justify-center shadow-lg shadow-pink-500/20">
+        <ShieldCheck className="text-white w-8 h-8" />
+      </div>
+      <h4 className="font-bold text-xl text-white mb-3">La Sécurité par Conception</h4>
+      <p className="text-white/80 leading-relaxed">
+       J'intègre les meilleures pratiques de sécurité dès la première ligne de code. Chaque projet est pensé pour être robuste et protéger les données.
+      </p>
+    </motion.div>
+    
+    {/* Carte 3: Performance et Code Propre */}
+    <motion.div 
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.5, delay: 0.3 }}
+      className="bg-white/5 p-8 rounded-2xl border border-gray-800 flex flex-col items-start text-left hover:border-orange-500/50 transition-colors"
+    >
+      <div className="w-16 h-16 mb-6 rounded-full bg-gradient-to-r from-[#ec4899] to-[#f97316] flex items-center justify-center shadow-lg shadow-orange-500/20">
+        <Zap className="text-white w-8 h-8" />
+      </div>
+      <h4 className="font-bold text-xl text-white mb-3">Performance & Code Propre</h4>
+      <p className="text-white/80 leading-relaxed">
+        Un site rapide est essentiel. J'optimise chaque aspect, du poids des images au code, pour garantir des temps de chargement minimaux et une maintenabilité à long terme.
+      </p>
+    </motion.div>
+
+  </div>
+</div>
         
         <motion.div
           initial={{ opacity: 0, y: 20 }}
