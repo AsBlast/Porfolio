@@ -36,8 +36,8 @@ export function Navigation() {
   const menuItems = [
     { name: "Accueil", sectionId: "home", icon: <Home size={20} /> },
     { name: "À propos", sectionId: "about", icon: <User size={20} /> },
-    { name: "Produits", sectionId: "/produits", icon: <Store size={20} /> }, 
     { name: "Projets", sectionId: "projects", icon: <Folder size={20} /> },
+    { name: "Produits", sectionId: "/produits", icon: <Store size={20} /> }, 
     { name: "Blog", sectionId: "/blog", icon: <Feather size={20} /> },
     { name: "Contact", sectionId: "contact", icon: <Mail size={20} /> },
   ];

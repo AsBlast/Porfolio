@@ -15,9 +15,12 @@ const About = lazy(() => import('@/components/About').then(module => ({ default:
 const Projects = lazy(() => import('@/components/Projects').then(module => ({ default: module.Projects })));
 const Contact = lazy(() => import('@/components/Contact').then(module => ({ default: module.Contact })));
 
+//  Lazy loading pour la section Ventures ---
+const Ventures = lazy(() => import('@/components/Ventures').then(module => ({ default: module.Ventures })));
+
 // --- Composant : Appel à l'action pour la boutique ---
 const CtaShopSection = () => (
-  <section id="shop-cta" className="py-20 md:py-32 bg-[#1A1F2C]">
+  <section id="shop-cta" className="py-20 md:py-32 bg-[#221F26]"> {/* Couleur de fond ajustée pour alterner */}
     <div className="container mx-auto px-4 text-center">
       <motion.h2 
         initial={{ opacity: 0, y: 20 }}
@@ -85,12 +88,9 @@ export default function IndexPage() {
   return (
     <>
       <Helmet>
-        {/* --- BALISES SEO MISES À JOUR --- */}
         <title>Brice Yakim AsBlast | Développeur Full Stack à Madagascar</title>
         <meta name="description" content="Portfolio de Brice Yakim, Développeur Full Stack à Madagascar. Spécialisé en React, Node.js et création d'expériences web interactives pour startups et PME." />
         <link rel="canonical" href="https://asblast.space/"/>
-        
-        {/* Open Graph (pour le partage sur les réseaux sociaux) */}
         <meta property="og:title" content="Brice Yakim AsBlast | Développeur Full Stack à Madagascar" />
         <meta property="og:description" content="Découvrez le portfolio et les projets de Brice Yakim, spécialiste en expériences digitales innovantes." />
         <meta property="og:image" content="https://asblast.space/og-image.jpg" />
@@ -102,11 +102,18 @@ export default function IndexPage() {
         <div className="min-h-screen bg-[#1A1F2C] text-white overflow-x-hidden">
           <main>
             <section id="home" aria-labelledby="hero-heading"><Hero /></section>
+            
             <Suspense fallback={<SectionLoader />}><section id="about" aria-labelledby="about-heading"><About /></section></Suspense>
+            
+            <Suspense fallback={<SectionLoader />}><section id="projects" aria-labelledby="projects-heading"><Projects /></section></Suspense>
+            
+            {/* --- NOUVELLE SECTION INTÉGRÉE ICI --- */}
+            <Suspense fallback={<SectionLoader />}><section id="ventures" aria-labelledby="ventures-heading"><Ventures /></section></Suspense>
+
             <Suspense fallback={<SectionLoader />}>
               <CtaShopSection />
             </Suspense>
-            <Suspense fallback={<SectionLoader />}><section id="projects" aria-labelledby="projects-heading"><Projects /></section></Suspense>
+            
             <Suspense fallback={<SectionLoader />}><section id="contact" aria-labelledby="contact-heading"><Contact /></section></Suspense>
           </main>
         </div>

@@ -53,10 +53,10 @@ const projectsData: Project[] = [
     id: 2,
     title: "Projet Beta",
     description:
-      "Site d'affiliation créée avec React avec solution d'achat redirigée vers Amazon.fr pour smartphone : Samsung Galaxy S24 Ultra ",
-    image: "/images/samsung.webp",
+      "Site d'affiliation créée avec React avec solution d'achat redirigée vers Amazon.fr pour guide pratique  : Python pour les hackers",
+    image: "/images/Python-hackers.jpg",
     github: "https://github.com",
-    live: "http://asblast-samsung.netlify.app/",
+    live: "https://asblast-affiliation.netlify.app/",
     tags: ["React", "Tailwind CSS", "Vite"],
     status: "En production",
     featured: true,
