@@ -7,6 +7,7 @@ import { useTranslation } from 'react-i18next';
 import { useMemo } from 'react';
 
 import { ChevronDown, Github, Linkedin, Rocket, Coffee, MoonStar, Zap, Terminal } from "lucide-react";
+import { SectionDivider } from "./SectionDivider";
 
 export function Hero() {
   const { t, i18n } = useTranslation(); 
@@ -27,7 +28,7 @@ export function Hero() {
       className="min-h-screen flex flex-col items-center justify-center pt-28 relative overflow-hidden"
     >
       <AnimatedBackground />
-      
+       <SectionDivider/>
 <div className="container mx-auto px-4 relative z-40 flex flex-col items-center">
         
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} className="text-center">
@@ -101,6 +102,7 @@ export function Hero() {
           
         </motion.div>
       </div>
+     
     </header>
   );
 }

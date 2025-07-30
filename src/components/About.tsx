@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { Code, Database, Layout, Box, Download, Award, Globe, Star, User, ShieldCheck, Zap, LayoutTemplate } from "lucide-react";
 import { useEffect, useState, useRef } from "react";
 import { Tooltip } from './Tooltip';
+import { SectionDivider } from "./SectionDivider";
 
 function Typewriter({ text }) {
   const [displayed, setDisplayed] = useState("");
@@ -79,7 +80,7 @@ export function About() {
 
   return (
     <section id="about" aria-labelledby="about-heading" className="py-20 bg-[#221F26]">
-      
+       <SectionDivider/>
       <div className="container mx-auto px-4">
         <motion.h2
           id="about-heading"
@@ -99,7 +100,7 @@ export function About() {
             viewport={{ once: true }}
             className="relative rounded-lg overflow-hidden"
           >
-            {/* --- CORRECTION DE L'IMAGE POUR LA PERFORMANCE --- */}
+            
             <picture>
               <source
                 type="image/webp"
@@ -287,6 +288,7 @@ export function About() {
           </div>
         </motion.div>
       </div>
+      
     </section>
   );
 }
