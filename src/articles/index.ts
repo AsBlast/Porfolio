@@ -42,7 +42,7 @@ export const articles: ArticleMeta[] = [
     title: "J'ai cru que 'savoir coder et déployer' suffisaient : La leçon qui a transformé ma carrière de développeur",
     date: "2025-07-28",
     summary: "J'ai déployé mon premier site, fier de mon code. Puis, le silence. J'ai compris que le vrai défi n'est pas de construire, mais de créer de la valeur. Voici les 3 piliers que j'ai découverts et qui ont tout changé.",
-    image: "/images/blog/portfolio-facebook.jpg", 
+    image: "/images/blog/leçon-dev.webp", 
     imagePosition: 'top',
     tags: ["Développement Web", "Stratégie", "UX", "Marketing", "Carrière", "Relation Client"],
   },
