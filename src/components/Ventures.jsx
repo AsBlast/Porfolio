@@ -1,13 +1,14 @@
 // src/components/Ventures.tsx
 
 import { motion } from "framer-motion";
-import { Facebook, ArrowUpRight } from "lucide-react"; // On garde les icônes pertinentes
+import { Facebook, ArrowUpRight } from "lucide-react";
 
+// --- 1. MODIFICATION DE LA STRUCTURE DE DONNÉES ---
 const ventures = [
   {
     title: "Félin Fashion Mada",
     description: "Boutique en ligne pionnière d'accessoires stylés pour chiens et chats à Madagascar, créant un pont digital avec une communauté Facebook de plus de 10k passionnés.",
-    image: "/images/felin-fashion.webp",
+    imageBase: "/images/felin-fashion",
     facebookLink: "https://web.facebook.com/profile.php?id=61555557527535",
     stack: ["React", "Boutique Facebook", "Meta API", "Community Management"],
     status: "En ligne sur Facebook" 
@@ -116,14 +117,30 @@ export function Ventures() {
                 </div>
               </div>
               
+              {/* --- 2. LA CORRECTION POUR L'OPTIMISATION DE L'IMAGE --- */}
               <div className="md:w-[42%] flex-shrink-0 bg-black/30 p-4 flex items-center justify-center relative overflow-hidden">
                 <div className="relative w-full h-64 md:h-full">
-                  <img 
-                    src={venture.image} 
-                    alt={`Logo de ${venture.title}`} 
-                    className="w-full h-full object-contain transition-all duration-500 group-hover:scale-110"
-                    loading="lazy"
-                  />
+
+                  <picture>
+                    <source
+                      type="image/webp"
+                      srcSet={`
+                        ${venture.imageBase}-small.webp 300w,
+                        ${venture.imageBase}-medium.webp 600w,
+                        ${venture.imageBase}-large.webp 1000w
+                      `}
+                      sizes="(max-width: 767px) 90vw, 500px"
+                    />
+                    <img 
+                      src={`${venture.imageBase}-medium.webp`}
+                      alt={`Logo de ${venture.title}`} 
+                      className="w-full h-full object-contain transition-all duration-500 group-hover:scale-110"
+                      loading="lazy"
+                      width="600"
+                      height="600"
+                    />
+                  </picture>
+                  
                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/20 to-transparent pointer-events-none"></div>
                   <div className="absolute inset-0 ring-1 ring-inset ring-purple-500/20 rounded-xl pointer-events-none"></div>
                 </div>
@@ -133,16 +150,16 @@ export function Ventures() {
         </motion.div>
         
        <motion.div
-  initial={{ opacity: 0 }}
-  whileInView={{ opacity: 1 }}
-  viewport={{ once: true }}
-  transition={{ delay: 0.5 }}
-  className="mt-16 text-center"
->
-  <p className="text-purple-300 text-lg font-medium">
-    Et ce n'est que le début...
-  </p>
-</motion.div>
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.5 }}
+          className="mt-16 text-center"
+        >
+          <p className="text-purple-300 text-lg font-medium">
+            Et ce n'est que le début...
+          </p>
+        </motion.div>
       </div>
     </section>
   );
