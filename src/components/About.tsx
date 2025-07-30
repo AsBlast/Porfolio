@@ -1,9 +1,10 @@
+// src/components/About.tsx
+
 import { motion } from "framer-motion";
 import { Code, Database, Layout, Box, Download, Award, Globe, Star, User, ShieldCheck, Zap, LayoutTemplate } from "lucide-react";
 import { useEffect, useState, useRef } from "react";
 import { Tooltip } from './Tooltip';
 
-// Le Typewriter ne se lance que lorsqu'il est visible ---
 function Typewriter({ text }) {
   const [displayed, setDisplayed] = useState("");
   const [startTyping, setStartTyping] = useState(false);
@@ -97,14 +98,26 @@ export function About() {
             viewport={{ once: true }}
             className="relative rounded-lg overflow-hidden"
           >
-            <img
-              src="/images/1699548679409.webp"
-              alt="Photo de Brice Yakim, développeur web, dans un environnement de travail."
-              className="w-full h-full object-cover rounded-lg"
-              width="500"
-              height="600"
-              loading="lazy"
-            />
+            {/* --- CORRECTION DE L'IMAGE POUR LA PERFORMANCE --- */}
+            <picture>
+              <source
+                type="image/webp"
+                srcSet="
+                  /images/profile-small.webp 200w,
+                  /images/profile-medium.webp 400w,
+                  /images/profile-large.webp 600w
+                "
+                sizes="(max-width: 767px) 90vw, 500px"
+              />
+              <img
+                src="/images/profile-medium.webp"
+                alt="Photo de Brice Yakim, développeur web, dans un environnement de travail."
+                className="w-full h-full object-cover rounded-lg"
+                width="400"
+                height="400"
+                loading="lazy"
+              />
+            </picture>
             <div className="absolute inset-0 bg-gradient-to-t from-[#1A1F2C] to-transparent opacity-50 rounded-lg" />
           </motion.div>
 
@@ -114,7 +127,6 @@ export function About() {
             viewport={{ once: true }}
             className="text-white/80"
           >
-            {/* AMÉLIORATION 1 : Titre plus percutant */}
             <Typewriter text="Je transforme la complexité en leviers de productivité." />
 
             {paragraphs.map((text, i) => (
@@ -145,7 +157,6 @@ export function About() {
               </motion.a>
             </div>
             
-            {/* AMÉLIORATION 2 : Section "Mes principes directeurs" */}
             <div className="mt-12">
               <h4 className="text-xl font-semibold text-white mb-4">Mes principes directeurs :</h4>
               <div className="flex flex-wrap gap-3">
@@ -187,7 +198,6 @@ export function About() {
           ))}
         </motion.div>
 
-        {/* AMÉLIORATION 3 : Titre explicite pour la section des compétences */}
         <h3 className="text-3xl md:text-4xl font-bold text-center text-white mt-20 mb-12">Mes Outils de Prédilection</h3>
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
           {skills.map((skill, index) => (
@@ -234,66 +244,28 @@ export function About() {
           ))}
         </div>
 
-        {/* AMÉLIORATION 4 : Section Témoignages pour la preuve sociale */}
        <div className="mt-20">
-  <h3 className="text-3xl md:text-4xl font-bold text-center text-white mb-16">
-    Mon Approche du Développement
-  </h3>
-  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
-    
-    {/* Carte 1: Expérience Utilisateur */}
-    <motion.div 
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.5 }}
-      className="bg-white/5 p-8 rounded-2xl border border-gray-800 flex flex-col items-start text-left hover:border-violet-500/50 transition-colors"
-    >
-      <div className="w-16 h-16 mb-6 rounded-full bg-gradient-to-r from-[#8B5CF6] to-[#D946EF] flex items-center justify-center shadow-lg shadow-violet-500/20">
-        <LayoutTemplate className="text-white w-8 h-8" />
-      </div>
-      <h4 className="font-bold text-xl text-white mb-3">Expérience Utilisateur d'Abord</h4>
-      <p className="text-white/80 leading-relaxed">
-        Un bon design n'est pas seulement esthétique, il est fonctionnel. Je conçois des interfaces intuitives qui guident l'utilisateur et rendent chaque interaction fluide et logique.
-      </p>
-    </motion.div>
-
-    {/* Carte 2: Sécurité par Conception */}
-    <motion.div 
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.5, delay: 0.15 }}
-      className="bg-white/5 p-8 rounded-2xl border border-gray-800 flex flex-col items-start text-left hover:border-pink-500/50 transition-colors"
-    >
-      <div className="w-16 h-16 mb-6 rounded-full bg-gradient-to-r from-[#D946EF] to-[#ec4899] flex items-center justify-center shadow-lg shadow-pink-500/20">
-        <ShieldCheck className="text-white w-8 h-8" />
-      </div>
-      <h4 className="font-bold text-xl text-white mb-3">La Sécurité par Conception</h4>
-      <p className="text-white/80 leading-relaxed">
-       J'intègre les meilleures pratiques de sécurité dès la première ligne de code. Chaque projet est pensé pour être robuste et protéger les données.
-      </p>
-    </motion.div>
-    
-    {/* Carte 3: Performance et Code Propre */}
-    <motion.div 
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.5, delay: 0.3 }}
-      className="bg-white/5 p-8 rounded-2xl border border-gray-800 flex flex-col items-start text-left hover:border-orange-500/50 transition-colors"
-    >
-      <div className="w-16 h-16 mb-6 rounded-full bg-gradient-to-r from-[#ec4899] to-[#f97316] flex items-center justify-center shadow-lg shadow-orange-500/20">
-        <Zap className="text-white w-8 h-8" />
-      </div>
-      <h4 className="font-bold text-xl text-white mb-3">Performance & Code Propre</h4>
-      <p className="text-white/80 leading-relaxed">
-        Un site rapide est essentiel. J'optimise chaque aspect, du poids des images au code, pour garantir des temps de chargement minimaux et une maintenabilité à long terme.
-      </p>
-    </motion.div>
-
-  </div>
-</div>
+          <h3 className="text-3xl md:text-4xl font-bold text-center text-white mb-16">
+            Mon Approche du Développement
+          </h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }} className="bg-white/5 p-8 rounded-2xl border border-gray-800 flex flex-col items-start text-left hover:border-violet-500/50 transition-colors">
+              <div className="w-16 h-16 mb-6 rounded-full bg-gradient-to-r from-[#8B5CF6] to-[#D946EF] flex items-center justify-center shadow-lg shadow-violet-500/20"><LayoutTemplate className="text-white w-8 h-8" /></div>
+              <h4 className="font-bold text-xl text-white mb-3">Expérience Utilisateur d'Abord</h4>
+              <p className="text-white/80 leading-relaxed">Un bon design n'est pas seulement esthétique, il est fonctionnel. Je conçois des interfaces intuitives qui guident l'utilisateur et rendent chaque interaction fluide et logique.</p>
+            </motion.div>
+            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.15 }} className="bg-white/5 p-8 rounded-2xl border border-gray-800 flex flex-col items-start text-left hover:border-pink-500/50 transition-colors">
+              <div className="w-16 h-16 mb-6 rounded-full bg-gradient-to-r from-[#D946EF] to-[#ec4899] flex items-center justify-center shadow-lg shadow-pink-500/20"><ShieldCheck className="text-white w-8 h-8" /></div>
+              <h4 className="font-bold text-xl text-white mb-3">La Sécurité par Conception</h4>
+              <p className="text-white/80 leading-relaxed">J'intègre les meilleures pratiques de sécurité dès la première ligne de code. Chaque projet est pensé pour être robuste et protéger les données.</p>
+            </motion.div>
+            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.3 }} className="bg-white/5 p-8 rounded-2xl border border-gray-800 flex flex-col items-start text-left hover:border-orange-500/50 transition-colors">
+              <div className="w-16 h-16 mb-6 rounded-full bg-gradient-to-r from-[#ec4899] to-[#f97316] flex items-center justify-center shadow-lg shadow-orange-500/20"><Zap className="text-white w-8 h-8" /></div>
+              <h4 className="font-bold text-xl text-white mb-3">Performance & Code Propre</h4>
+              <p className="text-white/80 leading-relaxed">Un site rapide est essentiel. J'optimise chaque aspect, du poids des images au code, pour garantir des temps de chargement minimaux et une maintenabilité à long terme.</p>
+            </motion.div>
+          </div>
+        </div>
         
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -305,7 +277,6 @@ export function About() {
             <Award className="w-10 h-10 text-[#D946EF]" />
             <h3 className="text-2xl font-bold text-white">Certifications & Formations</h3>
           </div>
-          
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div className="p-4 bg-white/5 rounded-lg">
               <div className="font-semibold text-[#D946EF]">Formation Mudey</div>
