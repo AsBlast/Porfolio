@@ -4,5 +4,19 @@
   "nav_projects": "Projects",
   "nav_products": "Products",
   "nav_blog": "Blog",
-  "nav_contact": "Contact"
+  "nav_contact": "Contact",
+  
+  "hero_job_title": "Full Stack Developer & Digital Creator",
+   "hero_typing_sequence": [
+    "Night Coder",
+    "Digital Experience Architect",
+    "Self-taught by the screen light"
+  ],
+  "hero_scroll_button": "Find Out More",
+  "hero_scroll_button_aria": "Scroll to the About section",
+
+  "affiliate_title": "🚀 The Host I Use and Recommend",
+  "affiliate_description": "Start your project on a powerful and affordable solution, ideal for developers.",
+  "affiliate_button": "Get 20% off",
+  "affiliate_disclaimer": "(Note: this is an affiliate link. It supports me at no extra cost to you.)"
 }

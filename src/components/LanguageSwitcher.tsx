@@ -13,8 +13,8 @@ interface Language {
 }
 
 const languages: Language[] = [
-  { code: 'fr', lang: 'Français' },
-  { code: 'en', lang: 'English' },
+  { code: 'fr', lang: 'FR' },
+  { code: 'en', lang: 'EN' },
 ];
 
 const LanguageSwitcher: React.FC = () => {

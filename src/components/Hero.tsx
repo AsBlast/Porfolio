@@ -3,10 +3,27 @@
 import { motion } from "framer-motion";
 import { TypeAnimation } from "react-type-animation";
 import { AnimatedBackground } from "./AnimatedBackground"; 
+import { useTranslation } from 'react-i18next';
+import { useMemo } from 'react'; // useMemo pour l'optimisation
 
 import { ChevronDown, Github, Linkedin, Rocket, Coffee, MoonStar, Zap, Terminal } from "lucide-react";
 
 export function Hero() {
+  const { t, i18n } = useTranslation(); 
+
+  // On utilise useMemo pour ne reconstruire la séquence que si la langue change
+  const typingSequence = useMemo(() => {
+    // On récupère le tableau de traductions
+    const phrases = t('hero_typing_sequence', { returnObjects: true }) as string[];
+    
+    // On construit la séquence pour le composant TypeAnimation
+    // [ "phrase 1", 1500, (vider), "phrase 2", 1500, (vider), ... ]
+    return phrases.flatMap(phrase => [
+      phrase,
+      1500,
+      (el: HTMLElement | null) => { if (el) el.textContent = ''; }
+    ]);
+  }, [t]); // Dépendances : la séquence se met à jour quand la langue ou la fonction t changent
 
   return (
     <header
@@ -37,22 +54,22 @@ export function Hero() {
           </h1>
 
           <h2 className="text-3xl md:text-4xl font-bold mb-4 text-cyan-300 drop-shadow-[0_0_5px_rgba(0,255,255,0.5)]">
-            Développeur Full Stack & Créateur Numérique
+            {t('hero_job_title')}
           </h2>
 
-          <div className="text-xl md:text-2xl text-cyan-100/90 font-mono mb-8 max-w-2xl mx-auto min-h-[110px]">
+          <div className="text-xl md:text-2xl text-cyan-100/90 font-mono mb-8 max-w-2xl mx-auto min-h-[110px] sm:min-h-[80px]">
             <TypeAnimation
-              sequence={[
-                'Codeur nocturne', 1500, (element) => { if(element) element.textContent = ''; },
-                'Architecte d\'expériences digitales', 1500, (element) => { if(element) element.textContent = ''; },
-                'Auto-formé à la lumière des écrans', 1500, (element) => { if(element) element.textContent = ''; },
-              ]}
+              
+              // Quand i18n.language change (ex: 'fr' -> 'en'), React détruit et recrée le composant.
+              key={i18n.language} 
+              sequence={typingSequence}
               wrapper="p" speed={50} cursor={true} className="mb-4" repeat={Infinity}
             />
             <motion.div 
               className="flex items-center justify-center gap-3 text-2xl"
               initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.8, duration: 1 }}
             >
+              {/* ... icônes ... */}
               <motion.div animate={{ rotate: [0, 15, 0, -15, 0] }} transition={{ duration: 4, repeat: Infinity, delay: 1 }}><MoonStar className="text-purple-400" /></motion.div>
               <span>+</span>
               <motion.div animate={{ y: [0, -5, 0] }} transition={{ duration: 2, repeat: Infinity, delay: 1.2 }}><Coffee className="text-amber-400" /></motion.div>
@@ -62,55 +79,30 @@ export function Hero() {
               <Rocket className="text-pink-500 animate-pulse" />
             </motion.div>
           </div>
-
+            
           <div className="flex justify-center gap-4 mb-12">
             {[ { platform: "GitHub", url: "https://github.com/AsBlast", icon: <Github size={24} /> }, { platform: "LinkedIn", url: "https://linkedin.com/in/brice-yakim-andriamahefaromisa-6a8a2b200", icon: <Linkedin size={24} /> }, ].map(({ platform, url, icon }) => (
               <motion.a key={platform} href={url} target="_blank" rel="noopener noreferrer" aria-label={`Visiter mon profil ${platform}`} whileHover={{ scale: 1.1, boxShadow: "0 0 15px rgba(34,211,238,0.4)" }} whileTap={{ scale: 0.95 }} className="p-3 rounded-full bg-black/30 backdrop-blur-sm border border-cyan-500/30 hover:border-cyan-400 transition-colors">{icon}</motion.a>
             ))}
           </div>
-<section aria-labelledby="affiliate-heading" className="floating-banner p-6 bg-black/80 backdrop-blur-sm rounded-xl border border-cyan-500/30 shadow-[0_0_20px_rgba(0,255,255,0.2)] max-w-md mx-auto transform transition-all hover:scale-105 duration-300">
-  <div className="flex flex-col items-center text-center gap-4">
-    <img 
-      src="/images/hostinger.png" 
-      alt="Logo Hostinger" 
-      width="128" 
-      height="45" 
-      className="rounded-md shadow-lg" 
-      loading="lazy" 
-    />
 
-    {/* Un titre alternatif possible, plus affirmé */}
-    <h3 id="affiliate-heading" className="text-2xl text-cyan-400 font-bold">
-      🚀 L'Hébergeur que j'utilise et recommande
-    </h3>
-
-    <p className="text-gray-300">
-      Démarrez votre projet sur une solution performante et abordable, idéale pour les développeurs.
-    </p>
-
-    <motion.a 
-      href="https://hostinger.com?REFERRALCODE=W8MBRICEYA9R" 
-      target="_blank" 
-      rel="sponsored noopener noreferrer" 
-      whileHover={{ scale: 1.05 }} 
-      className="inline-flex items-center gap-3 px-8 py-3 text-lg font-medium text-cyan-300 border border-cyan-400 rounded-lg hover:bg-cyan-950 hover:text-cyan-100 transition-all duration-300 shadow-[0_0_15px_rgba(0,255,255,0.3)] hover:shadow-[0_0_25px_rgba(0,255,255,0.5)]"
-    >
-      Profitez de 20 % de réduction
-    </motion.a>
-
-    
-    <p className="text-xs text-gray-400/80 italic mt-2">
-      (Note : ce lien est affilié. Il me soutient sans aucun coût supplémentaire pour vous.)
-    </p>
-  </div>
-</section>
+          <section aria-labelledby="affiliate-heading" className="floating-banner p-6 bg-black/80 backdrop-blur-sm rounded-xl border border-cyan-500/30 shadow-[0_0_20px_rgba(0,255,255,0.2)] max-w-md mx-auto transform transition-all hover:scale-105 duration-300">
+            <div className="flex flex-col items-center text-center gap-4">
+              <img src="/images/hostinger.png" alt="Logo Hostinger" width="128" height="45" className="rounded-md shadow-lg" loading="lazy" />
+              <h3 id="affiliate-heading" className="text-2xl text-cyan-400 font-bold">{t('affiliate_title')}</h3>
+              <p className="text-gray-300">{t('affiliate_description')}</p>
+              <motion.a href="https://hostinger.com?REFERRALCODE=W8MBRICEYA9R" target="_blank" rel="sponsored noopener noreferrer" whileHover={{ scale: 1.05 }} className="inline-flex items-center gap-3 px-8 py-3 text-lg font-medium text-cyan-300 border border-cyan-400 rounded-lg hover:bg-cyan-950 hover:text-cyan-100 transition-all duration-300 shadow-[0_0_15px_rgba(0,255,255,0.3)] hover:shadow-[0_0_25px_rgba(0,255,255,0.5)]">{t('affiliate_button')}</motion.a>
+              <p className="text-xs text-gray-400/80 italic mt-2">{t('affiliate_disclaimer')}</p>
+            </div>
+          </section>
           
-          <a href="#about" className="mt-12 inline-flex items-center gap-2 px-8 py-3 bg-cyan-950 text-cyan-300 rounded-lg border border-cyan-500/50 hover:bg-cyan-900 transition-colors">
-            En savoir plus 
-            <motion.div animate={{ y: [0, 5, 0] }} transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}>
+          <motion.a href="#about" aria-label={t('hero_scroll_button_aria')} className="group relative inline-flex items-center justify-center gap-3 px-8 py-4 mt-12 text-lg font-bold text-white rounded-full overflow-hidden bg-gradient-to-r from-cyan-500 via-purple-600 to-pink-500 transition-all duration-300 ease-in-out" whileHover={{ scale: 1.05, boxShadow: "0px 0px 30px rgba(107, 229, 255, 0.6)"}} whileTap={{ scale: 0.98 }} transition={{ type: "spring", stiffness: 300, damping: 20 }}>
+            <span className="absolute inset-0 w-full h-full bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
+            <span className="relative z-10">{t('hero_scroll_button')}</span>
+            <motion.div className="relative z-10" animate={{ y: [0, 4, 0] }} transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}>
               <ChevronDown className="w-5 h-5" />
             </motion.div>
-          </a>
+          </motion.a>
           
         </motion.div>
       </div>

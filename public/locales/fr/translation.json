@@ -4,5 +4,21 @@
   "nav_projects": "Projets",
   "nav_products": "Produits",
   "nav_blog": "Blog",
-  "nav_contact": "Contact"
+  "nav_contact": "Contact",
+
+ "hero_job_title": "Développeur Full Stack & Créateur Numérique",
+   "hero_typing_sequence": [
+    "Codeur nocturne",
+    "Architecte d'expériences digitales",
+    "Auto-formé à la lumière des écrans"
+  ],
+
+  "hero_scroll_button": "En savoir plus",
+  "hero_scroll_button_aria": "Faire défiler vers la section À propos",
+  
+  "affiliate_title": "🚀 L'Hébergeur que j'utilise et recommande",
+  "affiliate_description": "Démarrez votre projet sur une solution performante et abordable, idéale pour les développeurs.",
+  "affiliate_button": "Profitez de 20 % de réduction",
+  "affiliate_disclaimer": "(Note : ce lien est affilié. Il me soutient sans aucun coût supplémentaire pour vous.)"
 }
+
