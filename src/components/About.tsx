@@ -5,6 +5,7 @@ import { Code, Database, Layout, Box, Download, Award, Globe, Star, User, Shield
 import { useEffect, useState, useRef } from "react";
 import { Tooltip } from './Tooltip';
 import { SectionDivider } from "./SectionDivider";
+import { AnimatedBackground } from "./AnimatedBackground";
 
 function Typewriter({ text }) {
   const [displayed, setDisplayed] = useState("");
@@ -79,9 +80,10 @@ export function About() {
   ];
 
   return (
-    <section id="about" aria-labelledby="about-heading" className="py-20 bg-[#221F26]">
-       <SectionDivider/>
+<section id="about" aria-labelledby="about-heading" className="relative py-20 bg-[#131116]">
+        
       <div className="container mx-auto px-4">
+          
         <motion.h2
           id="about-heading"
           initial={{ opacity: 0, y: 20 }}
@@ -177,6 +179,7 @@ export function About() {
               </div>
             </div>
           </motion.div>
+          
         </div>
 
         <motion.div
@@ -288,7 +291,7 @@ export function About() {
           </div>
         </motion.div>
       </div>
-      
+       <SectionDivider/>
     </section>
   );
 }

@@ -482,8 +482,9 @@ export function Projects() {
     <section
       id="projects"
       aria-labelledby="projects-heading"
-      className="py-20 bg-[#1A1F2C]"
+      className="py-20 bg-[#17141a]"
     >
+       
       <div className="container mx-auto px-4">
         <h2 id="projects-heading" className="sr-only">
           Projets et Compétences
