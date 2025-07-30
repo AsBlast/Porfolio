@@ -4,36 +4,31 @@ import { motion } from "framer-motion";
 import { TypeAnimation } from "react-type-animation";
 import { AnimatedBackground } from "./AnimatedBackground"; 
 import { useTranslation } from 'react-i18next';
-import { useMemo } from 'react'; // useMemo pour l'optimisation
+import { useMemo } from 'react';
 
 import { ChevronDown, Github, Linkedin, Rocket, Coffee, MoonStar, Zap, Terminal } from "lucide-react";
 
 export function Hero() {
   const { t, i18n } = useTranslation(); 
 
-  // On utilise useMemo pour ne reconstruire la séquence que si la langue change
   const typingSequence = useMemo(() => {
-    // On récupère le tableau de traductions
     const phrases = t('hero_typing_sequence', { returnObjects: true }) as string[];
-    
-    // On construit la séquence pour le composant TypeAnimation
-    // [ "phrase 1", 1500, (vider), "phrase 2", 1500, (vider), ... ]
     return phrases.flatMap(phrase => [
       phrase,
       1500,
       (el: HTMLElement | null) => { if (el) el.textContent = ''; }
     ]);
-  }, [t]); // Dépendances : la séquence se met à jour quand la langue ou la fonction t changent
+  }, [t]);
 
   return (
     <header
       id="home"
       aria-labelledby="main-heading"
-      className="min-h-screen flex flex-col items-center justify-center pt-28 relative overflow-hidden bg-black"
+      className="min-h-screen flex flex-col items-center justify-center pt-28 relative overflow-hidden"
     >
       <AnimatedBackground />
       
-      <div className="container mx-auto px-4 relative z-20 flex flex-col items-center">
+<div className="container mx-auto px-4 relative z-40 flex flex-col items-center">
         
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} className="text-center">
           
@@ -59,8 +54,6 @@ export function Hero() {
 
           <div className="text-xl md:text-2xl text-cyan-100/90 font-mono mb-8 max-w-2xl mx-auto min-h-[110px] sm:min-h-[80px]">
             <TypeAnimation
-              
-              // Quand i18n.language change (ex: 'fr' -> 'en'), React détruit et recrée le composant.
               key={i18n.language} 
               sequence={typingSequence}
               wrapper="p" speed={50} cursor={true} className="mb-4" repeat={Infinity}
@@ -69,7 +62,6 @@ export function Hero() {
               className="flex items-center justify-center gap-3 text-2xl"
               initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.8, duration: 1 }}
             >
-              {/* ... icônes ... */}
               <motion.div animate={{ rotate: [0, 15, 0, -15, 0] }} transition={{ duration: 4, repeat: Infinity, delay: 1 }}><MoonStar className="text-purple-400" /></motion.div>
               <span>+</span>
               <motion.div animate={{ y: [0, -5, 0] }} transition={{ duration: 2, repeat: Infinity, delay: 1.2 }}><Coffee className="text-amber-400" /></motion.div>
@@ -88,7 +80,10 @@ export function Hero() {
 
           <section aria-labelledby="affiliate-heading" className="floating-banner p-6 bg-black/80 backdrop-blur-sm rounded-xl border border-cyan-500/30 shadow-[0_0_20px_rgba(0,255,255,0.2)] max-w-md mx-auto transform transition-all hover:scale-105 duration-300">
             <div className="flex flex-col items-center text-center gap-4">
-              <img src="/images/hostinger.png" alt="Logo Hostinger" width="128" height="45" className="rounded-md shadow-lg" loading="lazy" />
+              <picture>
+                <source type="image/webp" srcSet="/images/hostinger-small.webp 1x, /images/hostinger-large.webp 2x" />
+                <img src="/images/hostinger.webp" alt="Logo Hostinger" width="128" height="45" className="rounded-md shadow-lg" loading="lazy" />
+              </picture>
               <h3 id="affiliate-heading" className="text-2xl text-cyan-400 font-bold">{t('affiliate_title')}</h3>
               <p className="text-gray-300">{t('affiliate_description')}</p>
               <motion.a href="https://hostinger.com?REFERRALCODE=W8MBRICEYA9R" target="_blank" rel="sponsored noopener noreferrer" whileHover={{ scale: 1.05 }} className="inline-flex items-center gap-3 px-8 py-3 text-lg font-medium text-cyan-300 border border-cyan-400 rounded-lg hover:bg-cyan-950 hover:text-cyan-100 transition-all duration-300 shadow-[0_0_15px_rgba(0,255,255,0.3)] hover:shadow-[0_0_25px_rgba(0,255,255,0.5)]">{t('affiliate_button')}</motion.a>

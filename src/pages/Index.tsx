@@ -1,6 +1,6 @@
 // src/pages/Index.tsx
 
-import React, { Suspense, lazy, useState, useEffect } from "react";
+import { Suspense, lazy, useState, useEffect } from "react";
 import { Helmet } from 'react-helmet-async';
 import { AnimatePresence, motion } from "framer-motion";
 import { useLocation, Link } from 'react-router-dom'; 

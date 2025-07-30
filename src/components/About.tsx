@@ -79,6 +79,7 @@ export function About() {
 
   return (
     <section id="about" aria-labelledby="about-heading" className="py-20 bg-[#221F26]">
+      
       <div className="container mx-auto px-4">
         <motion.h2
           id="about-heading"
