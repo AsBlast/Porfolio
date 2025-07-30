@@ -54,6 +54,7 @@ export default defineConfig({
         '/blog/guide-optimisation-lighthouse',
         '/blog/creation-majordome-ai',
         '/blog/connecter-site-facebook',
+        '/blog/leçon-dev',
 
       ]
     }),
