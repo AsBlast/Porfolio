@@ -36,7 +36,7 @@ interface Project {
 const projectsData: Project[] = [
   {
     id: 1,
-    title: "Projet Alpha",
+    title: "Remote work",
     description:
       "Application Web moderne créée avec React, exploitant Tailwind CSS pour le style et Vite pour un développement ultra-rapide.",
     image: "/images/alpha.webp",
@@ -51,7 +51,7 @@ const projectsData: Project[] = [
   },
   {
     id: 2,
-    title: "Projet Beta",
+    title: "Python Hackers",
     description:
       "Site d'affiliation créée avec React avec solution d'achat redirigée vers Amazon.fr pour guide pratique  : Python pour les hackers",
     image: "/images/Python-hackers.jpg",
@@ -66,7 +66,7 @@ const projectsData: Project[] = [
   },
   {
     id: 3,
-    title: "Projet Gamma",
+    title: "Akata",
     description:
       "Application Web complète utilisant React, Vite, Tailwind CSS pour le frontend et Node JS pour le backend ( en cours ).",
     image: "/images/AKATA.webp",
