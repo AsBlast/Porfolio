@@ -100,7 +100,7 @@ const projectsData: Project[] = [
     github: "https://github.com",
     live: "https://neurocockpit.netlify.app/",
     tags: [ "React", "Vite", "Tailwind CSS"],
-    status: "En Production",
+    status: "En production",
     category: "frontend",
     date: "2025-12-22",
     complexity: 4,
