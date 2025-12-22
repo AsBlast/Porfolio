@@ -109,7 +109,6 @@ const ProductsPage: FC = () => {
         {featuredProduct && (
           <section className="pb-16" aria-labelledby="featured-product-heading">
             <div className="container mx-auto px-4">
-              <h2 id="featured-product-heading" className="sr-only">Produit en vedette</h2>
               <FeaturedProduct product={featuredProduct} />
             </div>
           </section>

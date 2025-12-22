@@ -66,7 +66,7 @@ export function About() {
   ];
 
   const stats = [
-    { value: "2+", label: "Années d'expérience" },
+    { value: "3+", label: "Années d'expérience" },
     { value: "10+", label: "Projets réalisés" },
     { value: "98%", label: "Satisfaction clients" },
     { value: "7+", label: "Technologies maîtrisées" }
@@ -164,7 +164,7 @@ export function About() {
             <div className="mt-12">
               <h4 className="text-xl font-semibold text-white mb-4">Mes principes directeurs :</h4>
               <div className="flex flex-wrap gap-3">
-                {["Simplicité Radicale", "L'Utilisateur d'Abord", "Impact > Fonctionnalités", "Itération Continue"].map((value, i) => (
+                {["Simplicité Radicale", "L'Utilisateur d'abord", "Impact > Fonctionnalités", "Itération Continue"].map((value, i) => (
                   <motion.div
                     key={i}
                     initial={{ opacity: 0, scale: 0.9 }}

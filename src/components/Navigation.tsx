@@ -5,8 +5,7 @@ import { Menu, X, Home, User, Folder, Mail, Store, Feather } from "lucide-react"
 
 // --- 1. IMPORTS POUR LA TRADUCTION ---
 import { useTranslation } from "react-i18next";
-import LanguageSwitcher from "./LanguageSwitcher"; // Vérifiez que ce chemin est correct
-
+import LanguageSwitcher from "./LanguageSwitcher"; 
 // Fonction hook pour suivre la section active sur la page d'accueil
 function useActiveSection(sectionIds: string[], isHomePage: boolean): string {
   const [activeSection, setActiveSection] = useState(sectionIds[0]);
