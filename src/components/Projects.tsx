@@ -44,7 +44,7 @@ const projectsData: Project[] = [
     live: "http://mg-remote-work.netlify.app/",
     tags: ["React", "Tailwind CSS", "Vite"],
     status: "En production",
-    featured: true,
+    featured: false,
     category: "frontend",
     date: "2023-10-15",
     complexity: 3,
@@ -74,6 +74,8 @@ const projectsData: Project[] = [
     live: "https://akata.netlify.app/",
     tags: [ " Node JS", "MySQL", "React"],
     status: "En développement",
+    featured: false,
+
     category: "backend",
     date: "2023-11-05",
     complexity: 4,
@@ -87,6 +89,8 @@ const projectsData: Project[] = [
     live: "/home/asblast/Documents/2-ZNT MEMORY VAULT/dist/index.html",
     tags: ["React", "tailwind", "Vite"],
     status: "En maintenance",
+        featured: false,
+
     category: "mobile",
     date: "2023-05-18",
     complexity: 3,
@@ -101,6 +105,8 @@ const projectsData: Project[] = [
     live: "https://neurocockpit.netlify.app/",
     tags: [ "React", "Vite", "Tailwind CSS"],
     status: "En production",
+        featured: true,
+
     category: "frontend",
     date: "2025-12-22",
     complexity: 4,
