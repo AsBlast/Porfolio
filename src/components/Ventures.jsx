@@ -7,7 +7,7 @@ import { Facebook, ArrowUpRight } from "lucide-react";
 const ventures = [
   {
     title: "Félin Fashion Mada",
-    description: "Boutique en ligne pionnière d'accessoires stylés pour chiens et chats à Madagascar, créant un pont digital avec une communauté Facebook de plus de 10k passionnés.",
+    description: "Boutique en ligne pionnière d'accessoires stylés pour chiens et chats à Madagascar, créant un pont digital avec une communauté Facebook de plus de 11k passionnés.",
     imageBase: "/images/felin-fashion",
     facebookLink: "https://web.facebook.com/profile.php?id=61555557527535",
     stack: ["React", "Boutique Facebook", "Meta API", "Community Management"],
