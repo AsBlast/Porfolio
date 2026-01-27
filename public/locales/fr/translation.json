@@ -15,10 +15,9 @@
 
   "hero_scroll_button": "En savoir plus",
   "hero_scroll_button_aria": "Faire défiler vers la section À propos",
-  
-  "affiliate_title": "🚀 L'Hébergeur que j'utilise et recommande",
-  "affiliate_description": "Démarrez votre projet sur une solution performante et abordable, idéale pour les développeurs.",
-  "affiliate_button": "Profitez de 20 % de réduction",
-  "affiliate_disclaimer": "(Note : ce lien est affilié. Il me soutient sans aucun coût supplémentaire pour vous.)"
+  "affiliate_io_title": "🚀 Propulsez votre Business",
+  "affiliate_io_description": "L'outil tout-en-un que je recommande pour créer vos tunnels de vente, gérer vos emails et automatiser votre succès.",
+  "affiliate_io_button": "Commencer gratuitement",
+  "affiliate_io_disclaimer": "(Note : Ce lien est affilié. Il soutient mon travail sans aucun coût supplémentaire pour vous.)"
 }
 
