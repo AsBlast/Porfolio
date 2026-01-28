@@ -88,10 +88,10 @@ export default function IndexPage() {
   return (
     <>
       <Helmet>
-        <title>Brice Yakim AsBlast | Développeur Full Stack à Madagascar</title>
-        <meta name="description" content="Portfolio de Brice Yakim, Développeur Full Stack à Madagascar. Spécialisé en React, Node.js et création d'expériences web interactives pour startups et PME." />
+        <title>Brice Yakim AsBlast | Architecte de Solutions Augmentées par l'IA</title>
+        <meta name="description" content="Portfolio de Brice Yakim AsBlast, architecte de solutions web modernes combinant React/TypeScript et intégration stratégique d'IA. Expert en expériences interactives performantes." />
         <link rel="canonical" href="https://asblast.space/"/>
-        <meta property="og:title" content="Brice Yakim AsBlast | Développeur Full Stack à Madagascar" />
+        <meta property="og:title" content="Brice Yakim AsBlast | Développeur Full Stack & Architecte de Solutions Augmentées par l'IA" />
         <meta property="og:description" content="Découvrez le portfolio et les projets de Brice Yakim, spécialiste en expériences digitales innovantes." />
         <meta property="og:image" content="https://asblast.space/og-image.jpg" />
         <meta property="og:type" content="website" />
