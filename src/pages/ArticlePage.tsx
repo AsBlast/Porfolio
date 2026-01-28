@@ -6,6 +6,8 @@ import { Helmet } from 'react-helmet-async';
 import { articles } from '../articles'; 
 import { motion } from 'framer-motion';
 import { ArrowLeft, Home } from 'lucide-react';
+import { CtaBox } from "@/components/CtaBox"; // 1. Importe le composant
+
 
 // Composant de chargement simple
 const ArticleLoader = () => (
@@ -65,7 +67,7 @@ export default function ArticlePage() {
             
             {/* Le contenu de l'article MDX */}
             <Suspense fallback={<ArticleLoader />}>
-              <ArticleContent />
+              <ArticleContent components={{ CtaBox }}/>
 
               
             </Suspense>

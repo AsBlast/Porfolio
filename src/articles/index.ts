@@ -21,7 +21,7 @@ export const articles: ArticleMeta[] = [
   },
    {
     slug: "creation-majordome-ai",
-    title: "Développez un majordome IA ultra-performant avec Groq et React : boostez votre portfolio",
+    title: "Développez un majordome IA ultra-performant avec Groq et React : le guide complet",
     date: "2025-07-27",
     summary: "Le récit complet de la création d'un agent conversationnel proactif. De l'idée à l'intégration, découvrez comment React, Netlify Functions et le Vercel AI SDK se sont assemblés pour donner vie à mon assistant numérique.",
     image: "/images/blog/majordome.webp", 
