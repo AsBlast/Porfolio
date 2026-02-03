@@ -14,12 +14,12 @@ const sections = [
       content: (
         <>
           <div className="grid md:grid-cols-2 gap-6 mb-6">
-            <div className="bg-[#2D374B] p-5 rounded-xl border border-cyan-500/20"><h4 className="font-bold text-cyan-300 mb-3">Nom</h4><p>Brice Yakim ANDRIAMAHEFAROMISA</p></div>
+            <div className="bg-[#2D374B] p-5 rounded-xl border border-cyan-500/20"><h4 className="font-bold text-cyan-300 mb-3">Nom</h4><p>Brice ANDRIAMAHEFAROMISA</p></div>
             <div className="bg-[#2D374B] p-5 rounded-xl border border-purple-500/20"><h4 className="font-bold text-purple-300 mb-3">Statut</h4><p>Développeur Fullstack & Architecte de Solutions Augmentées par l'IA</p></div>
             <div className="bg-[#2D374B] p-5 rounded-xl border border-pink-500/20"><h4 className="font-bold text-pink-300 mb-3">Email</h4><p>briceyakimasblast@gmail.com</p></div>
             <div className="bg-[#2D374B] p-5 rounded-xl border border-white/20"><h4 className="font-bold text-white mb-3">Localisation</h4><p>Madagascar</p></div>
           </div>
-          <p className="text-sm bg-[#0F172A] p-4 rounded-lg border border-cyan-500/30"><span className="font-bold text-cyan-300">Directeur de publication :</span> Brice Yakim ANDRIAMAHEFAROMISA</p>
+          <p className="text-sm bg-[#0F172A] p-4 rounded-lg border border-cyan-500/30"><span className="font-bold text-cyan-300">Directeur de publication :</span> Brice  ANDRIAMAHEFAROMISA</p>
         </>
       )
     },
