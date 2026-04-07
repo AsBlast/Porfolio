@@ -102,7 +102,7 @@ const projectsData: Project[] = [
       "Dashboard analytique de développement personnel gamifié. Permet le suivi de l'état psychologique via 7 archétypes, avec visualisation de données temporelles et calcul de tendances.",
     image: "images/neuro_cockpit2.png",
     github: "https://github.com",
-    live: "https://neurocockpit.netlify.app/",
+    live: "https://neuronal-cockpit.asblast.space/",
     tags: [ "React", "Vite", "Tailwind CSS"],
     status: "En production",
         featured: true,
