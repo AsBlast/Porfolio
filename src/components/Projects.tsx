@@ -83,10 +83,10 @@ const projectsData: Project[] = [
   {
     id: 4,
     title: "Projet Delta",
-    description: "Neuro-Cockpit pour apprendre et maitriser PAO (Personne Action Objet ).",
-    image: "",
+    description: "Conçu comme une application web qui s'exécute entièrement côté client. En utilisant React et Vite, l'application est non seulement ultra-rapide, mais elle garantit aussi que 100% des calculs sont effectués sur votre appareil. Aucune donnée n'est jamais transmise, pour une tranquillité d'esprit totale.",
+    image: "images/texAnalyzer.webp",
     github: "https://github.com",
-    live: "/home/asblast/Documents/2-ZNT MEMORY VAULT/dist/index.html",
+    live: "#",
     tags: ["React", "tailwind", "Vite"],
     status: "En maintenance",
         featured: false,
@@ -110,6 +110,22 @@ const projectsData: Project[] = [
     category: "frontend",
     date: "2025-12-22",
     complexity: 4,
+  },
+  {
+    id: 6,
+    title: "meyrin-petanque",
+    description:
+      "Application Web complète utilisant React, Vite, Tailwind CSS pour le frontend et Node JS pour le backend ( en cours ).",
+    image: "/images/meyrin.webp",
+    github: "https://github.com",
+    live: "https://meyrin-petanque.vercel.app/",
+    tags: [ " Node JS", "Tailwind CSS", "React"],
+    status: "En développement",
+    featured: false,
+
+    category: "backend",
+    date: "2025-11-05",
+    complexity: 3,
   },
 ];
 const skills = [
