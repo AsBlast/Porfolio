@@ -86,7 +86,7 @@ const projectsData: Project[] = [
     description: "Conçu comme une application web qui s'exécute entièrement côté client. En utilisant React et Vite, l'application est non seulement ultra-rapide, mais elle garantit aussi que 100% des calculs sont effectués sur votre appareil. Aucune donnée n'est jamais transmise, pour une tranquillité d'esprit totale.",
     image: "images/texAnalyzer.webp",
     github: "https://github.com",
-    live: "#",
+    live: "https://text-analyzer-pro-two.vercel.app/",
     tags: ["React", "tailwind", "Vite"],
     status: "En maintenance",
         featured: false,
