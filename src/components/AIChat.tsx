@@ -5,8 +5,8 @@ import { Bot, CornerDownLeft, X } from "lucide-react";
 import { useFirstVisit } from "../hooks/useFirstVisit"; // Assurez-vous que ce hook est corrigé comme dans notre première discussion
 
 const getApiEndpoint = () => {
-  if (import.meta.env.PROD) return "api/chat";
-  return "http://localhost:3000/api/chat";
+  if (import.meta.env.PROD) return "http://localhost:3000/api/chat";
+  return "/api/chat";
 };
 
 export function AIChat() {
