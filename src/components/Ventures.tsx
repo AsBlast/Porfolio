@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Facebook, ArrowUpRight } from "lucide-react";
+import type { Variants } from "framer-motion";
 
 // --- 1. MODIFICATION DE LA STRUCTURE DE DONNÉES ---
 const ventures = [
@@ -23,15 +24,18 @@ const containerVariants = {
   },
 };
 
-const itemVariants = {
+const itemVariants: Variants = {
   hidden: { y: 20, opacity: 0 },
   visible: {
     y: 0,
     opacity: 1,
-    transition: { type: "spring", stiffness: 100, damping: 15 },
+    transition: {
+      type: "spring" as const, // 🔥 FIX CRITIQUE
+      stiffness: 100,
+      damping: 15,
+    },
   },
 };
-
 export function Ventures() {
   return (
     <section 
@@ -164,3 +168,5 @@ export function Ventures() {
     </section>
   );
 }
+
+export default Ventures;
