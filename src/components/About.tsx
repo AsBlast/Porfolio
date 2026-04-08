@@ -285,7 +285,7 @@ export function About() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div className="p-4 bg-white/5 rounded-lg">
               <div className="font-semibold text-[#D946EF]">Formation Mudey</div>
-              <div className="text-white">Développement Web Full-Stack Hybride</div>
+              <div className="text-white">Développement Web Full-Stack JS/Python</div>
               <div className="text-gray-400 text-sm mt-1">2023</div>
             </div>
           </div>
