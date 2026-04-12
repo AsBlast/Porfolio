@@ -1,9 +1,23 @@
 // src/components/About.tsx
 
 import { motion } from "framer-motion";
-import { Code, Database, Layout, Box, Download, Award, Globe, Star, User, ShieldCheck, Zap, LayoutTemplate } from "lucide-react";
+import {
+  Code,
+  Database,
+  Layout,
+  Box,
+  Download,
+  Award,
+  Globe,
+  Star,
+  User,
+  ShieldCheck,
+  Zap,
+  LayoutTemplate,
+  ExternalLink,
+} from "lucide-react";
 import { useEffect, useState, useRef } from "react";
-import { Tooltip } from './Tooltip';
+import { Tooltip } from "./Tooltip";
 import { SectionDivider } from "./SectionDivider";
 import { AnimatedBackground } from "./AnimatedBackground";
 
@@ -17,7 +31,7 @@ function Typewriter({ text }) {
       ([entry]) => {
         if (entry.isIntersecting) {
           setStartTyping(true);
-          observer.unobserve(ref.current); 
+          observer.unobserve(ref.current);
         }
       },
       { threshold: 0.1 }
@@ -42,7 +56,7 @@ function Typewriter({ text }) {
       i++;
       if (i === text.length) clearInterval(interval);
     }, 50);
-    
+
     return () => clearInterval(interval);
   }, [startTyping, text]);
 
@@ -59,31 +73,61 @@ function Typewriter({ text }) {
 
 export function About() {
   const skills = [
-    { icon: <Code size={28} className="text-[#D946EF]" />, title: "Développement front-end", description: "Expert en React, Vite et frameworks JavaScript modernes. Création d'interfaces utilisateur réactives et intuitives qui donnent vie à vos idées.", tools: ["React", "Vite", "Tailwind CSS", "Bootstrap"], level: 95 },
-    { icon: <Database size={28} className="text-[#D946EF]" />, title: "Développement backend", description: "Maîtrise de Node.js, Python et de la gestion de bases de données. Création de solutions côté serveur robustes et évolutives.", tools: ["Node.js", "Express", "MongoDB", "Postman/Insomnia"], level: 90 },
-    { icon: <Layout size={28} className="text-[#D946EF]" />, title: "Conception UI/UX", description: "Créer des interfaces utilisateur belles et intuitives qui combinent esthétique et fonctionnalité pour une expérience utilisateur optimale.", tools: ["Prototyping", "User Testing"], level: 85 },
-    { icon: <Box size={28} className="text-[#D946EF]" />, title: "Développement CMS", description: "Expertise dans la création et la personnalisation de sites WordPress. Optimisation SEO des pages, intégration responsive et garantie de la compatibilité cross-browser.", tools: ["Elementor", "WooCommerce", "SEO", "Plugins"], level: 85 },
+    {
+      icon: <Code size={28} className="text-[#D946EF]" />,
+      title: "Développement front-end",
+      description:
+        "Expert en React, Vite et frameworks JavaScript modernes. Création d'interfaces utilisateur réactives et intuitives qui donnent vie à vos idées.",
+      tools: ["React", "Vite", "Tailwind CSS", "Bootstrap"],
+      level: 95,
+    },
+    {
+      icon: <Database size={28} className="text-[#D946EF]" />,
+      title: "Développement backend",
+      description:
+        "Maîtrise de Node.js, Python et de la gestion de bases de données. Création de solutions côté serveur robustes et évolutives.",
+      tools: ["Node.js", "Express", "MongoDB", "Postman/Insomnia"],
+      level: 90,
+    },
+    {
+      icon: <Layout size={28} className="text-[#D946EF]" />,
+      title: "Conception UI/UX",
+      description:
+        "Créer des interfaces utilisateur belles et intuitives qui combinent esthétique et fonctionnalité pour une expérience utilisateur optimale.",
+      tools: ["Prototyping", "User Testing"],
+      level: 85,
+    },
+    {
+      icon: <Box size={28} className="text-[#D946EF]" />,
+      title: "Développement CMS",
+      description:
+        "Expertise dans la création et la personnalisation de sites WordPress. Optimisation SEO des pages, intégration responsive et garantie de la compatibilité cross-browser.",
+      tools: ["Elementor", "WooCommerce", "SEO", "Plugins"],
+      level: 85,
+    },
   ];
 
   const stats = [
     { value: "3+", label: "Années d'expérience" },
     { value: "10+", label: "Projets réalisés" },
     { value: "98%", label: "Satisfaction clients" },
-    { value: "7+", label: "Technologies maîtrisées" }
+    { value: "7+", label: "Technologies maîtrisées" },
   ];
 
   const paragraphs = [
     "« La seule façon de faire du bon travail, c'est d'aimer ce que l'on fait. »",
     "Mon approche est simple : je ne suis pas le développeur qui exécute une liste de fonctionnalités. Je suis celui qui traque le problème réel derrière la demande, obsédé par l'idée de le dissoudre dans une solution radicalement efficace.",
     "C'est pourquoi ma règle d'or est non négociable : la puissance sans la clarté est inutile. Un outil brillant mais confus est comme une bibliothèque remplie de trésors, mais sans catalogue pour les trouver. La valeur est là, mais elle reste hors de portée.",
-    "Depuis Antananarivo, Madagascar, je ne construis donc pas des logiciels. Je forge des leviers de productivité : des solutions autonomes, puissantes et intuitives, conçues pour vous donner un avantage tangible et vous rendre maître de votre temps."
+    "Depuis Antananarivo, Madagascar, je ne construis donc pas des logiciels. Je forge des leviers de productivité : des solutions autonomes, puissantes et intuitives, conçues pour vous donner un avantage tangible et vous rendre maître de votre temps.",
   ];
 
   return (
-<section id="about" aria-labelledby="about-heading" className="relative py-20 bg-[#131116]">
-        
+    <section
+      id="about"
+      aria-labelledby="about-heading"
+      className="relative py-20 bg-[#131116]"
+    >
       <div className="container mx-auto px-4">
-          
         <motion.h2
           id="about-heading"
           initial={{ opacity: 0, y: 20 }}
@@ -102,7 +146,6 @@ export function About() {
             viewport={{ once: true }}
             className="relative rounded-lg overflow-hidden"
           >
-            
             <picture>
               <source
                 type="image/webp"
@@ -134,7 +177,16 @@ export function About() {
             <Typewriter text="Je transforme la complexité en leviers de productivité." />
 
             {paragraphs.map((text, i) => (
-              <motion.p key={i} initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.3 + i * 0.3 }} className="mb-6">{text}</motion.p>
+              <motion.p
+                key={i}
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.3 + i * 0.3 }}
+                className="mb-6"
+              >
+                {text}
+              </motion.p>
             ))}
 
             <div className="flex flex-wrap gap-4 mt-8">
@@ -149,7 +201,7 @@ export function About() {
                 <Download size={18} />
                 Télécharger mon CV
               </motion.a>
-              
+
               <motion.a
                 href="#projects"
                 whileHover={{ scale: 1.05 }}
@@ -160,11 +212,18 @@ export function About() {
                 Voir mes projets
               </motion.a>
             </div>
-            
+
             <div className="mt-12">
-              <h4 className="text-xl font-semibold text-white mb-4">Mes principes directeurs :</h4>
+              <h4 className="text-xl font-semibold text-white mb-4">
+                Mes principes directeurs :
+              </h4>
               <div className="flex flex-wrap gap-3">
-                {["Simplicité Radicale", "L'Utilisateur d'abord", "Impact > Fonctionnalités", "Itération Continue"].map((value, i) => (
+                {[
+                  "Simplicité Radicale",
+                  "L'Utilisateur d'abord",
+                  "Impact > Fonctionnalités",
+                  "Itération Continue",
+                ].map((value, i) => (
                   <motion.div
                     key={i}
                     initial={{ opacity: 0, scale: 0.9 }}
@@ -179,7 +238,6 @@ export function About() {
               </div>
             </div>
           </motion.div>
-          
         </div>
 
         <motion.div
@@ -197,20 +255,27 @@ export function About() {
               transition={{ delay: index * 0.1, duration: 0.3 }}
               className="bg-white/5 backdrop-blur-sm p-6 rounded-xl border border-gray-800 text-center"
             >
-              <div className="text-3xl font-bold text-[#D946EF]">{stat.value}</div>
+              <div className="text-3xl font-bold text-[#D946EF]">
+                {stat.value}
+              </div>
               <div className="text-gray-300 mt-2">{stat.label}</div>
             </motion.div>
           ))}
         </motion.div>
 
-        <h3 className="text-3xl md:text-4xl font-bold text-center text-white mt-20 mb-12">Mes Outils de Prédilection</h3>
+        <h3 className="text-3xl md:text-4xl font-bold text-center text-white mt-20 mb-12">
+          Mes Outils de Prédilection
+        </h3>
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
           {skills.map((skill, index) => (
             <motion.div
               key={index}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              whileHover={{ scale: 1.05, boxShadow: "0 8px 15px rgba(217, 70, 239, 0.3)" }}
+              whileHover={{
+                scale: 1.05,
+                boxShadow: "0 8px 15px rgba(217, 70, 239, 0.3)",
+              }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.2 }}
               className="p-6 bg-white/5 rounded-lg hover:bg-white/10 transition-colors group relative"
@@ -218,16 +283,31 @@ export function About() {
               <div className="absolute inset-0 bg-gradient-to-r from-[#D946EF] to-[#8B5CF6] opacity-0 group-hover:opacity-10 transition-opacity rounded-lg"></div>
               <div className="relative z-10">
                 <div className="mb-4">{skill.icon}</div>
-                <h3 className="text-xl font-bold mb-2 text-white">{skill.title}</h3>
-                
-                <div className="mt-4 mb-4" role="meter" aria-valuenow={skill.level} aria-valuemin={0} aria-valuemax={100} aria-label={`Niveau d'affinité : ${skill.level} sur 100`}>
-                  <div className="flex justify-between text-sm text-gray-400 mb-1" aria-hidden="true">
+                <h3 className="text-xl font-bold mb-2 text-white">
+                  {skill.title}
+                </h3>
+
+                <div
+                  className="mt-4 mb-4"
+                  role="meter"
+                  aria-valuenow={skill.level}
+                  aria-valuemin={0}
+                  aria-valuemax={100}
+                  aria-label={`Niveau d'affinité : ${skill.level} sur 100`}
+                >
+                  <div
+                    className="flex justify-between text-sm text-gray-400 mb-1"
+                    aria-hidden="true"
+                  >
                     <span>Affinité</span>
                     <span>{skill.level}%</span>
                   </div>
-                  <div className="w-full bg-gray-800 rounded-full h-2" aria-hidden="true">
-                    <motion.div 
-                      className="bg-gradient-to-r from-[#D946EF] to-[#8B5CF6] h-2 rounded-full" 
+                  <div
+                    className="w-full bg-gray-800 rounded-full h-2"
+                    aria-hidden="true"
+                  >
+                    <motion.div
+                      className="bg-gradient-to-r from-[#D946EF] to-[#8B5CF6] h-2 rounded-full"
                       initial={{ width: 0 }}
                       whileInView={{ width: `${skill.level}%` }}
                       viewport={{ once: true }}
@@ -235,12 +315,14 @@ export function About() {
                     />
                   </div>
                 </div>
-                
+
                 <p className="text-white/70 mb-4">{skill.description}</p>
                 <div className="flex flex-wrap gap-2">
                   {skill.tools.map((tool, i) => (
                     <Tooltip key={i} content={tool}>
-                      <span className="px-3 py-1 bg-gray-800/50 text-gray-300 text-sm rounded-full">{tool}</span>
+                      <span className="px-3 py-1 bg-gray-800/50 text-gray-300 text-sm rounded-full">
+                        {tool}
+                      </span>
                     </Tooltip>
                   ))}
                 </div>
@@ -249,49 +331,154 @@ export function About() {
           ))}
         </div>
 
-       <div className="mt-20">
+        <div className="mt-20">
           <h3 className="text-3xl md:text-4xl font-bold text-center text-white mb-16">
             Mon Approche du Développement
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
-            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5 }} className="bg-white/5 p-8 rounded-2xl border border-gray-800 flex flex-col items-start text-left hover:border-violet-500/50 transition-colors">
-              <div className="w-16 h-16 mb-6 rounded-full bg-gradient-to-r from-[#8B5CF6] to-[#D946EF] flex items-center justify-center shadow-lg shadow-violet-500/20"><LayoutTemplate className="text-white w-8 h-8" /></div>
-              <h4 className="font-bold text-xl text-white mb-3">Expérience Utilisateur d'Abord</h4>
-              <p className="text-white/80 leading-relaxed">Un bon design n'est pas seulement esthétique, il est fonctionnel. Je conçois des interfaces intuitives qui guident l'utilisateur et rendent chaque interaction fluide et logique.</p>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+              className="bg-white/5 p-8 rounded-2xl border border-gray-800 flex flex-col items-start text-left hover:border-violet-500/50 transition-colors"
+            >
+              <div className="w-16 h-16 mb-6 rounded-full bg-gradient-to-r from-[#8B5CF6] to-[#D946EF] flex items-center justify-center shadow-lg shadow-violet-500/20">
+                <LayoutTemplate className="text-white w-8 h-8" />
+              </div>
+              <h4 className="font-bold text-xl text-white mb-3">
+                Expérience Utilisateur d'Abord
+              </h4>
+              <p className="text-white/80 leading-relaxed">
+                Un bon design n'est pas seulement esthétique, il est
+                fonctionnel. Je conçois des interfaces intuitives qui guident
+                l'utilisateur et rendent chaque interaction fluide et logique.
+              </p>
             </motion.div>
-            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.15 }} className="bg-white/5 p-8 rounded-2xl border border-gray-800 flex flex-col items-start text-left hover:border-pink-500/50 transition-colors">
-              <div className="w-16 h-16 mb-6 rounded-full bg-gradient-to-r from-[#D946EF] to-[#ec4899] flex items-center justify-center shadow-lg shadow-pink-500/20"><ShieldCheck className="text-white w-8 h-8" /></div>
-              <h4 className="font-bold text-xl text-white mb-3">La Sécurité par Conception</h4>
-              <p className="text-white/80 leading-relaxed">J'intègre les meilleures pratiques de sécurité dès la première ligne de code. Chaque projet est pensé pour être robuste et protéger les données.</p>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.15 }}
+              className="bg-white/5 p-8 rounded-2xl border border-gray-800 flex flex-col items-start text-left hover:border-pink-500/50 transition-colors"
+            >
+              <div className="w-16 h-16 mb-6 rounded-full bg-gradient-to-r from-[#D946EF] to-[#ec4899] flex items-center justify-center shadow-lg shadow-pink-500/20">
+                <ShieldCheck className="text-white w-8 h-8" />
+              </div>
+              <h4 className="font-bold text-xl text-white mb-3">
+                La Sécurité par Conception
+              </h4>
+              <p className="text-white/80 leading-relaxed">
+                J'intègre les meilleures pratiques de sécurité dès la première
+                ligne de code. Chaque projet est pensé pour être robuste et
+                protéger les données.
+              </p>
             </motion.div>
-            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.3 }} className="bg-white/5 p-8 rounded-2xl border border-gray-800 flex flex-col items-start text-left hover:border-orange-500/50 transition-colors">
-              <div className="w-16 h-16 mb-6 rounded-full bg-gradient-to-r from-[#ec4899] to-[#f97316] flex items-center justify-center shadow-lg shadow-orange-500/20"><Zap className="text-white w-8 h-8" /></div>
-              <h4 className="font-bold text-xl text-white mb-3">Performance & Code Propre</h4>
-              <p className="text-white/80 leading-relaxed">Un site rapide est essentiel. J'optimise chaque aspect, du poids des images au code, pour garantir des temps de chargement minimaux et une maintenabilité à long terme.</p>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.3 }}
+              className="bg-white/5 p-8 rounded-2xl border border-gray-800 flex flex-col items-start text-left hover:border-orange-500/50 transition-colors"
+            >
+              <div className="w-16 h-16 mb-6 rounded-full bg-gradient-to-r from-[#ec4899] to-[#f97316] flex items-center justify-center shadow-lg shadow-orange-500/20">
+                <Zap className="text-white w-8 h-8" />
+              </div>
+              <h4 className="font-bold text-xl text-white mb-3">
+                Performance & Code Propre
+              </h4>
+              <p className="text-white/80 leading-relaxed">
+                Un site rapide est essentiel. J'optimise chaque aspect, du poids
+                des images au code, pour garantir des temps de chargement
+                minimaux et une maintenabilité à long terme.
+              </p>
             </motion.div>
           </div>
         </div>
-        
+
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           className="mt-20 bg-gradient-to-r from-[#D946EF]/10 to-[#8B5CF6]/10 p-8 rounded-2xl border border-[#D946EF]/30"
         >
-          <div className="flex items-center gap-4 mb-6">
+          <div className="flex items-center gap-4 mb-8">
             <Award className="w-10 h-10 text-[#D946EF]" />
-            <h3 className="text-2xl font-bold text-white">Certifications & Formations</h3>
+            <h3 className="text-2xl font-bold text-white">
+              Certifications & Formations
+            </h3>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div className="p-4 bg-white/5 rounded-lg">
-              <div className="font-semibold text-[#D946EF]">Formation Mudey</div>
-              <div className="text-white">Développement Web Full-Stack JS/Python</div>
-              <div className="text-gray-400 text-sm mt-1">2023</div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
+            {/* Colonne Gauche : Liste des acquis */}
+            <div className="space-y-6">
+              <div className="p-5 bg-white/5 rounded-xl border border-white/10">
+                <div className="font-bold text-[#D946EF] text-lg mb-2">
+                  Formation Mudey
+                </div>
+                <p className="text-white/80 text-sm">
+                  Développement Web Full-Stack (JS / Python / Django)
+                </p>
+                <span className="text-gray-500 text-xs mt-2 block">2023</span>
+              </div>
+
+              <div className="p-5 bg-white/5 rounded-xl border border-white/10">
+                <div className="font-bold text-[#D946EF] text-lg mb-3">
+                  Spécialisations Cursa
+                </div>
+                <ul className="text-white/80 text-sm space-y-2 list-disc list-inside">
+                  <li>Javascript & HTML/CSS (Pierre Giraud)</li>
+                  <li>Développement d'API avec NodeJS</li>
+                  <li>Architecture de thèmes WordPress (Grafikart)</li>
+                  <li>Python Avancé</li>
+                </ul>
+                <span className="text-gray-500 text-xs mt-4 block">
+                  2025 - 2026
+                </span>
+              </div>
+            </div>
+
+            {/* Colonne Droite : Le Certificat Cliquable (Taille ajustée) */}
+            <div className="flex justify-center items-center w-full">
+              {" "}
+              {/* Conteneur pour centrer */}
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                className="max-w-[320px] relative group cursor-pointer overflow-hidden rounded-xl border-2 border-white/10 shadow-2xl"
+              >
+                <a
+                  href="/images/certificat.png"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block"
+                >
+                  {/* Overlay au survol */}
+                  <div className="absolute inset-0 bg-[#D946EF]/20 opacity-0 group-hover:opacity-100 transition-opacity z-10 flex items-center justify-center">
+                    <div className="bg-black/60 p-3 rounded-full backdrop-blur-md border border-white/20">
+                      <ExternalLink className="text-white w-6 h-6" />
+                    </div>
+                  </div>
+
+                  {/* Image de preview réduite */}
+                  <img
+                    src="/images/certificat.png"
+                    alt="Certificat Cursa Brice Andriamahefaromisa"
+                    className="w-full h-auto object-contain transition-transform duration-500 group-hover:scale-105"
+                  />
+
+                  {/* Barre de légende plus discrète */}
+                  <div className="absolute bottom-0 left-0 right-0 p-2 bg-black/90 backdrop-blur-sm text-center">
+                    <p className="text-white text-[10px] font-bold uppercase tracking-widest">
+                      Voir en plein écran
+                    </p>
+                  </div>
+                </a>
+              </motion.div>
             </div>
           </div>
         </motion.div>
       </div>
-       <SectionDivider/>
+      <SectionDivider />
     </section>
   );
 }
