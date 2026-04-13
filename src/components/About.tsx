@@ -433,7 +433,7 @@ export function About() {
                   <li>Python Avancé</li>
                 </ul>
                 <span className="text-gray-500 text-xs mt-4 block">
-                  2025 - 2026
+                  2024
                 </span>
               </div>
             </div>
