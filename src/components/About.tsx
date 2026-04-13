@@ -396,87 +396,124 @@ export function About() {
           </div>
         </div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="mt-20 bg-gradient-to-r from-[#D946EF]/10 to-[#8B5CF6]/10 p-8 rounded-2xl border border-[#D946EF]/30"
-        >
-          <div className="flex items-center gap-4 mb-8">
-            <Award className="w-10 h-10 text-[#D946EF]" />
-            <h3 className="text-2xl font-bold text-white">
-              Certifications & Formations
-            </h3>
+       {/* --- Section Certifications & Formations Optmisée --- */}
+<motion.section
+  initial={{ opacity: 0, y: 20 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  viewport={{ once: true, margin: "-100px" }}
+  className="mt-24 relative overflow-hidden"
+  aria-labelledby="certifications-title"
+>
+  {/* Fond stylisé avec un dégradé très subtil et bordure néon */}
+  <div className="p-8 md:p-10 rounded-3xl bg-slate-900/40 backdrop-blur-md border border-white/10 relative z-10">
+    
+    {/* En-tête de section */}
+    <div className="flex items-center gap-4 mb-12">
+      <div className="p-3 bg-[#D946EF]/20 rounded-2xl shadow-[0_0_15px_rgba(217,70,239,0.2)]">
+        <Award className="w-8 h-8 text-[#D946EF]" />
+      </div>
+      <div>
+        <h3 id="certifications-title" className="text-2xl md:text-3xl font-bold text-white tracking-tight">
+         Formations
+        </h3>
+        <p className="text-slate-400 text-sm font-mono uppercase tracking-widest mt-1">Expertise validée</p>
+      </div>
+    </div>
+
+    <div className="space-y-10 relative">
+      {/* Ligne verticale décorative (Timeline style) */}
+      <div className="absolute left-[1.35rem] top-2 bottom-2 w-px bg-gradient-to-b from-[#D946EF]/50 via-white/10 to-transparent hidden md:block"></div>
+
+      {/* 1. Bloc Formation Mudey */}
+      <div className="relative md:pl-12 group">
+        {/* Point de timeline (uniquement bureau) */}
+        <div className="absolute left-4 top-2 w-3 h-3 rounded-full bg-slate-800 border-2 border-[#D946EF] hidden md:block group-hover:scale-125 transition-transform shadow-[0_0_8px_rgba(217,70,239,0.8)]"></div>
+        
+        <div className="p-6 bg-white/5 rounded-2xl border border-white/5 hover:border-white/20 transition-all duration-300">
+          <div className="flex flex-col sm:flex-row justify-between items-start gap-2 mb-3">
+            <h4 className="text-xl font-bold text-white group-hover:text-[#D946EF] transition-colors">Formation Mudey</h4>
+            <span className="px-3 py-1 bg-white/10 rounded-full text-[#D946EF] text-xs font-bold font-mono uppercase">2023</span>
           </div>
+          <p className="text-slate-300 leading-relaxed max-w-2xl">
+            Cursus intensif en <span className="text-white font-semibold">Développement Web Full-Stack</span> (JavaScript, NodeJS, Python, ). Maîtrise du cycle de vie complet d'une application.
+          </p>
+        </div>
+      </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
-            {/* Colonne Gauche : Liste des acquis */}
-            <div className="space-y-6">
-              <div className="p-5 bg-white/5 rounded-xl border border-white/10">
-                <div className="font-bold text-[#D946EF] text-lg mb-2">
-                  Formation Mudey
-                </div>
-                <p className="text-white/80 text-sm">
-                  Développement Web Full-Stack (JS / Python / Django)
-                </p>
-                <span className="text-gray-500 text-xs mt-2 block">2023</span>
+      {/* 2. Bloc Spécialisations Cursa avec Certificat Miniature */}
+      <div className="relative md:pl-12 group">
+        <div className="absolute left-4 top-2 w-3 h-3 rounded-full bg-slate-800 border-2 border-[#D946EF] hidden md:block group-hover:scale-125 transition-transform shadow-[0_0_8px_rgba(217,70,239,0.8)]"></div>
+
+        <div className="p-6 bg-white/5 rounded-2xl border border-white/5 hover:border-white/20 transition-all duration-300 relative overflow-hidden">
+          {/* Lueur d'accentuation en arrière-plan */}
+          <div className="absolute -right-10 -bottom-10 w-40 h-40 bg-[#D946EF]/5 blur-[50px] pointer-events-none" />
+
+          <div className="flex flex-col md:flex-row justify-between items-start gap-8">
+            
+            {/* Contenu textuel */}
+            <div className="flex-1 w-full">
+              <div className="flex flex-col sm:flex-row justify-between items-start gap-2 mb-5">
+                <h4 className="text-xl font-bold text-white group-hover:text-[#D946EF] transition-colors">Spécialisations Cursa</h4>
+                <span className="px-3 py-1 bg-white/10 rounded-full text-[#D946EF] text-xs font-bold font-mono uppercase">2024</span>
               </div>
 
-              <div className="p-5 bg-white/5 rounded-xl border border-white/10">
-                <div className="font-bold text-[#D946EF] text-lg mb-3">
-                  Spécialisations Cursa
-                </div>
-                <ul className="text-white/80 text-sm space-y-2 list-disc list-inside">
-                  <li>Javascript & HTML/CSS (Pierre Giraud)</li>
-                  <li>Développement d'API avec NodeJS</li>
-                  <li>Architecture de thèmes WordPress (Grafikart)</li>
-                  <li>Python Avancé</li>
-                </ul>
-                <span className="text-gray-500 text-xs mt-4 block">
-                  2024
-                </span>
-              </div>
+              {/* Liste optimisée */}
+              <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4" aria-label="Liste des cours suivis">
+                {[
+                  "Javascript & HTML/CSS",
+                  "Développement API NodeJS",
+                  "Architecture WordPress",
+                  "Python Avancé"
+                ].map((item, idx) => (
+                  <li key={idx} className="flex items-center gap-3 text-slate-300 group/item">
+                    <div className="w-1.5 h-1.5 rounded-full bg-cyan-400 shadow-[0_0_5px_rgba(34,211,238,0.8)]" />
+                    <span className="text-sm font-medium group-hover/item:text-white transition-colors">{item}</span>
+                  </li>
+                ))}
+              </ul>
             </div>
 
-            {/* Colonne Droite : Le Certificat Cliquable (Taille ajustée) */}
-            <div className="flex justify-center items-center w-full">
-              {" "}
-              {/* Conteneur pour centrer */}
-              <motion.div
-                whileHover={{ scale: 1.05 }}
-                className="max-w-[320px] relative group cursor-pointer overflow-hidden rounded-xl border-2 border-white/10 shadow-2xl"
-              >
-                <a
-                  href="/images/certificat.png"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block"
+            {/* Miniature du certificat : Alignée en haut avec le texte */}
+            <div className="shrink-0 self-start">
+              <Tooltip content="Cliquer pour vérifier l'accréditation">
+                <motion.div
+                  whileHover={{ scale: 1.05, y: -2 }}
+                  whileTap={{ scale: 0.98 }}
+                  className="relative cursor-pointer"
                 >
-                  {/* Overlay au survol */}
-                  <div className="absolute inset-0 bg-[#D946EF]/20 opacity-0 group-hover:opacity-100 transition-opacity z-10 flex items-center justify-center">
-                    <div className="bg-black/60 p-3 rounded-full backdrop-blur-md border border-white/20">
-                      <ExternalLink className="text-white w-6 h-6" />
+                  {/* Cadre mockup du certificat */}
+                  <a
+                    href="/images/certificat.png"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block group/cert"
+                  >
+                    <div className="w-14 h-20 sm:w-16 sm:h-24 bg-black rounded-md border border-white/20 overflow-hidden shadow-2xl transition-all group-hover/cert:border-[#D946EF]/50">
+                       <img
+                        src="/images/certificat.png"
+                        alt="Diplôme Cursa miniature"
+                        className="w-full h-full object-cover opacity-70 group-hover/cert:opacity-100 transition-opacity"
+                        loading="lazy"
+                      />
                     </div>
-                  </div>
-
-                  {/* Image de preview réduite */}
-                  <img
-                    src="/images/certificat.png"
-                    alt="Certificat Cursa Brice Andriamahefaromisa"
-                    className="w-full h-auto object-contain transition-transform duration-500 group-hover:scale-105"
-                  />
-
-                  {/* Barre de légende plus discrète */}
-                  <div className="absolute bottom-0 left-0 right-0 p-2 bg-black/90 backdrop-blur-sm text-center">
-                    <p className="text-white text-[10px] font-bold uppercase tracking-widest">
-                      Voir en plein écran
-                    </p>
-                  </div>
-                </a>
-              </motion.div>
+                    {/* Badge interactif discret */}
+                    <div className="absolute -bottom-2 -right-2 bg-[#D946EF] p-1.5 rounded-lg shadow-lg rotate-12 group-hover/cert:rotate-0 transition-transform">
+                      <ExternalLink size={10} className="text-white" />
+                    </div>
+                  </a>
+                </motion.div>
+              </Tooltip>
             </div>
+
           </div>
-        </motion.div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {/* Décoration d'arrière-plan (Aurora effect) */}
+  <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-gradient-to-br from-purple-500/5 via-transparent to-cyan-500/5 blur-[120px] -z-10" />
+</motion.section>
       </div>
       <SectionDivider />
     </section>
