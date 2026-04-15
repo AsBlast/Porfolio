@@ -5,37 +5,31 @@ import { Link, useParams } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { articles } from '../articles'; 
 import { motion } from 'framer-motion';
-import { ArrowLeft, Home } from 'lucide-react';
-import { CtaBox } from "@/components/CtaBox"; // 1. Importe le composant
+import { ArrowLeft, Home, Share2, Clock, Terminal } from 'lucide-react';
+import { CtaBox } from "@/components/CtaBox";
 
-
-// Composant de chargement simple
 const ArticleLoader = () => (
-  <div className="flex justify-center items-center h-64">
-    <div className="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-cyan-400"></div>
+  <div className="flex flex-col justify-center items-center h-96 gap-4">
+    <div className="w-12 h-12 border-2 border-quantum border-t-transparent rounded-full animate-spin"></div>
+    <p className="font-mono text-xs text-quantum animate-pulse">DECRYPTING_DATA_STREAM...</p>
   </div>
 );
 
 export default function ArticlePage() {
   const { slug } = useParams();
-
-  // Charge dynamiquement le contenu de l'article MDX
+  
   const ArticleContent = useMemo(() => {
     if (!slug) return null;
     return React.lazy(() => import(`../articles/${slug}.mdx`));
   }, [slug]);
 
-  // Trouve les métadonnées de l'article actuel pour le titre, etc.
   const articleMeta = articles.find(article => article.slug === slug);
 
   if (!ArticleContent || !articleMeta) {
-    // Gérer le cas où l'article n'est pas trouvé
     return (
-        <main className="bg-[#1A1F2C] text-white pt-32 pb-20">
-            <div className="container mx-auto px-4 text-center">
-                <h1 className="text-4xl font-bold">Article non trouvé</h1>
-                <p className="mt-4">Désolé, l'article que vous cherchez n'existe pas.</p>
-            </div>
+        <main className="bg-space-950 text-white pt-40 text-center h-screen">
+            <h1 className="text-2xl font-mono text-nebula">ERROR_404: FILE_CORRUPTED_OR_MISSING</h1>
+            <Link to="/blog" className="mt-8 inline-block text-quantum underline font-mono">Return to Archives</Link>
         </main>
     );
   }
@@ -43,61 +37,80 @@ export default function ArticlePage() {
   return (
     <>
       <Helmet>
-        <title>{`${articleMeta.title} - Brice Yakim`}</title>
-        <meta name="description" content={articleMeta.summary} />
+        <title>{`${articleMeta.title} | Transmission`}</title>
       </Helmet>
 
-      <main className="bg-[#1A1F2C] text-white">
-        <div className="container mx-auto px-4 pt-32 pb-20">
-          <article 
-            className="
-              prose prose-invert 
-              lg:prose-xl 
-              mx-auto
-              prose-headings:text-transparent prose-headings:bg-clip-text prose-headings:bg-gradient-to-r prose-headings:from-cyan-400 prose-headings:to-purple-500
-              prose-a:text-cyan-400 prose-a:transition-colors hover:prose-a:text-cyan-300
-              prose-strong:text-cyan-100
-              prose-blockquote:border-cyan-500 prose-blockquote:text-cyan-200
-            "
-          >
-            {/* L'image de couverture et le titre de l'article */}
-            <h1>{articleMeta.title}</h1>
-            <p className="lead !text-xl !text-cyan-200/80">{articleMeta.summary}</p>
-            <img src={articleMeta.image} alt={articleMeta.title} className="rounded-lg shadow-lg mb-8" />
-            
-            {/* Le contenu de l'article MDX */}
-            <Suspense fallback={<ArticleLoader />}>
-              <ArticleContent components={{ CtaBox }}/>
-
-              
-            </Suspense>
-
-            
-          </article>
-          <br />
-           <motion.div
-            initial={{ y: 20, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ delay: 0.8, duration: 0.5 }}
-            className="flex flex-col sm:flex-row items-center justify-center gap-4"
-          >
-            <Link 
-              to="/"
-              className="inline-flex items-center justify-center gap-2 w-full sm:w-auto px-8 py-3 bg-[#D946EF] rounded-lg text-white text-lg font-bold hover:bg-[#C026D3] transition-colors transform hover:scale-105"
-            >
-              <Home className="w-5 h-5 " />
-              Retourner à l'accueil
+      <main className="bg-space-950 text-white pt-32 pb-24">
+        <div className="container mx-auto px-4">
+          
+          {/* Top Bar Navigation */}
+          <div className="max-w-4xl mx-auto mb-12 flex justify-between items-center border-b border-white/5 pb-6">
+            <Link to="/blog" className="flex items-center gap-2 text-[10px] font-mono uppercase text-slate-500 hover:text-quantum transition-colors">
+              <ArrowLeft size={14} /> Retour_Archives
             </Link>
-            <button
-              onClick={() => window.history.back()}
-              className="inline-flex items-center justify-center gap-2 w-full sm:w-auto px-8 py-3 bg-white/10 rounded-lg text-white/80 font-semibold hover:bg-white/20 transition-colors"
-            >
-              <ArrowLeft className="w-5 h-5" />
-              Page précédente
-            </button>
-          </motion.div>
+            <div className="flex items-center gap-4 text-[10px] font-mono text-slate-500 uppercase">
+              <span className="flex items-center gap-1.5"><Clock size={12} /> 5min_read</span>
+              <button className="hover:text-quantum transition-colors"><Share2 size={14} /></button>
+            </div>
+          </div>
+
+          <article className="max-w-4xl mx-auto">
+            {/* Header de l'article */}
+            <header className="mb-16">
+              <div className="flex gap-2 mb-6">
+                {articleMeta.tags.map(tag => (
+                  <span key={tag} className="px-3 py-1 bg-quantum/10 border border-quantum/20 text-quantum text-[9px] font-black uppercase tracking-widest rounded">
+                    {tag}
+                  </span>
+                ))}
+              </div>
+              <h1 className="text-4xl md:text-6xl font-black text-white uppercase italic tracking-tighter mb-8 leading-[0.95]">
+                {articleMeta.title}
+              </h1>
+              <p className="text-xl text-slate-400 font-mono leading-relaxed border-l-4 border-quantum pl-6 py-2">
+                {articleMeta.summary}
+              </p>
+            </header>
+
+            {/* Image de couverture HUD */}
+            <div className="relative hud-glass rounded-3xl overflow-hidden mb-16 p-1">
+               <div className="absolute inset-0 z-10 pointer-events-none border-[12px] border-space-950/50 rounded-[1.4rem]" />
+               <img src={articleMeta.image} alt="" className="w-full h-auto rounded-2xl opacity-90" />
+            </div>
+            
+            {/* Contenu MDX stylisé */}
+            <div className="
+              prose prose-invert prose-quantum 
+              max-w-none
+              prose-headings:uppercase prose-headings:italic prose-headings:font-black prose-headings:tracking-tighter
+              prose-h2:text-3xl prose-h2:text-quantum prose-h2:border-b prose-h2:border-white/5 prose-h2:pb-4
+              prose-p:font-mono prose-p:text-slate-400 prose-p:leading-relaxed
+              prose-strong:text-white prose-strong:font-bold
+              prose-code:text-nebula prose-code:bg-space-900 prose-code:px-1.5 prose-code:rounded
+              prose-blockquote:border-nebula prose-blockquote:bg-nebula/5 prose-blockquote:py-2
+            ">
+              <Suspense fallback={<ArticleLoader />}>
+                <ArticleContent components={{ CtaBox }} />
+              </Suspense>
+            </div>
+
+            {/* Footer de l'article */}
+            <footer className="mt-20 pt-10 border-t border-white/5 flex flex-col items-center gap-8">
+               <div className="flex items-center gap-3 font-mono text-[10px] text-slate-500 uppercase tracking-[0.4em]">
+                 <Terminal size={14} /> End_Of_Transmission
+               </div>
+               
+               <div className="flex flex-col sm:flex-row gap-4 w-full justify-center">
+                  <Link to="/blog" className="hud-corners border border-white/10 text-white px-8 py-4 font-black uppercase text-xs tracking-widest text-center hover:bg-white/5 transition-all">
+                    Explorer d'autres logs
+                  </Link>
+                  <Link to="/" className="hud-corners bg-quantum text-space-950 px-8 py-4 font-black uppercase text-xs tracking-widest text-center hover:shadow-neon-cyan transition-all">
+                    Retour au Terminal Principal
+                  </Link>
+               </div>
+            </footer>
+          </article>
         </div>
-        
       </main>
     </>
   );

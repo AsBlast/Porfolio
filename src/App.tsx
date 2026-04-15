@@ -1,7 +1,7 @@
 // src/App.tsx
 
 import React, { Suspense } from "react";
-// --- NOUVEAUX IMPORTS pour le routing ---
+// --- IMPORTS pour le routing ---
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { HelmetProvider } from "react-helmet-async";
@@ -12,6 +12,8 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
 import ScrollToTop from "@/components/ScrollToTop"; 
+import { RouteLoader } from "@/components/RouteLoader"; 
+
 
 // Initialisation du client React Query
 const queryClient = new QueryClient();
@@ -93,7 +95,7 @@ const App = () => {
     <HelmetProvider>
       <QueryClientProvider client={queryClient}>
         <TooltipProvider>
-          <Suspense fallback={<PageLoader />}>
+          <Suspense fallback={<RouteLoader />}>
             <RouterProvider router={router} />
           </Suspense>
         </TooltipProvider>

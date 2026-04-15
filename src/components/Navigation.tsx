@@ -1,12 +1,12 @@
+// src/components/Navigation.tsx
+
 import { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, Home, User, Folder, Mail, Store, Feather } from "lucide-react";
-
-// --- 1. IMPORTS POUR LA TRADUCTION ---
+import { Menu, X, Home, User, Folder, Mail, Store, Feather, Cpu } from "lucide-react";
 import { useTranslation } from "react-i18next";
-import LanguageSwitcher from "./LanguageSwitcher"; 
-// Fonction hook pour suivre la section active sur la page d'accueil
+import LanguageSwitcher from "./LanguageSwitcher";
+
 function useActiveSection(sectionIds: string[], isHomePage: boolean): string {
   const [activeSection, setActiveSection] = useState(sectionIds[0]);
 
@@ -15,12 +15,10 @@ function useActiveSection(sectionIds: string[], isHomePage: boolean): string {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            setActiveSection(entry.target.id);
-          }
+          if (entry.isIntersecting) setActiveSection(entry.target.id);
         });
       },
-      { rootMargin: "-30% 0px -70% 0px" } // Détecte la section au milieu de l'écran
+      { rootMargin: "-30% 0px -70% 0px" }
     );
 
     sectionIds.forEach(id => {
@@ -28,21 +26,14 @@ function useActiveSection(sectionIds: string[], isHomePage: boolean): string {
       if (element) observer.observe(element);
     });
 
-    return () => {
-      sectionIds.forEach(id => {
-        const element = document.getElementById(id);
-        if (element) observer.unobserve(element);
-      });
-    };
+    return () => observer.disconnect();
   }, [sectionIds, isHomePage]);
 
   return activeSection;
 }
 
 export function Navigation() {
-  // --- 2. INITIALISATION DU HOOK DE TRADUCTION ---
   const { t } = useTranslation();
-
   const location = useLocation();
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
@@ -50,33 +41,25 @@ export function Navigation() {
 
   const isHomePage = location.pathname === '/';
   
-  // --- 3. MENU ITEMS UTILISANT DES CLÉS DE TRADUCTION ---
   const menuItems = [
-    { translationKey: "nav_home", sectionId: "home", icon: <Home size={20} /> },
-    { translationKey: "nav_about", sectionId: "about", icon: <User size={20} /> },
-    { translationKey: "nav_projects", sectionId: "projects", icon: <Folder size={20} /> },
-    { translationKey: "nav_products", sectionId: "/produits", icon: <Store size={20} /> }, 
-    { translationKey: "nav_blog", sectionId: "/blog", icon: <Feather size={20} /> },
-    { translationKey: "nav_contact", sectionId: "contact", icon: <Mail size={20} /> },
+    { translationKey: "nav_home", sectionId: "home", icon: <Home size={18} /> },
+    { translationKey: "nav_about", sectionId: "about", icon: <User size={18} /> },
+    { translationKey: "nav_projects", sectionId: "projects", icon: <Folder size={18} /> },
+    { translationKey: "nav_products", sectionId: "/produits", icon: <Store size={18} /> }, 
+    { translationKey: "nav_blog", sectionId: "/blog", icon: <Feather size={18} /> },
+    { translationKey: "nav_contact", sectionId: "contact", icon: <Mail size={18} /> },
   ];
 
   const sectionIds = menuItems.filter(item => !item.sectionId.startsWith('/')).map(item => item.sectionId);
   const activeSection = useActiveSection(sectionIds, isHomePage);
   
   const handleNavClick = (sectionId: string) => {
-    if (isOpen) {
-      setIsOpen(false);
-    }
-    // Délai pour permettre à l'animation de fermeture de se terminer
+    setIsOpen(false);
     setTimeout(() => {
-      if (sectionId.startsWith('/')) {
-        navigate(sectionId);
-      } else if (isHomePage) {
-        document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
-      } else {
-        navigate('/', { state: { scrollToSection: sectionId } });
-      }
-    }, 150); 
+      if (sectionId.startsWith('/')) navigate(sectionId);
+      else if (isHomePage) document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
+      else navigate('/', { state: { scrollToSection: sectionId } });
+    }, 150);
   };
 
   useEffect(() => {
@@ -86,70 +69,115 @@ export function Navigation() {
   }, []);
 
   const getIsActive = (itemSectionId: string) => {
-    if (itemSectionId.startsWith('/')) {
-      return location.pathname.startsWith(itemSectionId);
-    }
+    if (itemSectionId.startsWith('/')) return location.pathname.startsWith(itemSectionId);
     return isHomePage && activeSection === itemSectionId;
   };
 
   return (
-    <header className={`fixed w-full z-50 transition-all duration-300 ${isScrolled ? "bg-black/80 backdrop-blur-lg border-b border-cyan-500/20 py-3 shadow-xl" : "py-4 bg-transparent"}`}>
-      <nav className="container mx-auto px-4 flex justify-between items-center" aria-label="Navigation principale">
-        
-        <button onClick={() => handleNavClick('home')} aria-label="Retour à l'accueil" className="text-2xl font-bold bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500 bg-clip-text text-transparent flex items-center gap-2">
-          <div className="bg-cyan-500/10 p-2 rounded-full"><div className="bg-gradient-to-r from-cyan-400 to-purple-500 w-3 h-3 rounded-full animate-pulse"></div></div>
-          <span>Brice-Dev</span>
+    // On ajoute un padding top pour l'effet "flottant"
+    <header className="fixed w-full top-0 z-50 p-4 md:p-6 pointer-events-none">
+      <nav 
+        className={`
+          mx-auto max-w-7xl px-4 py-2 flex justify-between items-center 
+          pointer-events-auto transition-all duration-500 rounded-2xl
+          ${isScrolled 
+            ? "bg-space-900/60 backdrop-blur-xl border border-quantum/30 shadow-neon-cyan/20 py-2" 
+            : "bg-transparent py-4"}
+        `} 
+        aria-label="Navigation principale"
+      >
+        {/* LOGO STYLE HUD */}
+        <button 
+          onClick={() => handleNavClick('home')} 
+          className="group flex items-center gap-3"
+        >
+          <div className="relative">
+            <div className="absolute inset-0 bg-quantum opacity-20 blur-md group-hover:opacity-40 transition-opacity"></div>
+            <div className="relative p-2 bg-space-950 border border-quantum/40 rounded-lg group-hover:border-quantum transition-colors">
+              <Cpu className="w-6 h-6 text-quantum animate-pulse" />
+            </div>
+          </div>
+          <span className="hidden sm:block text-xl font-black tracking-tighter text-white uppercase italic">
+            Brice<span className="text-quantum">Dev</span>
+          </span>
         </button>
         
-        {/* Menu Desktop */}
-        <div className="hidden md:flex items-center space-x-2">
+        {/* MENU DESKTOP - FLOTTANT */}
+        <div className="hidden md:flex items-center gap-1 bg-space-950/40 p-1 rounded-xl border border-white/5">
           {menuItems.map((item) => {
             const isActive = getIsActive(item.sectionId);
             return (
               <button
                 key={item.translationKey}
                 onClick={() => handleNavClick(item.sectionId)} 
-                aria-current={isActive ? "page" : undefined}
-                className={`px-4 py-2 rounded-lg relative flex items-center gap-2 transition-colors duration-300 ${isActive ? "text-cyan-300" : "text-cyan-300/60 hover:text-cyan-300"}`}
+                className={`
+                  px-4 py-2 rounded-lg relative flex items-center gap-2 transition-all duration-300
+                  text-sm font-mono tracking-tight group
+                  ${isActive ? "text-quantum" : "text-slate-400 hover:text-quantum hover:bg-quantum/5"}
+                `}
               >
-                {item.icon}
-                {t(item.translationKey)}
+                <span className={`${isActive ? "animate-pulse" : "opacity-50 group-hover:opacity-100"}`}>
+                  {item.icon}
+                </span>
+                <span className="uppercase">{t(item.translationKey)}</span>
+                
+                {/* Indicateur actif style HUD */}
                 {isActive && (
-                  <motion.div className="absolute bottom-0 left-0 right-0 h-0.5 bg-cyan-400" layoutId="underline" transition={{ type: "spring", stiffness: 380, damping: 30 }}/>
+                  <motion.div 
+                    layoutId="activeGlow"
+                    className="absolute inset-0 border border-quantum/50 rounded-lg shadow-neon-cyan/20"
+                    initial={false}
+                    transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                  />
                 )}
               </button>
             )
           })}
-           {/* --- 4. AJOUT DU LANGUAGE SWITCHER (DESKTOP) --- */}
-          <div className="pl-4 ml-2 border-l border-cyan-500/20">
-            <LanguageSwitcher />
-          </div>
+          
+          <div className="h-6 w-[1px] bg-white/10 mx-2"></div>
+          <LanguageSwitcher />
         </div>
         
-        <div className="md:hidden"> 
-          <motion.button onClick={() => setIsOpen(!isOpen)} aria-label={isOpen ? "Fermer le menu" : "Ouvrir le menu"} aria-expanded={isOpen} aria-controls="mobile-menu" className="p-2 rounded-md text-cyan-300">
-            {isOpen ? <X size={24} /> : <Menu size={24} />}
+        {/* MOBILE TRIGGER */}
+        <div className="md:hidden flex items-center gap-4">
+          <LanguageSwitcher />
+          <motion.button 
+            onClick={() => setIsOpen(!isOpen)} 
+            className="p-3 bg-space-900 border border-quantum/30 rounded-xl text-quantum shadow-neon-cyan/10"
+          >
+            {isOpen ? <X size={20} /> : <Menu size={20} />}
           </motion.button>
         </div>
       </nav>
 
+      {/* MOBILE MENU FULL HUD */}
       <AnimatePresence>
         {isOpen && (
-          <motion.div id="mobile-menu" initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }} className="md:hidden bg-black/90 backdrop-blur-xl border-t border-cyan-500/20">
-            <div className="flex flex-col p-4 space-y-2">
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.9, y: -20 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.9, y: -20 }}
+            className="md:hidden absolute top-24 left-4 right-4 bg-space-900/95 backdrop-blur-2xl border border-quantum/30 rounded-3xl p-6 pointer-events-auto shadow-2xl"
+          >
+            <div className="grid grid-cols-1 gap-3 text-center">
               {menuItems.map((item) => {
                 const isActive = getIsActive(item.sectionId);
                 return (
-                  <button key={`mobile-${item.translationKey}`} onClick={() => handleNavClick(item.sectionId)} className={`px-3 py-3 rounded-md flex items-center gap-3 text-lg transition-colors ${isActive ? "text-cyan-300 bg-cyan-500/10" : "text-cyan-300/80 hover:bg-cyan-500/5"}`}>
+                  <button 
+                    key={`mobile-${item.translationKey}`} 
+                    onClick={() => handleNavClick(item.sectionId)} 
+                    className={`
+                      p-4 rounded-2xl flex items-center justify-center gap-4 text-lg font-mono uppercase transition-all
+                      ${isActive 
+                        ? "bg-quantum/10 text-quantum border border-quantum/40" 
+                        : "text-slate-400 border border-transparent"}
+                    `}
+                  >
                     {item.icon}
                     <span>{t(item.translationKey)}</span>
                   </button>
                 )
               })}
-              {/* --- 5. AJOUT DU LANGUAGE SWITCHER (MOBILE) --- */}
-              <div className="pt-4 mt-2 border-t border-cyan-500/20 flex justify-center">
-                  <LanguageSwitcher />
-              </div>
             </div>
           </motion.div>
         )}

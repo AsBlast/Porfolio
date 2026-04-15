@@ -1,521 +1,242 @@
 // src/components/About.tsx
 
 import { motion } from "framer-motion";
-import {
-  Code,
-  Database,
-  Layout,
-  Box,
-  Download,
-  Award,
-  Globe,
-  Star,
-  User,
-  ShieldCheck,
-  Zap,
-  LayoutTemplate,
-  ExternalLink,
+import { 
+  Code, Database, Layout, Box, Download, Award, 
+  Globe, User, ShieldCheck, Zap, LayoutTemplate, 
+  ExternalLink, Target, Cpu, Fingerprint, Activity
 } from "lucide-react";
 import { useEffect, useState, useRef } from "react";
 import { Tooltip } from "./Tooltip";
-import { SectionDivider } from "./SectionDivider";
-import { AnimatedBackground } from "./AnimatedBackground";
 
-function Typewriter({ text }) {
+function Typewriter({ text }: { text: string }) {
   const [displayed, setDisplayed] = useState("");
   const [startTyping, setStartTyping] = useState(false);
   const ref = useRef(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setStartTyping(true);
-          observer.unobserve(ref.current);
-        }
-      },
+      ([entry]) => { if (entry.isIntersecting) setStartTyping(true); },
       { threshold: 0.1 }
     );
-
-    const node = ref.current;
-    if (node) {
-      observer.observe(node);
-    }
-
-    return () => {
-      if (node) observer.unobserve(node);
-    };
+    if (ref.current) observer.observe(ref.current);
+    return () => observer.disconnect();
   }, []);
 
   useEffect(() => {
     if (!startTyping) return;
-
     let i = 0;
     const interval = setInterval(() => {
       setDisplayed(text.slice(0, i + 1));
       i++;
       if (i === text.length) clearInterval(interval);
-    }, 50);
-
+    }, 30);
     return () => clearInterval(interval);
   }, [startTyping, text]);
 
   return (
-    <h3
-      ref={ref}
-      aria-label={text}
-      className="text-2xl font-bold bg-gradient-to-r from-[#8B5CF6] to-[#D946EF] bg-clip-text text-transparent mb-6 h-16 sm:h-auto"
-    >
-      {displayed}
-    </h3>
+    <div ref={ref} className="font-mono text-quantum/80 mb-6 flex items-center gap-2">
+      <span className="bg-quantum/20 p-1 text-[10px] uppercase font-bold">Status</span>
+      <span className="text-lg md:text-xl font-bold tracking-tight">{displayed}</span>
+    </div>
   );
 }
 
 export function About() {
   const skills = [
     {
-      icon: <Code size={28} className="text-[#D946EF]" />,
-      title: "Développement front-end",
-      description:
-        "Expert en React, Vite et frameworks JavaScript modernes. Création d'interfaces utilisateur réactives et intuitives qui donnent vie à vos idées.",
-      tools: ["React", "Vite", "Tailwind CSS", "Bootstrap"],
+      icon: <Code size={24} />,
+      title: "Core Frontend",
+      tools: ["React", "TypeScript", "Vite", "Tailwind"],
       level: 95,
+      color: "from-cyan-500 to-blue-600"
     },
     {
-      icon: <Database size={28} className="text-[#D946EF]" />,
-      title: "Développement backend",
-      description:
-        "Maîtrise de Node.js, Python et de la gestion de bases de données. Création de solutions côté serveur robustes et évolutives.",
-      tools: ["Node.js", "Express", "MongoDB", "Postman/Insomnia"],
+      icon: <Database size={24} />,
+      title: "Backend Neural",
+      tools: ["Node.js", "Python", "MongoDB", "SQL"],
+      level: 88,
+      color: "from-purple-500 to-indigo-600"
+    },
+    {
+      icon: <LayoutTemplate size={24} />,
+      title: "User Interface",
+      tools: ["HUD Design", "UX Architecture", "Prototyping"],
+      level: 85,
+      color: "from-pink-500 to-rose-600"
+    },
+    {
+      icon: <Fingerprint size={24} />,
+      title: "Digital Identity",
+      tools: ["WordPress", "SEO Tech", "Optimization"],
       level: 90,
+      color: "from-orange-500 to-amber-600"
     },
-    {
-      icon: <Layout size={28} className="text-[#D946EF]" />,
-      title: "Conception UI/UX",
-      description:
-        "Créer des interfaces utilisateur belles et intuitives qui combinent esthétique et fonctionnalité pour une expérience utilisateur optimale.",
-      tools: ["Prototyping", "User Testing"],
-      level: 85,
-    },
-    {
-      icon: <Box size={28} className="text-[#D946EF]" />,
-      title: "Développement CMS",
-      description:
-        "Expertise dans la création et la personnalisation de sites WordPress. Optimisation SEO des pages, intégration responsive et garantie de la compatibilité cross-browser.",
-      tools: ["Elementor", "WooCommerce", "SEO", "Plugins"],
-      level: 85,
-    },
-  ];
-
-  const stats = [
-    { value: "3+", label: "Années d'expérience" },
-    { value: "10+", label: "Projets réalisés" },
-    { value: "98%", label: "Satisfaction clients" },
-    { value: "7+", label: "Technologies maîtrisées" },
-  ];
-
-  const paragraphs = [
-    "« La seule façon de faire du bon travail, c'est d'aimer ce que l'on fait. »",
-    "Mon approche est simple : je ne suis pas le développeur qui exécute une liste de fonctionnalités. Je suis celui qui traque le problème réel derrière la demande, obsédé par l'idée de le dissoudre dans une solution radicalement efficace.",
-    "C'est pourquoi ma règle d'or est non négociable : la puissance sans la clarté est inutile. Un outil brillant mais confus est comme une bibliothèque remplie de trésors, mais sans catalogue pour les trouver. La valeur est là, mais elle reste hors de portée.",
-    "Depuis Antananarivo, Madagascar, je ne construis donc pas des logiciels. Je forge des leviers de productivité : des solutions autonomes, puissantes et intuitives, conçues pour vous donner un avantage tangible et vous rendre maître de votre temps.",
   ];
 
   return (
-    <section
-      id="about"
-      aria-labelledby="about-heading"
-      className="relative py-20 bg-[#131116]"
-    >
-      <div className="container mx-auto px-4">
-        <motion.h2
-          id="about-heading"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-3xl md:text-4xl font-bold mb-12 text-center text-white"
-        >
-          Qui suis-je ?
-        </motion.h2>
+    <section id="about" className="relative py-24 bg-space-950 overflow-hidden">
+      {/* Texture de fond HUD */}
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#1e293b_1px,transparent_1px),linear-gradient(to_bottom,#1e293b_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_70%,transparent_100%)] opacity-10"></div>
 
-        <div className="grid md:grid-cols-2 gap-12 items-center mb-16">
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            whileHover={{ scale: 1.05, filter: "brightness(1.1)" }}
-            viewport={{ once: true }}
-            className="relative rounded-lg overflow-hidden"
-          >
-            <picture>
-              <source
-                type="image/webp"
-                srcSet="
-                  /images/profile-small.webp 200w,
-                  /images/profile-medium.webp 400w,
-                  /images/profile-large.webp 600w
-                "
-                sizes="(max-width: 767px) 90vw, 500px"
-              />
-              <img
-                src="/images/profile-medium.webp"
-                alt="Photo de Brice Yakim, développeur web, dans un environnement de travail."
-                className="w-full h-full object-cover rounded-lg"
-                width="400"
-                height="400"
-                loading="lazy"
-              />
-            </picture>
-            <div className="absolute inset-0 bg-gradient-to-t from-[#1A1F2C] to-transparent opacity-50 rounded-lg" />
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            className="text-white/80"
-          >
-            <Typewriter text="Je transforme la complexité en leviers de productivité." />
-
-            {paragraphs.map((text, i) => (
-              <motion.p
-                key={i}
-                initial={{ opacity: 0, y: 10 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.3 + i * 0.3 }}
-                className="mb-6"
-              >
-                {text}
-              </motion.p>
-            ))}
-
-            <div className="flex flex-wrap gap-4 mt-8">
-              <motion.a
-                href="/files/CV.pdf"
-                download="CV_Yakim_Brice-Dev.pdf"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="inline-flex items-center gap-2 bg-[#D946EF] hover:bg-[#C026D3] text-white font-medium py-3 px-6 rounded-lg transition-colors"
-                aria-label="Télécharger mon Curriculum Vitae au format PDF"
-              >
-                <Download size={18} />
-                Télécharger mon CV
-              </motion.a>
-
-              <motion.a
-                href="#projects"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="inline-flex items-center gap-2 border-2 border-[#D946EF] text-[#D946EF] hover:bg-[#D946EF]/10 font-medium py-3 px-6 rounded-lg transition-colors"
-              >
-                <Globe size={18} />
-                Voir mes projets
-              </motion.a>
-            </div>
-
-            <div className="mt-12">
-              <h4 className="text-xl font-semibold text-white mb-4">
-                Mes principes directeurs :
-              </h4>
-              <div className="flex flex-wrap gap-3">
-                {[
-                  "Simplicité Radicale",
-                  "L'Utilisateur d'abord",
-                  "Impact > Fonctionnalités",
-                  "Itération Continue",
-                ].map((value, i) => (
-                  <motion.div
-                    key={i}
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: i * 0.1 }}
-                    className="px-4 py-2 bg-white/10 text-white rounded-full text-sm font-medium"
-                  >
-                    {value}
-                  </motion.div>
-                ))}
-              </div>
-            </div>
-          </motion.div>
+      <div className="container mx-auto px-4 relative z-10">
+        <div className="flex flex-col items-center mb-16">
+          <motion.div 
+            initial={{ width: 0 }} whileInView={{ width: "100px" }}
+            className="h-1 bg-quantum mb-4 shadow-neon-cyan"
+          />
+          <h2 className="text-4xl md:text-5xl font-black uppercase tracking-tighter text-white italic">
+            Dossier: <span className="text-quantum">Architecte</span>
+          </h2>
         </div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="grid grid-cols-2 md:grid-cols-4 gap-6"
-        >
-          {stats.map((stat, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.1, duration: 0.3 }}
-              className="bg-white/5 backdrop-blur-sm p-6 rounded-xl border border-gray-800 text-center"
+        <div className="grid lg:grid-cols-12 gap-12 items-start">
+          
+          {/* --- COLONNE GAUCHE : SCAN BIOMÉTRIQUE --- */}
+          <div className="lg:col-span-5 relative group">
+            <motion.div 
+              initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }}
+              className="relative p-2 border border-quantum/30 rounded-3xl overflow-hidden backdrop-blur-sm bg-space-900/40"
             >
-              <div className="text-3xl font-bold text-[#D946EF]">
-                {stat.value}
+              {/* Overlay de scan interactif */}
+              <div className="absolute inset-0 z-20 pointer-events-none">
+                <div className="absolute top-0 left-0 w-8 h-8 border-t-2 border-l-2 border-quantum"></div>
+                <div className="absolute top-0 right-0 w-8 h-8 border-t-2 border-r-2 border-quantum"></div>
+                <div className="absolute bottom-0 left-0 w-8 h-8 border-b-2 border-l-2 border-quantum"></div>
+                <div className="absolute bottom-0 right-0 w-8 h-8 border-b-2 border-r-2 border-quantum"></div>
+                <motion.div 
+                  animate={{ top: ["0%", "100%", "0%"] }} 
+                  transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
+                  className="absolute left-0 right-0 h-[2px] bg-quantum shadow-neon-cyan opacity-50"
+                />
               </div>
-              <div className="text-gray-300 mt-2">{stat.label}</div>
+
+              <img 
+                src="/images/profile-large.webp" 
+                alt="Bio-Scan" 
+                className="w-full h-auto rounded-2xl grayscale group-hover:grayscale-0 transition-all duration-700 opacity-80 group-hover:opacity-100"
+              />
+
+              {/* Étiquettes de données flottantes */}
+              <div className="absolute bottom-6 right-6 z-30 font-mono text-[10px] text-quantum bg-space-950/80 p-2 border border-quantum/20 rounded-lg">
+                <div className="flex items-center gap-2"><div className="w-2 h-2 bg-quantum rounded-full animate-ping"></div> IDENTIFIED: BRICE_YAKIM</div>
+              </div>
             </motion.div>
-          ))}
-        </motion.div>
 
-        <h3 className="text-3xl md:text-4xl font-bold text-center text-white mt-20 mb-12">
-          Mes Outils de Prédilection
-        </h3>
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {skills.map((skill, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              whileHover={{
-                scale: 1.05,
-                boxShadow: "0 8px 15px rgba(217, 70, 239, 0.3)",
-              }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.2 }}
-              className="p-6 bg-white/5 rounded-lg hover:bg-white/10 transition-colors group relative"
-            >
-              <div className="absolute inset-0 bg-gradient-to-r from-[#D946EF] to-[#8B5CF6] opacity-0 group-hover:opacity-10 transition-opacity rounded-lg"></div>
-              <div className="relative z-10">
-                <div className="mb-4">{skill.icon}</div>
-                <h3 className="text-xl font-bold mb-2 text-white">
-                  {skill.title}
-                </h3>
+            {/* Statistiques flottantes style HUD */}
+            <div className="grid grid-cols-2 gap-4 mt-6">
+              {[
+                { label: "Expérience", val: "3+ Cycles" },
+                { label: "Projets", val: "10+ Units" }
+              ].map(s => (
+                <div key={s.label} className="p-4 bg-space-900 border border-white/5 rounded-2xl">
+                   <p className="text-[10px] uppercase text-slate-500 font-bold mb-1">{s.label}</p>
+                   <p className="text-xl font-black text-white">{s.val}</p>
+                </div>
+              ))}
+            </div>
+          </div>
 
-                <div
-                  className="mt-4 mb-4"
-                  role="meter"
-                  aria-valuenow={skill.level}
-                  aria-valuemin={0}
-                  aria-valuemax={100}
-                  aria-label={`Niveau d'affinité : ${skill.level} sur 100`}
+          {/* --- COLONNE DROITE : SYSTÈME DE DONNÉES --- */}
+          <div className="lg:col-span-7">
+            <Typewriter text="Je forge des leviers de productivité haute-fidélité." />
+
+            <div className="space-y-6 text-slate-400 font-mono text-sm leading-relaxed">
+               <p className="border-l-2 border-quantum/40 pl-4 bg-quantum/5 py-2">
+                &gt; Analyse: Le sujet ne se contente pas de coder des fonctionnalités. Il traque le problème racine pour le dissoudre dans une solution radicalement efficace.
+               </p>
+               <p>
+                Ma philosophie repose sur un pilier non-négociable : <span className="text-white">la puissance sans la clarté est obsolète</span>. Depuis Antananarivo, Madagascar, je transforme vos visions en architectures numériques robustes.
+               </p>
+            </div>
+
+            <div className="grid sm:grid-cols-2 gap-4 mt-10">
+              {skills.map((skill, i) => (
+                <motion.div 
+                  key={skill.title}
+                  initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ delay: i * 0.1 }}
+                  className="p-5 bg-space-900/60 border border-white/5 rounded-2xl hover:border-quantum/40 transition-colors group"
                 >
-                  <div
-                    className="flex justify-between text-sm text-gray-400 mb-1"
-                    aria-hidden="true"
-                  >
-                    <span>Affinité</span>
-                    <span>{skill.level}%</span>
+                  <div className="flex items-center gap-4 mb-4">
+                    <div className="p-2 bg-space-950 border border-white/10 rounded-lg text-quantum group-hover:shadow-neon-cyan transition-all">
+                      {skill.icon}
+                    </div>
+                    <h4 className="font-bold text-white text-sm uppercase tracking-wider">{skill.title}</h4>
                   </div>
-                  <div
-                    className="w-full bg-gray-800 rounded-full h-2"
-                    aria-hidden="true"
-                  >
-                    <motion.div
-                      className="bg-gradient-to-r from-[#D946EF] to-[#8B5CF6] h-2 rounded-full"
-                      initial={{ width: 0 }}
-                      whileInView={{ width: `${skill.level}%` }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 1, delay: 0.5 }}
+                  
+                  {/* Progress bar style HUD */}
+                  <div className="h-1 w-full bg-space-950 rounded-full mb-4 overflow-hidden">
+                    <motion.div 
+                      initial={{ width: 0 }} whileInView={{ width: `${skill.level}%` }}
+                      className={`h-full bg-gradient-to-r ${skill.color}`}
                     />
                   </div>
-                </div>
-
-                <p className="text-white/70 mb-4">{skill.description}</p>
-                <div className="flex flex-wrap gap-2">
-                  {skill.tools.map((tool, i) => (
-                    <Tooltip key={i} content={tool}>
-                      <span className="px-3 py-1 bg-gray-800/50 text-gray-300 text-sm rounded-full">
+                  
+                  <div className="flex flex-wrap gap-2">
+                    {skill.tools.map(tool => (
+                      <span key={tool} className="text-[9px] px-2 py-1 bg-white/5 border border-white/5 rounded-md uppercase text-slate-400">
                         {tool}
                       </span>
-                    </Tooltip>
+                    ))}
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+
+            <div className="flex flex-wrap gap-4 mt-12">
+               <motion.a 
+                  href="/files/CV.pdf" 
+                  whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}
+                  className="hud-corners bg-quantum text-space-950 px-8 py-4 font-black uppercase tracking-tighter flex items-center gap-3"
+               >
+                 <Download size={18} /> Télécharger Log_Data.pdf
+               </motion.a>
+               <motion.a 
+                  href="#contact" 
+                  whileHover={{ backgroundColor: "rgba(34, 211, 238, 0.1)" }}
+                  className="hud-corners border border-quantum text-quantum px-8 py-4 font-black uppercase tracking-tighter"
+               >
+                 Ouvrir une session
+               </motion.a>
+            </div>
+          </div>
+        </div>
+
+        {/* --- SECTION FORMATION : GRID TECH --- */}
+        <div className="mt-24 pt-16 border-t border-white/5">
+          <div className="flex items-center gap-3 mb-12">
+            <Cpu className="text-nebula" />
+            <h3 className="text-2xl font-bold text-white uppercase tracking-widest italic">Modules_Acquisition</h3>
+          </div>
+          
+          <div className="grid md:grid-cols-2 gap-8">
+             <div className="relative p-6 bg-space-900 border border-white/10 rounded-2xl overflow-hidden">
+                <div className="absolute top-0 right-0 px-3 py-1 bg-nebula text-white text-[10px] font-black uppercase">Core_Verified</div>
+                <h4 className="text-xl font-bold text-white mb-2">Formation Mudey</h4>
+                <p className="text-slate-400 font-mono text-xs mb-4">MADA_SEC_7G // FULL-STACK ARCHITECTURE</p>
+                <p className="text-sm text-slate-300">Spécialisation en systèmes distribués, JavaScript asynchrone et optimisation de la performance noyau.</p>
+             </div>
+
+             <div className="relative p-6 bg-space-900 border border-white/10 rounded-2xl overflow-hidden group">
+                <div className="absolute top-0 right-0 px-3 py-1 bg-quantum text-space-950 text-[10px] font-black uppercase">Neural_Link</div>
+                <h4 className="text-xl font-bold text-white mb-2">Spécialisations Cursa</h4>
+                <p className="text-slate-400 font-mono text-xs mb-4">GLOBAL_DATA_STREAM // 2024</p>
+                <div className="grid grid-cols-2 gap-2">
+                  {["Node.js Advanced", "Python Scripting", "UX Engineering", "API Design"].map(t => (
+                    <div key={t} className="flex items-center gap-2 text-xs text-slate-400">
+                      <div className="w-1 h-1 bg-quantum"></div> {t}
+                    </div>
                   ))}
                 </div>
-              </div>
-            </motion.div>
-          ))}
-        </div>
-
-        <div className="mt-20">
-          <h3 className="text-3xl md:text-4xl font-bold text-center text-white mb-16">
-            Mon Approche du Développement
-          </h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
-              className="bg-white/5 p-8 rounded-2xl border border-gray-800 flex flex-col items-start text-left hover:border-violet-500/50 transition-colors"
-            >
-              <div className="w-16 h-16 mb-6 rounded-full bg-gradient-to-r from-[#8B5CF6] to-[#D946EF] flex items-center justify-center shadow-lg shadow-violet-500/20">
-                <LayoutTemplate className="text-white w-8 h-8" />
-              </div>
-              <h4 className="font-bold text-xl text-white mb-3">
-                Expérience Utilisateur d'Abord
-              </h4>
-              <p className="text-white/80 leading-relaxed">
-                Un bon design n'est pas seulement esthétique, il est
-                fonctionnel. Je conçois des interfaces intuitives qui guident
-                l'utilisateur et rendent chaque interaction fluide et logique.
-              </p>
-            </motion.div>
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.15 }}
-              className="bg-white/5 p-8 rounded-2xl border border-gray-800 flex flex-col items-start text-left hover:border-pink-500/50 transition-colors"
-            >
-              <div className="w-16 h-16 mb-6 rounded-full bg-gradient-to-r from-[#D946EF] to-[#ec4899] flex items-center justify-center shadow-lg shadow-pink-500/20">
-                <ShieldCheck className="text-white w-8 h-8" />
-              </div>
-              <h4 className="font-bold text-xl text-white mb-3">
-                La Sécurité par Conception
-              </h4>
-              <p className="text-white/80 leading-relaxed">
-                J'intègre les meilleures pratiques de sécurité dès la première
-                ligne de code. Chaque projet est pensé pour être robuste et
-                protéger les données.
-              </p>
-            </motion.div>
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.3 }}
-              className="bg-white/5 p-8 rounded-2xl border border-gray-800 flex flex-col items-start text-left hover:border-orange-500/50 transition-colors"
-            >
-              <div className="w-16 h-16 mb-6 rounded-full bg-gradient-to-r from-[#ec4899] to-[#f97316] flex items-center justify-center shadow-lg shadow-orange-500/20">
-                <Zap className="text-white w-8 h-8" />
-              </div>
-              <h4 className="font-bold text-xl text-white mb-3">
-                Performance & Code Propre
-              </h4>
-              <p className="text-white/80 leading-relaxed">
-                Un site rapide est essentiel. J'optimise chaque aspect, du poids
-                des images au code, pour garantir des temps de chargement
-                minimaux et une maintenabilité à long terme.
-              </p>
-            </motion.div>
-          </div>
-        </div>
-
-       {/* --- Section Certifications & Formations Optmisée --- */}
-<motion.section
-  initial={{ opacity: 0, y: 20 }}
-  whileInView={{ opacity: 1, y: 0 }}
-  viewport={{ once: true, margin: "-100px" }}
-  className="mt-24 relative overflow-hidden"
-  aria-labelledby="certifications-title"
->
-  {/* Fond stylisé avec un dégradé très subtil et bordure néon */}
-  <div className="p-8 md:p-10 rounded-3xl bg-slate-900/40 backdrop-blur-md border border-white/10 relative z-10">
-    
-    {/* En-tête de section */}
-    <div className="flex items-center gap-4 mb-12">
-      <div className="p-3 bg-[#D946EF]/20 rounded-2xl shadow-[0_0_15px_rgba(217,70,239,0.2)]">
-        <Award className="w-8 h-8 text-[#D946EF]" />
-      </div>
-      <div>
-        <h3 id="certifications-title" className="text-2xl md:text-3xl font-bold text-white tracking-tight">
-         Formations
-        </h3>
-        <p className="text-slate-400 text-sm font-mono uppercase tracking-widest mt-1">Expertise validée</p>
-      </div>
-    </div>
-
-    <div className="space-y-10 relative">
-      {/* Ligne verticale décorative (Timeline style) */}
-      <div className="absolute left-[1.35rem] top-2 bottom-2 w-px bg-gradient-to-b from-[#D946EF]/50 via-white/10 to-transparent hidden md:block"></div>
-
-      {/* 1. Bloc Formation Mudey */}
-      <div className="relative md:pl-12 group">
-        {/* Point de timeline (uniquement bureau) */}
-        <div className="absolute left-4 top-2 w-3 h-3 rounded-full bg-slate-800 border-2 border-[#D946EF] hidden md:block group-hover:scale-125 transition-transform shadow-[0_0_8px_rgba(217,70,239,0.8)]"></div>
-        
-        <div className="p-6 bg-white/5 rounded-2xl border border-white/5 hover:border-white/20 transition-all duration-300">
-          <div className="flex flex-col sm:flex-row justify-between items-start gap-2 mb-3">
-            <h4 className="text-xl font-bold text-white group-hover:text-[#D946EF] transition-colors">Formation Mudey</h4>
-            <span className="px-3 py-1 bg-white/10 rounded-full text-[#D946EF] text-xs font-bold font-mono uppercase">2023</span>
-          </div>
-          <p className="text-slate-300 leading-relaxed max-w-2xl">
-            Cursus intensif en <span className="text-white font-semibold">Développement Web Full-Stack</span> (JavaScript, NodeJS, Python, ). Maîtrise du cycle de vie complet d'une application.
-          </p>
-        </div>
-      </div>
-
-      {/* 2. Bloc Spécialisations Cursa avec Certificat Miniature */}
-      <div className="relative md:pl-12 group">
-        <div className="absolute left-4 top-2 w-3 h-3 rounded-full bg-slate-800 border-2 border-[#D946EF] hidden md:block group-hover:scale-125 transition-transform shadow-[0_0_8px_rgba(217,70,239,0.8)]"></div>
-
-        <div className="p-6 bg-white/5 rounded-2xl border border-white/5 hover:border-white/20 transition-all duration-300 relative overflow-hidden">
-          {/* Lueur d'accentuation en arrière-plan */}
-          <div className="absolute -right-10 -bottom-10 w-40 h-40 bg-[#D946EF]/5 blur-[50px] pointer-events-none" />
-
-          <div className="flex flex-col md:flex-row justify-between items-start gap-8">
-            
-            {/* Contenu textuel */}
-            <div className="flex-1 w-full">
-              <div className="flex flex-col sm:flex-row justify-between items-start gap-2 mb-5">
-                <h4 className="text-xl font-bold text-white group-hover:text-[#D946EF] transition-colors">Spécialisations Cursa</h4>
-                <span className="px-3 py-1 bg-white/10 rounded-full text-[#D946EF] text-xs font-bold font-mono uppercase">2024</span>
-              </div>
-
-              {/* Liste optimisée */}
-              <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4" aria-label="Liste des cours suivis">
-                {[
-                  "Javascript & HTML/CSS",
-                  "Développement API NodeJS",
-                  "Architecture WordPress",
-                  "Python Avancé"
-                ].map((item, idx) => (
-                  <li key={idx} className="flex items-center gap-3 text-slate-300 group/item">
-                    <div className="w-1.5 h-1.5 rounded-full bg-cyan-400 shadow-[0_0_5px_rgba(34,211,238,0.8)]" />
-                    <span className="text-sm font-medium group-hover/item:text-white transition-colors">{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            {/* Miniature du certificat : Alignée en haut avec le texte */}
-            <div className="shrink-0 self-start">
-              <Tooltip content="Cliquer pour vérifier l'accréditation">
-                <motion.div
-                  whileHover={{ scale: 1.05, y: -2 }}
-                  whileTap={{ scale: 0.98 }}
-                  className="relative cursor-pointer"
-                >
-                  {/* Cadre mockup du certificat */}
-                  <a
-                    href="/images/certificat.png"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="block group/cert"
-                  >
-                    <div className="w-14 h-20 sm:w-16 sm:h-24 bg-black rounded-md border border-white/20 overflow-hidden shadow-2xl transition-all group-hover/cert:border-[#D946EF]/50">
-                       <img
-                        src="/images/certificat.png"
-                        alt="Diplôme Cursa miniature"
-                        className="w-full h-full object-cover opacity-70 group-hover/cert:opacity-100 transition-opacity"
-                        loading="lazy"
-                      />
-                    </div>
-                    {/* Badge interactif discret */}
-                    <div className="absolute -bottom-2 -right-2 bg-[#D946EF] p-1.5 rounded-lg shadow-lg rotate-12 group-hover/cert:rotate-0 transition-transform">
-                      <ExternalLink size={10} className="text-white" />
-                    </div>
-                  </a>
-                </motion.div>
-              </Tooltip>
-            </div>
-
+                {/* Certificat miniature interactif */}
+                <a href="/images/certificat.png" target="_blank" className="mt-4 inline-flex items-center gap-2 text-[10px] text-quantum hover:underline font-bold uppercase tracking-widest">
+                  <ExternalLink size={12} /> Voir accréditation
+                </a>
+             </div>
           </div>
         </div>
       </div>
-    </div>
-  </div>
-
-  {/* Décoration d'arrière-plan (Aurora effect) */}
-  <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-gradient-to-br from-purple-500/5 via-transparent to-cyan-500/5 blur-[120px] -z-10" />
-</motion.section>
-      </div>
-      <SectionDivider />
     </section>
   );
 }

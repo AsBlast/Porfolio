@@ -1,150 +1,144 @@
 // src/pages/ProductsPage.tsx
 
 import React, { useState, useMemo, FC } from "react";
-import { motion, Variants } from "framer-motion";
+import { motion, Variants, AnimatePresence } from "framer-motion";
 import { Link } from 'react-router-dom';
-import { ShoppingCart, Sparkles, Star, Filter, X, Target, BrainCircuit } from "lucide-react";
+import { ShoppingCart, Star, Filter, X, Cpu, Zap, Layers, Box } from "lucide-react";
 import { Helmet } from "react-helmet-async";
+import { productsData, Product } from '../data/products';
 
-import { productsData } from '../data/products';
-import type { Product } from '../data/products';
-
-// --- Définition des animations Framer Motion ---
 const containerVariants: Variants = {
   hidden: { opacity: 0 },
   visible: { opacity: 1, transition: { staggerChildren: 0.1 } },
 };
 
-const itemVariants: Variants = {
-  hidden: { y: 20, opacity: 0 },
-  visible: { y: 0, opacity: 1, transition: { type: "spring", stiffness: 100 } },
-};
-
-// --- Sous-composant : ProductCard ---
-// On type explicitement les props du composant avec FC (FunctionComponent)
 const ProductCard: FC<{ product: Product }> = ({ product }) => (
-  <Link to={`/produits/${product.slug}`} className="block h-full" aria-label={`Voir les détails pour ${product.title}`}>
-    <motion.div
-      variants={itemVariants}
-      className="bg-white/5 rounded-2xl overflow-hidden border border-white/10 group relative flex flex-col h-full hover:border-[#D946EF]/50 transition-colors duration-300"
-    >
-      <div className="aspect-[16/10] overflow-hidden relative">
-        <img src={product.image} alt={`Aperçu du produit ${product.title}`} width="400" height="250" loading="lazy" className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
-        <span className="absolute top-4 right-4 px-3 py-1 bg-white/10 backdrop-blur-sm rounded-full text-xs font-medium text-white/80">{product.category}</span>
-      </div>
-      <div className="p-6 flex flex-col flex-grow">
-        <h3 className="text-xl font-bold text-white mb-1 group-hover:text-[#D946EF] transition-colors">{product.title}</h3>
-        <p className="text-white/60 text-sm mb-4 flex-grow">{product.tagline}</p>
-        <div className="mt-auto flex items-center justify-between">
+  <motion.div
+    variants={{ hidden: { y: 20, opacity: 0 }, visible: { y: 0, opacity: 1 } }}
+    className="group relative hud-glass flex flex-col h-full border-white/5 hover:border-quantum/40 transition-all duration-500"
+  >
+    <Link to={`/produits/${product.slug}`} className="block overflow-hidden relative aspect-[16/10]">
+      <img 
+        src={product.image} 
+        alt={product.title} 
+        className="w-full h-full object-cover opacity-60 group-hover:opacity-100 group-hover:scale-110 transition-all duration-700" 
+      />
+      <div className="absolute inset-0 bg-gradient-to-t from-space-950 via-transparent to-transparent" />
+      <span className="absolute top-4 right-4 px-3 py-1 bg-space-950/80 backdrop-blur-md border border-white/10 rounded-full text-[10px] font-mono font-bold text-quantum uppercase tracking-widest">
+        {product.category}
+      </span>
+    </Link>
+
+    <div className="p-6 flex flex-col flex-grow">
+      <h3 className="text-xl font-black text-white mb-2 uppercase italic tracking-tighter group-hover:text-quantum transition-colors">
+        {product.title}
+      </h3>
+      <p className="text-slate-400 text-xs font-mono mb-6 line-clamp-2 flex-grow">
+        {product.tagline}
+      </p>
+
+      <div className="mt-auto pt-6 border-t border-white/5 flex items-center justify-between">
+        <div className="flex flex-col">
+          <span className="text-[10px] font-mono text-slate-500 uppercase">Acquisition_Cost</span>
           <div className="flex items-baseline gap-2">
-            <span className="text-2xl font-bold text-white">
-              {typeof product.price === 'object' ? product.price.current.toFixed(2) : product.price.toFixed(2)}€
-            </span>
-            {typeof product.price === 'object' && product.price.original && (
-              <span className="line-through text-lg font-normal text-white/50">{product.price.original.toFixed(2)}€</span>
-            )}
+             <span className="text-2xl font-black text-white">
+               {typeof product.price === 'object' ? product.price.current.toFixed(2) : product.price.toFixed(2)}€
+             </span>
           </div>
-          <span className="px-4 py-2 bg-white/10 rounded-lg text-white font-semibold">Voir détails</span>
         </div>
+        <Link 
+          to={`/produits/${product.slug}`}
+          className="p-3 bg-quantum/10 text-quantum border border-quantum/20 rounded-xl hover:bg-quantum hover:text-space-950 transition-all shadow-neon-cyan/10"
+        >
+          <Box size={20} />
+        </Link>
       </div>
-    </motion.div>
-  </Link>
+    </div>
+  </motion.div>
 );
 
-// --- Sous-composant : FeaturedProduct ---
-const FeaturedProduct: FC<{ product: Product }> = ({ product }) => (
-  <div className="grid lg:grid-cols-2 gap-8 md:gap-12 items-center">
-    <motion.div initial={{ opacity: 0, scale: 0.9 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ duration: 0.5 }} className="aspect-video rounded-lg overflow-hidden border border-white/10 shadow-lg">
-      <img src={product.image} alt={`Image principale du produit ${product.title}`} width="600" height="338" fetchPriority="high" className="w-full h-full object-cover" />
-    </motion.div>
-    <motion.div initial={{ opacity: 0, x: 20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.2 }}>
-      <div className="flex items-center gap-2 mb-4 text-sm font-bold text-yellow-400">
-        <Star className="w-4 h-4" fill="currentColor" />
-        <span>Produit en Vedette</span>
-      </div>
-      <h2 className="text-3xl md:text-4xl font-bold text-white mb-3">{product.title}</h2>
-      <p className="text-white/70 mb-8">{product.tagline}</p>
-      {/* Utilisation d'un Link pour aller à la page détail, qui contient ces informations */}
-      <Link to={`/produits/${product.slug}`} className="flex items-center gap-3 px-6 py-3 bg-[#D946EF] rounded-lg text-white text-lg font-bold hover:bg-[#C026D3] transition-colors">
-        <ShoppingCart className="w-5 h-5" />
-        <span>Voir les détails et acheter</span>
-      </Link>
-    </motion.div>
-  </div>
-);
-
-
-// --- Composant principal de la page ---
 const ProductsPage: FC = () => {
   const [filterCategory, setFilterCategory] = useState<string>("Tous");
   const categories = ["Tous", ...new Set(productsData.map((p) => p.category))];
+  
   const featuredProduct = useMemo(() => productsData.find((p) => p.featured), []);
-
-  const filteredProducts = useMemo(() => {
-    const otherProducts = productsData.filter((p) => !p.featured);
-    if (filterCategory === "Tous") return otherProducts;
-    return otherProducts.filter((p) => p.category === filterCategory);
+  const otherProducts = useMemo(() => {
+    const list = productsData.filter((p) => !p.featured);
+    return filterCategory === "Tous" ? list : list.filter(p => p.category === filterCategory);
   }, [filterCategory]);
 
   return (
     <>
       <Helmet>
-        <title>Boutique - Templates et Outils pour Développeurs par Brice A.</title>
-        <meta name="description" content="Découvrez des templates, kits UI et scripts de haute qualité, conçus pour accélérer vos projets de développement web et mobile." />
+        <title>Boutique - Modules Technologiques par Brice-Dev</title>
       </Helmet>
 
-      <main className="bg-[#1A1F2C] text-white">
-        <section className="pt-32 pb-16">
-          <div className="container mx-auto px-4 text-center">
-            <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} className="text-4xl md:text-5xl font-extrabold text-white mb-4">
-              Accélérez Vos Projets
-            </motion.h1>
-            <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.1 }} className="max-w-2xl mx-auto text-lg text-white/70">
-              Des templates prêts à l'emploi, conçus avec soin pour vous faire gagner du temps et produire un travail de qualité professionnelle.
-            </motion.p>
-          </div>
-        </section>
-
-        {featuredProduct && (
-          <section className="pb-16" aria-labelledby="featured-product-heading">
-            <div className="container mx-auto px-4">
-              <FeaturedProduct product={featuredProduct} />
+      <main className="bg-space-950 text-white pt-32 pb-24 min-h-screen">
+        <div className="container mx-auto px-4">
+          
+          {/* Header */}
+          <div className="max-w-3xl mb-20">
+            <div className="flex items-center gap-3 text-quantum font-mono text-xs uppercase tracking-[0.4em] mb-4">
+              <Layers size={16} /> <span>Tech_Distribution_Center</span>
             </div>
-          </section>
-        )}
+            <h1 className="text-5xl md:text-7xl font-black uppercase italic tracking-tighter mb-6 leading-none">
+              Orbital <span className="text-quantum">Store</span>
+            </h1>
+            <p className="text-slate-400 font-mono text-lg border-l-2 border-quantum/30 pl-6">
+              Modules d'ingénierie logicielle haute-fidélité pour architectes numériques exigeants.
+            </p>
+          </div>
 
-        <section className="py-16" aria-labelledby="all-products-heading">
-          <div className="container mx-auto px-4">
-            <h2 id="all-products-heading" className="text-3xl font-bold text-center text-white mb-12">Tous les produits</h2>
-            <div className="flex flex-wrap justify-center gap-2 mb-8" role="group" aria-label="Filtrer les produits par catégorie">
-              {categories.map((category) => (
-                <button key={category} onClick={() => setFilterCategory(category)} className={`px-4 py-2 rounded-full text-sm font-medium transition-all flex items-center gap-2 ${filterCategory === category ? "bg-[#D946EF] text-white shadow-lg" : "bg-white/10 text-white/70 hover:bg-white/20"}`}>
-                  {category}
-                  {filterCategory === category && filterCategory !== "Tous" && (
-                    <span onClick={(e) => { e.stopPropagation(); setFilterCategory("Tous"); }} aria-label="Réinitialiser le filtre" role="button">
-                      <X size={14} className="text-white" />
-                    </span>
-                  )}
+          {/* Featured */}
+          {featuredProduct && filterCategory === "Tous" && (
+            <div className="mb-24">
+               <div className="flex items-center gap-3 mb-8 text-nebula font-black uppercase tracking-widest text-xs">
+                 <Star size={14} fill="currentColor" /> <span>Alpha_Selection_Module</span>
+               </div>
+               <div className="hud-glass grid lg:grid-cols-2 gap-0 rounded-3xl overflow-hidden border-nebula/20">
+                  <div className="relative aspect-video lg:aspect-auto h-full overflow-hidden">
+                    <img src={featuredProduct.image} alt="" className="w-full h-full object-cover opacity-80" />
+                    <div className="absolute inset-0 bg-gradient-to-r from-space-950/80 to-transparent" />
+                  </div>
+                  <div className="p-8 md:p-12 flex flex-col justify-center bg-space-900/40 backdrop-blur-xl">
+                    <h2 className="text-3xl md:text-5xl font-black text-white uppercase italic tracking-tighter mb-4">{featuredProduct.title}</h2>
+                    <p className="text-xl text-slate-300 font-mono mb-8 leading-relaxed">{featuredProduct.tagline}</p>
+                    <Link to={`/produits/${featuredProduct.slug}`} className="hud-corners bg-nebula text-white px-8 py-4 font-black uppercase tracking-widest text-center sm:self-start hover:shadow-neon-purple transition-all">
+                      Analyser le module
+                    </Link>
+                  </div>
+               </div>
+            </div>
+          )}
+
+          {/* Filtres HUD */}
+          <div className="flex flex-col md:flex-row justify-between items-center gap-6 mb-12 border-b border-white/5 pb-8">
+            <div className="flex flex-wrap justify-center gap-2">
+              {categories.map((cat) => (
+                <button
+                  key={cat} onClick={() => setFilterCategory(cat)}
+                  className={`px-6 py-2 rounded-full text-[10px] font-mono uppercase tracking-widest transition-all ${
+                    filterCategory === cat ? "bg-quantum text-space-950 font-black shadow-neon-cyan" : "bg-white/5 text-slate-500 hover:text-white"
+                  }`}
+                >
+                  {cat}
                 </button>
               ))}
             </div>
-
-            <motion.div variants={containerVariants} initial="hidden" animate="visible" className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {filteredProducts.map((product) => (
-                <ProductCard key={product.id} product={product} />
-              ))}
-            </motion.div>
-
-            {filteredProducts.length === 0 && (
-              <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-center py-12">
-                <Filter className="w-16 h-16 mx-auto text-[#D946EF]/50 mb-4" />
-                <h3 className="text-xl font-bold text-white mb-2">Aucun produit dans cette catégorie</h3>
-                <p className="text-white/60">Essayez de sélectionner une autre catégorie.</p>
-              </motion.div>
-            )}
+            <div className="text-[10px] font-mono text-slate-500 uppercase tracking-widest">
+              Available_Units: {otherProducts.length + (filterCategory === "Tous" ? 1 : 0)}
+            </div>
           </div>
-        </section>
+
+          {/* Grille */}
+          <motion.div 
+            variants={containerVariants} initial="hidden" animate="visible"
+            className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
+          >
+            {otherProducts.map((product) => <ProductCard key={product.id} product={product} />)}
+          </motion.div>
+
+        </div>
       </main>
     </>
   );

@@ -1,6 +1,90 @@
-/* DANS VOTRE FICHIER CSS GLOBAL */
+/* src/index.css */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  :root {
+    /* Fond de l'espace profond */
+    --background: 222 47% 2%;    /* #02040a */
+    --foreground: 210 40% 98%;   /* Slate 50 */
 
+    /* Couleurs de bordure HUD */
+    --border: 188 90% 50% / 0.1; /* Quantum (Cyan) avec opacité */
+    --input: 188 90% 50% / 0.05;
+    --ring: 188 90% 50%;         /* Quantum */
+
+    /* Couleurs des éléments */
+    --card: 222 47% 4%;          /* Un peu plus clair que le fond */
+    --card-foreground: 210 40% 98%;
+    --popover: 222 47% 4%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 188 90% 50%;      /* Quantum Cyan */
+    --primary-foreground: 222 47% 2%;
+
+    --secondary: 291 83% 60% / 0.1; /* Nebula (Purple) */
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 222 47% 10%;
+    --muted-foreground: 215 20% 65%;
+
+    --accent: 188 90% 50% / 0.1;
+    --accent-foreground: 188 90% 50%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --radius: 0.75rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+}
+
+@layer components {
+  /* Effet HUD : Cadre numérique futuriste */
+  .hud-module {
+    @apply relative bg-space-900/40 backdrop-blur-xl border border-quantum/20 shadow-hud-inner overflow-hidden;
+  }
+
+  /* Coin coupé futuriste (optionnel, à utiliser sur les boutons ou cards) */
+  .hud-corners {
+    clip-path: polygon(
+      0 10px, 10px 0, 
+      calc(100% - 10px) 0, 100% 10px, 
+      100% calc(100% - 10px), calc(100% - 10px) 100%, 
+      10px 100%, 0 calc(100% - 10px)
+    );
+  }
+
+  /* Scan laser qui parcourt le module */
+  .hud-scanner::after {
+    content: "";
+    @apply absolute inset-0 w-full h-1 bg-gradient-to-r from-transparent via-quantum/30 to-transparent animate-scan;
+    z-index: 2;
+  }
+
+  /* Scrollbar fine et discrète */
+  ::-webkit-scrollbar {
+    width: 5px;
+  }
+  ::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply bg-quantum/20 rounded-full hover:bg-quantum/40 transition-colors;
+  }
+}
+
+/* Sélection de texte style "Terminal" */
+::selection {
+  @apply bg-quantum/30 text-white;
+}
