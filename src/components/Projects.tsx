@@ -100,7 +100,7 @@ const projectsData: Project[] = [
     title: "Les 7 Pilotes (IntegratorOS)",
     description:
       "Dashboard analytique de développement personnel gamifié. Permet le suivi de l'état psychologique via 7 archétypes, avec visualisation de données temporelles et calcul de tendances.",
-    image: "images/neuro_cockpit2.png",
+    image: "images/neurocockpit.webp",
     github: "https://github.com",
     live: "https://neuronal-cockpit.asblast.space/",
     tags: [ "React", "Vite", "Tailwind CSS"],
