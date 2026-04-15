@@ -3,12 +3,21 @@
 import { useState, useRef, useEffect, useMemo } from "react";
 import { useChat } from "ai/react";
 import { motion, AnimatePresence } from "framer-motion";
-import { 
-  Bot, CornerDownLeft, X, Mail, Zap, 
-  CheckCircle2, Lock, ShieldCheck, FileDown 
+import {
+  Bot,
+  CornerDownLeft,
+  X,
+  Mail,
+  Zap,
+  CheckCircle2,
+  Lock,
+  ShieldCheck,
+  FileDown,
 } from "lucide-react";
 import { useFirstVisit } from "../hooks/useFirstVisit";
 import { Link } from "react-router-dom";
+
+import ReactMarkdown from "react-markdown";
 
 const getApiEndpoint = () => {
   if (import.meta.env.DEV) return "http://localhost:3000/api/chat";
@@ -42,7 +51,8 @@ export function AIChat() {
     },
   });
 
-  const glassStyle = "bg-slate-900/80 backdrop-blur-xl border border-cyan-500/20";
+  const glassStyle =
+    "bg-slate-900/80 backdrop-blur-xl border border-cyan-500/20";
 
   // Auto-scroll
   useEffect(() => {
@@ -67,7 +77,13 @@ export function AIChat() {
 
   // Auto-fermeture si inactif
   useEffect(() => {
-    if (isOpen && messages.length === 0 && !isLoading && input.trim() === '' && !showEmailCapture) {
+    if (
+      isOpen &&
+      messages.length === 0 &&
+      !isLoading &&
+      input.trim() === "" &&
+      !showEmailCapture
+    ) {
       const timer = setTimeout(() => setIsOpen(false), 8000);
       return () => clearTimeout(timer);
     }
@@ -83,21 +99,22 @@ export function AIChat() {
       await fetch("https://formspree.io/f/xyzjwoqr", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ 
-          email: email, 
+        body: JSON.stringify({
+          email: email,
           subject: "Nouveau Lead - Protocole Performance",
-          message: `L'utilisateur veut le pack. Historique du chat : ${messages.map(m => m.content).join(" | ")}`
+          message: `L'utilisateur veut le pack. Historique du chat : ${messages
+            .map((m) => m.content)
+            .join(" | ")}`,
         }),
       });
 
       setIsEmailSent(true);
       setShowEmailCapture(false);
-      
+
       // Simulation de déverrouillage de fichier
       setTimeout(() => {
         setIsUnlocked(true);
       }, 8000); // 800ms pour l'effet "décryptage"
-
     } catch (err) {
       console.error("Liaison interrompue");
     }
@@ -120,7 +137,9 @@ export function AIChat() {
           )}
         </AnimatePresence>
         {!isOpen && !isEmailSent && (
-            <span className="absolute -top-1 -right-1 w-5 h-5 bg-nebula rounded-full flex items-center justify-center text-[10px] font-bold text-white animate-bounce">1</span>
+          <span className="absolute -top-1 -right-1 w-5 h-5 bg-nebula rounded-full flex items-center justify-center text-[10px] font-bold text-white animate-bounce">
+            1
+          </span>
         )}
       </motion.button>
 
@@ -140,26 +159,38 @@ export function AIChat() {
                 <div className="absolute -top-1 -right-1 w-2 h-2 bg-green-500 rounded-full animate-pulse" />
               </div>
               <div>
-                <h3 className="font-black text-white text-xs uppercase tracking-[0.2em]">AsBlast_AI.sys</h3>
-                <p className="text-[10px] text-quantum/60 font-mono">STATUS: CONNECTED // LEAD_MODE_ACTIVE</p>
+                <h3 className="font-black text-white text-xs uppercase tracking-[0.2em]">
+                  AsBlast_AI.sys
+                </h3>
+                <p className="text-[10px] text-quantum/60 font-mono">
+                  STATUS: CONNECTED // LEAD_MODE_ACTIVE
+                </p>
               </div>
             </div>
 
             {/* MESSAGES & CONVERSION */}
             <div className="flex-1 p-5 space-y-6 overflow-y-auto scrollbar-hide">
-              
               {/* Message de bienvenue si vide */}
               {messages.length === 0 && !isLoading && (
                 <div className="space-y-4">
                   <div className="bg-white/5 border border-white/10 p-4 rounded-2xl text-sm text-slate-300 font-mono leading-relaxed">
-                    Initialisation du protocole d'accueil... <br/>
-                    Je suis AsBlast AI. Comment puis-je assister votre projet aujourd'hui ?
+                    Initialisation du protocole d'accueil... <br />
+                    Je suis AsBlast AI. Comment puis-je assister votre projet
+                    aujourd'hui ?
                   </div>
                   <div className="grid grid-cols-1 gap-2">
-                    <button onClick={() => setInput("Analyse mes projets")} className="text-left p-3 rounded-xl bg-quantum/10 border border-quantum/20 text-quantum text-[10px] uppercase font-bold hover:bg-quantum hover:text-black transition-all">
+                    <button
+                      onClick={() => setInput("Analyse mes projets")}
+                      className="text-left p-3 rounded-xl bg-quantum/10 border border-quantum/20 text-quantum text-[10px] uppercase font-bold hover:bg-quantum hover:text-black transition-all"
+                    >
                       &gt; Explorer le catalogue modules
                     </button>
-                    <button onClick={() => setInput("Comment travailler avec Brice ?")} className="text-left p-3 rounded-xl bg-nebula/10 border border-nebula/20 text-nebula text-[10px] uppercase font-bold hover:bg-nebula hover:text-white transition-all">
+                    <button
+                      onClick={() =>
+                        setInput("Comment travailler avec Brice ?")
+                      }
+                      className="text-left p-3 rounded-xl bg-nebula/10 border border-nebula/20 text-nebula text-[10px] uppercase font-bold hover:bg-nebula hover:text-white transition-all"
+                    >
                       &gt; Lancer une requête de collaboration
                     </button>
                   </div>
@@ -169,45 +200,71 @@ export function AIChat() {
               {/* Rendu des messages */}
               {messages.map((m) => (
                 <motion.div
+                  key={m.id}
                   initial={{ opacity: 0, x: m.role === "user" ? 10 : -10 }}
                   animate={{ opacity: 1, x: 0 }}
-                  key={m.id}
-                  className={`flex ${m.role === "user" ? "justify-end" : "justify-start"}`}
+                  className={`flex ${
+                    m.role === "user" ? "justify-end" : "justify-start"
+                  }`}
                 >
-                  <div className={`max-w-[85%] p-4 rounded-2xl font-mono text-xs leading-relaxed ${
-                    m.role === "user" 
-                    ? "bg-quantum text-space-950 font-bold rounded-tr-none" 
-                    : "bg-white/5 border border-white/10 text-slate-200 rounded-tl-none"
-                  }`}>
-                    {m.content}
+                  <div
+                    className={`max-w-[85%] p-4 rounded-2xl text-xs leading-relaxed shadow-sm ${
+                      m.role === "user"
+                        ? "bg-quantum text-space-950 font-bold rounded-tr-none font-sans"
+                        : "bg-white/5 border border-white/10 text-slate-200 rounded-tl-none font-mono"
+                    }`}
+                  >
+                    {/* --- RENDU OPTIMISÉ ICI --- */}
+                    <div className="prose prose-invert prose-xs max-w-none 
+          prose-p:leading-relaxed prose-p:mb-3 last:prose-p:mb-0
+          prose-strong:text-quantum prose-strong:font-black
+          prose-ul:list-disc prose-ul:pl-4 prose-li:mb-2
+          prose-code:bg-quantum/20 prose-code:text-quantum prose-code:px-1 prose-code:rounded">
+                      <ReactMarkdown>
+                        {m.content}
+                      </ReactMarkdown>
+                    </div>
                   </div>
                 </motion.div>
               ))}
-
               {/* --- BLOC DE CAPTURE (LEAD MAGNET) --- */}
               <AnimatePresence>
                 {showEmailCapture && (
-                  <motion.div 
-                    initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
                     className="p-5 rounded-2xl bg-gradient-to-br from-quantum/20 to-nebula/20 border border-quantum/40 shadow-neon-cyan/20 space-y-4"
                   >
                     <div className="flex items-center gap-2 text-quantum font-black text-[11px] uppercase tracking-tighter">
                       <Lock size={16} /> Ressource Restreinte Détectée
                     </div>
                     <p className="text-xs text-white leading-relaxed">
-                      Souhaitez-vous recevoir le **Protocole de Performance v1.0** (Checklist pour un score Lighthouse 95+) directement par signal mail ?
+                      Souhaitez-vous recevoir le **Protocole de Performance
+                      v1.0** (Checklist pour un score Lighthouse 95+)
+                      directement par signal mail ?
                     </p>
                     <form onSubmit={handleEmailSubmit} className="flex gap-2">
-                      <input 
-                        type="email" required placeholder="votre@liaison.com"
-                        value={email} onChange={(e) => setEmail(e.target.value)}
+                      <input
+                        type="email"
+                        required
+                        placeholder="votre@liaison.com"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
                         className="flex-1 bg-space-950 border border-white/20 rounded-lg px-3 py-2 text-[11px] text-white focus:border-quantum outline-none"
                       />
-                      <button type="submit" className="bg-quantum text-space-950 p-2 rounded-lg hover:bg-white transition-colors">
+                      <button
+                        type="submit"
+                        className="bg-quantum text-space-950 p-2 rounded-lg hover:bg-white transition-colors"
+                      >
                         <Mail size={18} />
                       </button>
                     </form>
-                    <button onClick={() => setShowEmailCapture(false)} className="text-[9px] text-slate-500 uppercase underline w-full text-center">Ignorer l'avantage</button>
+                    <button
+                      onClick={() => setShowEmailCapture(false)}
+                      className="text-[9px] text-slate-500 uppercase underline w-full text-center"
+                    >
+                      Ignorer l'avantage
+                    </button>
                   </motion.div>
                 )}
               </AnimatePresence>
@@ -215,20 +272,28 @@ export function AIChat() {
               {/* --- BLOC DE LIVRAISON (VALEUR AJOUTÉE) --- */}
               <AnimatePresence>
                 {isUnlocked && (
-                  <motion.div 
-                    initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }}
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
                     className="p-5 rounded-2xl bg-green-500/10 border border-green-500/50 space-y-4 shadow-[0_0_20px_rgba(34,197,94,0.1)]"
                   >
                     <div className="flex items-center gap-2 text-green-400 font-black text-[11px] uppercase tracking-tighter">
                       <ShieldCheck size={18} /> Accès Autorisé : Pack_Expert
                     </div>
                     <div className="grid grid-cols-2 gap-3">
-                       <a href="/files/Checklist_Performance.pdf" download className="bg-green-500 text-space-950 p-3 rounded-xl text-[10px] font-black uppercase flex flex-col items-center gap-2 hover:bg-white transition-all">
-                          <FileDown size={20} /> PDF_PACK
-                       </a>
-                       <Link to="/blog/guide-optimisation-lighthouse" className="border border-green-500/50 text-green-400 p-3 rounded-xl text-[10px] font-black uppercase flex flex-col items-center gap-2 hover:bg-green-500/10 transition-all text-center">
-                          <Zap size={20} /> LIRE_LOGS
-                       </Link>
+                      <a
+                        href="/files/Checklist_Performance.pdf"
+                        download
+                        className="bg-green-500 text-space-950 p-3 rounded-xl text-[10px] font-black uppercase flex flex-col items-center gap-2 hover:bg-white transition-all"
+                      >
+                        <FileDown size={20} /> PDF_PACK
+                      </a>
+                      <Link
+                        to="/blog/guide-optimisation-lighthouse"
+                        className="border border-green-500/50 text-green-400 p-3 rounded-xl text-[10px] font-black uppercase flex flex-col items-center gap-2 hover:bg-green-500/10 transition-all text-center"
+                      >
+                        <Zap size={20} /> LIRE_LOGS
+                      </Link>
                     </div>
                   </motion.div>
                 )}
@@ -238,9 +303,21 @@ export function AIChat() {
               {isLoading && (
                 <div className="flex justify-start">
                   <div className="bg-white/5 p-4 rounded-2xl flex gap-1.5 items-center border border-white/5">
-                    <motion.div animate={{ opacity: [0.3, 1, 0.3] }} transition={{ repeat: Infinity, duration: 1 }} className="w-1.5 h-1.5 bg-quantum rounded-full" />
-                    <motion.div animate={{ opacity: [0.3, 1, 0.3] }} transition={{ repeat: Infinity, duration: 1, delay: 0.2 }} className="w-1.5 h-1.5 bg-quantum rounded-full" />
-                    <motion.div animate={{ opacity: [0.3, 1, 0.3] }} transition={{ repeat: Infinity, duration: 1, delay: 0.4 }} className="w-1.5 h-1.5 bg-quantum rounded-full" />
+                    <motion.div
+                      animate={{ opacity: [0.3, 1, 0.3] }}
+                      transition={{ repeat: Infinity, duration: 1 }}
+                      className="w-1.5 h-1.5 bg-quantum rounded-full"
+                    />
+                    <motion.div
+                      animate={{ opacity: [0.3, 1, 0.3] }}
+                      transition={{ repeat: Infinity, duration: 1, delay: 0.2 }}
+                      className="w-1.5 h-1.5 bg-quantum rounded-full"
+                    />
+                    <motion.div
+                      animate={{ opacity: [0.3, 1, 0.3] }}
+                      transition={{ repeat: Infinity, duration: 1, delay: 0.4 }}
+                      className="w-1.5 h-1.5 bg-quantum rounded-full"
+                    />
                   </div>
                 </div>
               )}
@@ -251,7 +328,9 @@ export function AIChat() {
             <AnimatePresence mode="wait">
               {!showEmailCapture && (
                 <motion.form
-                  initial={{ y: 20 }} animate={{ y: 0 }} exit={{ y: 20 }}
+                  initial={{ y: 20 }}
+                  animate={{ y: 0 }}
+                  exit={{ y: 20 }}
                   onSubmit={handleSubmit}
                   className="p-5 border-t border-white/5 bg-white/5"
                 >

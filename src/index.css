@@ -88,3 +88,22 @@
 ::selection {
   @apply bg-quantum/30 text-white;
 }
+
+.prose-xs {
+  font-size: 0.75rem;
+  line-height: 1.6;
+}
+
+.prose-xs p {
+  margin-bottom: 0.75rem;
+}
+
+.prose-xs ul, .prose-xs ol {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+/* Scrollbar invisible pour le chat mais fonctionnelle */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
