@@ -12,50 +12,78 @@ const containerVariants: Variants = {
   visible: { opacity: 1, transition: { staggerChildren: 0.1 } },
 };
 
-const ProductCard: FC<{ product: Product }> = ({ product }) => (
-  <motion.div
-    variants={{ hidden: { y: 20, opacity: 0 }, visible: { y: 0, opacity: 1 } }}
-    className="group relative hud-glass flex flex-col h-full border-white/5 hover:border-quantum/40 transition-all duration-500"
-  >
-    <Link to={`/produits/${product.slug}`} className="block overflow-hidden relative aspect-[16/10]">
-      <img 
-        src={product.image} 
-        alt={product.title} 
-        className="w-full h-full object-cover opacity-60 group-hover:opacity-100 group-hover:scale-110 transition-all duration-700" 
-      />
-      <div className="absolute inset-0 bg-gradient-to-t from-space-950 via-transparent to-transparent" />
-      <span className="absolute top-4 right-4 px-3 py-1 bg-space-950/80 backdrop-blur-md border border-white/10 rounded-full text-[10px] font-mono font-bold text-quantum uppercase tracking-widest">
-        {product.category}
+const ProductCard: FC<{ product: Product }> = ({ product }) => {
+  // --- LOGIQUE DE PRIX SÉCURISÉE ---
+  const renderPrice = () => {
+    if (typeof product.price === 'string') {
+      // Cas du NeuroCockpit / Donation
+      return (
+        <span className="text-xl font-black text-nebula uppercase italic">
+          Soutien_Libre
+        </span>
+      );
+    }
+
+    // Cas d'un prix chiffré
+    const priceVal = typeof product.price === 'object' ? product.price.current : product.price;
+    return (
+      <span className="text-2xl font-black text-white">
+        {priceVal.toFixed(2)}€
       </span>
-    </Link>
+    );
+  };
 
-    <div className="p-6 flex flex-col flex-grow">
-      <h3 className="text-xl font-black text-white mb-2 uppercase italic tracking-tighter group-hover:text-quantum transition-colors">
-        {product.title}
-      </h3>
-      <p className="text-slate-400 text-xs font-mono mb-6 line-clamp-2 flex-grow">
-        {product.tagline}
-      </p>
+  return (
+    <motion.div
+      variants={{ hidden: { y: 20, opacity: 0 }, visible: { y: 0, opacity: 1 } }}
+      className={`group relative hud-glass flex flex-col h-full border-white/5 transition-all duration-500 
+        ${product.price === "Donation_Libre" ? "hover:border-nebula/40" : "hover:border-quantum/40"}`}
+    >
+      <Link to={`/produits/${product.slug}`} className="block overflow-hidden relative aspect-[16/10]">
+        <img 
+          src={product.image} 
+          alt={product.title} 
+          className="w-full h-full object-cover opacity-60 group-hover:opacity-100 group-hover:scale-110 transition-all duration-700" 
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-space-950 via-transparent to-transparent" />
+        <span className={`absolute top-4 right-4 px-3 py-1 backdrop-blur-md border rounded-full text-[10px] font-mono font-bold uppercase tracking-widest
+          ${product.price === "Donation_Libre" ? "bg-nebula/20 border-nebula text-nebula" : "bg-space-950/80 border-white/10 text-quantum"}`}>
+          {product.category}
+        </span>
+      </Link>
 
-      <div className="mt-auto pt-6 border-t border-white/5 flex items-center justify-between">
-        <div className="flex flex-col">
-          <span className="text-[10px] font-mono text-slate-500 uppercase">Acquisition_Cost</span>
-          <div className="flex items-baseline gap-2">
-             <span className="text-2xl font-black text-white">
-               {typeof product.price === 'object' ? product.price.current.toFixed(2) : product.price.toFixed(2)}€
-             </span>
+      <div className="p-6 flex flex-col flex-grow">
+        <h3 className={`text-xl font-black text-white mb-2 uppercase italic tracking-tighter transition-colors
+          ${product.price === "Donation_Libre" ? "group-hover:text-nebula" : "group-hover:text-quantum"}`}>
+          {product.title}
+        </h3>
+        <p className="text-slate-400 text-xs font-mono mb-6 line-clamp-2 flex-grow">
+          {product.tagline}
+        </p>
+
+        <div className="mt-auto pt-6 border-t border-white/5 flex items-center justify-between">
+          <div className="flex flex-col">
+            <span className="text-[10px] font-mono text-slate-500 uppercase">
+              {product.price === "Donation_Libre" ? "Access_Type" : "Acquisition_Cost"}
+            </span>
+            <div className="flex items-baseline gap-2">
+               {renderPrice()}
+            </div>
           </div>
+          <Link 
+            to={`/produits/${product.slug}`}
+            className={`p-3 border rounded-xl transition-all shadow-lg
+              ${product.price === "Donation_Libre" 
+                ? "bg-nebula/10 text-nebula border-nebula/20 hover:bg-nebula hover:text-white shadow-nebula/10" 
+                : "bg-quantum/10 text-quantum border-quantum/20 hover:bg-quantum hover:text-space-950 shadow-neon-cyan/10"}`}
+          >
+            <Box size={20} />
+          </Link>
         </div>
-        <Link 
-          to={`/produits/${product.slug}`}
-          className="p-3 bg-quantum/10 text-quantum border border-quantum/20 rounded-xl hover:bg-quantum hover:text-space-950 transition-all shadow-neon-cyan/10"
-        >
-          <Box size={20} />
-        </Link>
       </div>
-    </div>
-  </motion.div>
-);
+    </motion.div>
+  );
+};
 
 const ProductsPage: FC = () => {
   const [filterCategory, setFilterCategory] = useState<string>("Tous");

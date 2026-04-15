@@ -13,7 +13,7 @@ export interface ArticleMeta {
 export const articles: ArticleMeta[] = [
   {
     slug: "guide-optimisation-lighthouse",
-    title: "Comment j'ai optimisé mon portfolio pour un score Lighthouse de 86+",
+    title: "Comment booster la performance d'un site React Lighthouse de 86+",
     date: "2025-07-22",
     summary: "De 38 à 86 en performance : un guide détaillé des optimisations techniques que j'ai appliquées à mon portfolio React.",
     image: "/images/blog/lighthouse.png", 
@@ -38,7 +38,7 @@ export const articles: ArticleMeta[] = [
     tags: ["React", "SEO", "Facebook", "Développement Web", "Tutoriel"],
   },
    {
-    slug: "leçon-dev",
+    slug: "Pourquoi coder ne suffit plus pour réussir en tant que développeur",
     title: "J'ai cru que 'savoir coder et déployer' suffisaient : La leçon qui a transformé ma carrière de développeur",
     date: "2025-07-28",
     summary: "J'ai déployé mon premier site, fier de mon code. Puis, le silence. J'ai compris que le vrai défi n'est pas de construire, mais de créer de la valeur. Voici les 3 piliers que j'ai découverts et qui ont tout changé.",

@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
-import { Calendar, Tag, ChevronRight, Database, activity } from "lucide-react";
+import { Calendar, Tag, ChevronRight, Database } from "lucide-react";
 import { articles, ArticleMeta } from '../articles';
 
 const ArticleCard = ({ article }: { article: ArticleMeta }) => {

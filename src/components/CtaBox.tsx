@@ -11,21 +11,29 @@ interface CtaBoxProps {
 export const CtaBox = ({ title, price, url }: CtaBoxProps) => {
   return (
     <motion.div 
-      initial={{ opacity: 0, y: 10 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      className="my-10 p-8 rounded-2xl bg-gradient-to-br from-purple-900/40 to-cyan-900/40 border border-cyan-500/30 text-center shadow-2xl"
+      whileHover={{ scale: 1.02 }}
+      className="my-12 p-1 border-2 border-dashed border-quantum/30 rounded-3xl overflow-hidden"
     >
-      <h4 className="text-2xl font-bold text-white mb-2">{title}</h4>
-      <p className="text-cyan-200 mb-6 font-medium">Gagnez des heures de développement pour seulement {price}€</p>
-      <a 
-        href={url} 
-        target="_blank" 
-        rel="sponsored noopener noreferrer"
-        className="inline-flex items-center gap-2 bg-[#D946EF] hover:bg-[#C026D3] text-white px-8 py-3 rounded-full font-bold transition-all transform hover:scale-105 shadow-lg shadow-pink-500/20"
-      >
-        <ShoppingCart size={20} />
-        Obtenir le pack maintenant
-      </a>
+      <div className="p-8 rounded-[1.4rem] bg-space-900 flex flex-col md:flex-row items-center justify-between gap-8">
+        <div className="text-center md:text-left">
+          <span className="inline-block px-3 py-1 bg-quantum/10 text-quantum text-[10px] font-black uppercase tracking-widest rounded-full mb-3">
+            Offre_Limitée_Architecte
+          </span>
+          <h4 className="text-2xl font-black text-white uppercase italic tracking-tighter">{title}</h4>
+          <p className="text-slate-400 font-mono text-sm mt-2">Équipez votre stack avec ce module pour seulement {price}€</p>
+        </div>
+        
+        <div className="flex flex-col items-center gap-3">
+            <a 
+                href={url} 
+                target="_blank" 
+                className="hud-corners whitespace-nowrap bg-quantum text-space-950 px-8 py-4 font-black uppercase text-xs tracking-widest hover:shadow-neon-cyan transition-all"
+            >
+                Acquérir le Module
+            </a>
+            <span className="text-[9px] text-slate-500 font-mono uppercase tracking-tighter">Satisfait ou remboursé</span>
+        </div>
+      </div>
     </motion.div>
   );
 };

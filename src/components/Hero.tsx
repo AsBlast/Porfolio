@@ -95,7 +95,7 @@ export function Hero() {
             
             <div className="flex gap-4">
               <SocialIcon href="https://github.com/AsBlast" icon={<Github size={20} />} label="GitHub" />
-              <SocialIcon href="https://linkedin.com/..." icon={<Linkedin size={20} />} label="LinkedIn" />
+              <SocialIcon href="https://www.linkedin.com/in/brice-yakim-andriamahefaromisa-6a8a2b200/" icon={<Linkedin size={20} />} label="LinkedIn" />
             </div>
           </div>
         </motion.div>
